@@ -1,143 +1,566 @@
-<div class="nav-links">
-  <a href="#home">Home</a>
-  <a href="#content">Content</a>
-  <a href="#about">About</a>
-  <a href="#contact">Contact</a>
-  <a class="nav-btn" href="#contact">Join Community</a>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Xenaro | Gaming Creator</title>
 
-    <div class="hero-buttons">
-      <button class="btn btn-primary" onclick="scrollToSection('content')">Explore Content</button>
-      <button class="btn btn-secondary" onclick="showMessage()">Click Me</button>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #060816, #0f172a, #111827);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .bg-glow {
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(56,189,248,0.25), transparent 70%);
+      top: -100px;
+      left: -100px;
+      z-index: -1;
+      filter: blur(40px);
+    }
+
+    .bg-glow.two {
+      top: auto;
+      left: auto;
+      right: -100px;
+      bottom: -100px;
+      background: radial-gradient(circle, rgba(168,85,247,0.22), transparent 70%);
+    }
+
+    nav {
+      width: 100%;
+      padding: 18px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      background: rgba(6, 8, 22, 0.7);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: #38bdf8;
+      letter-spacing: 1px;
+      text-shadow: 0 0 12px rgba(56,189,248,0.6);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: #d1d5db;
+      transition: 0.3s;
+      font-size: 15px;
+    }
+
+    .nav-links a:hover {
+      color: #38bdf8;
+    }
+
+    .nav-btn {
+      background: linear-gradient(90deg, #22c55e, #16a34a);
+      color: white;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-weight: bold;
+      box-shadow: 0 0 15px rgba(34,197,94,0.35);
+      transition: 0.3s;
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-2px) scale(1.03);
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 70px 8%;
+    }
+
+    .hero-content {
+      max-width: 1200px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-size: 64px;
+      line-height: 1.05;
+      margin-bottom: 20px;
+    }
+
+    .hero-text h1 span {
+      color: #38bdf8;
+      text-shadow: 0 0 18px rgba(56,189,248,0.55);
+    }
+
+    .hero-text p {
+      color: #cbd5e1;
+      font-size: 18px;
+      line-height: 1.7;
+      max-width: 650px;
+      margin-bottom: 28px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, #38bdf8, #0ea5e9);
+      color: white;
+      box-shadow: 0 0 18px rgba(56,189,248,0.35);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.18);
+      color: white;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px) scale(1.03);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .stat {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 18px 22px;
+      border-radius: 16px;
+      min-width: 140px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    }
+
+    .stat h3 {
+      font-size: 24px;
+      color: #38bdf8;
+      margin-bottom: 4px;
+    }
+
+    .stat p {
+      font-size: 14px;
+      color: #cbd5e1;
+      margin: 0;
+    }
+
+    .hero-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(56,189,248,0.12), rgba(168,85,247,0.08));
+      pointer-events: none;
+    }
+
+    .card-badge {
+      display: inline-block;
+      padding: 8px 14px;
+      background: rgba(56,189,248,0.15);
+      border: 1px solid rgba(56,189,248,0.25);
+      border-radius: 999px;
+      color: #7dd3fc;
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    .hero-card h2 {
+      font-size: 30px;
+      margin-bottom: 12px;
+    }
+
+    .hero-card p {
+      color: #cbd5e1;
+      line-height: 1.7;
+      margin-bottom: 22px;
+    }
+
+    .mini-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .mini-card {
+      background: rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 16px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .mini-card h4 {
+      color: #38bdf8;
+      margin-bottom: 8px;
+    }
+
+    section {
+      padding: 90px 8%;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .section-title h2 {
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: #cbd5e1;
+      font-size: 17px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .content-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 22px;
+      padding: 24px;
+      transition: 0.3s;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+    }
+
+    .content-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(56,189,248,0.35);
+      box-shadow: 0 12px 35px rgba(56,189,248,0.12);
+    }
+
+    .content-card .icon {
+      font-size: 32px;
+      margin-bottom: 14px;
+    }
+
+    .content-card h3 {
+      margin-bottom: 10px;
+      font-size: 22px;
+    }
+
+    .content-card p {
+      color: #cbd5e1;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .about-box {
+      max-width: 1000px;
+      margin: auto;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      padding: 35px;
+      line-height: 1.8;
+      color: #dbeafe;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    }
+
+    .socials {
+      margin-top: 25px;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .socials a {
+      padding: 12px 18px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: 0.3s;
+    }
+
+    .socials a:hover {
+      background: rgba(56,189,248,0.12);
+      border-color: rgba(56,189,248,0.35);
+      transform: translateY(-3px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      color: #94a3b8;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin-top: 30px;
+    }
+
+    @media (max-width: 980px) {
+      .hero-content,
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-text h1 {
+        font-size: 48px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 100px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero-text h1 {
+        font-size: 38px;
+      }
+
+      .section-title h2 {
+        font-size: 30px;
+      }
+
+      .mini-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-glow"></div>
+  <div class="bg-glow two"></div>
+
+  <nav>
+    <div class="logo">Xenaro</div>
+
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#content">Content</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a class="nav-btn" href="#contact">Join Community</a>
     </div>
+  </nav>
 
-    <div class="hero-stats">
-      <div class="stat">
-        <h3 id="subs">0</h3>
-        <p>Subscribers</p>
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1>Build Your World With <span>Xenaro</span> 🔥</h1>
+        <p>
+          Minecraft content, creative energy, gaming vibes, and a bold creator identity.
+          This is your space to showcase videos, projects, updates, and your community.
+        </p>
+
+        <div class="hero-buttons">
+          <button class="btn btn-primary" onclick="scrollToSection('content')">Explore Content</button>
+          <button class="btn btn-secondary" onclick="showMessage()">Click Me</button>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat">
+            <h3 id="subs">0</h3>
+            <p>Subscribers</p>
+          </div>
+          <div class="stat">
+            <h3 id="videos">0</h3>
+            <p>Videos</p>
+          </div>
+          <div class="stat">
+            <h3 id="views">0</h3>
+            <p>Total Views</p>
+          </div>
+        </div>
       </div>
-      <div class="stat">
-        <h3 id="videos">0</h3>
-        <p>Videos</p>
-      </div>
-      <div class="stat">
-        <h3 id="views">0</h3>
-        <p>Total Views</p>
-      </div>
-    </div>
-  </div>
 
-  <div class="hero-card">
-    <div class="card-badge">About Me</div>
-    <h2>Ghee Khatam...</h2>
-    <p>
-      I’m a Class 12 CS pass-out (result abhi tak aaya nahi hai… fail bhi ho sakta hu 🥀).
-      I run a small YouTube channel with around 1.1k subscribers where I create video edits.
-      I’m also pretty interested in video games.
-    </p>
+      <div class="hero-card">
+        <div class="card-badge">Gaming Creator UI</div>
+        <h2>Level Up Your Website</h2>
+        <p>
+          Add your YouTube channel, Minecraft theme, Discord server, latest uploads,
+          and creator branding into one clean modern website.
+        </p>
 
-    <div class="single-info-box">
-      <h3>About My Journey 🚀</h3>
-      <p>
-        I’m building my own space on the internet where I can share my edits,
-        videos, creative ideas, and future projects. This website is just the
-        beginning, and I’ll keep upgrading it with better designs, more content,
-        and cooler features over time.
-      </p>
-    </div>
-  </div>
-</div>
-<div class="nav-links">
-  <a href="#home">Home</a>
-  <a href="#content">Content</a>
-  <a href="#about">About</a>
-  <a href="#contact">Contact</a>
-  <a class="nav-btn" href="#contact">Join Community</a>
-</div>
-
-    <div class="hero-buttons">
-      <button class="btn btn-primary" onclick="scrollToSection('content')">Explore Content</button>
-      <button class="btn btn-secondary" onclick="showMessage()">Click Me</button>
-    </div>
-
-    <div class="hero-stats">
-      <div class="stat">
-        <h3 id="subs">0</h3>
-        <p>Subscribers</p>
-      </div>
-      <div class="stat">
-        <h3 id="videos">0</h3>
-        <p>Videos</p>
-      </div>
-      <div class="stat">
-        <h3 id="views">0</h3>
-        <p>Total Views</p>
+        <div class="mini-cards">
+          <div class="mini-card">
+            <h4>🎮 Gaming Theme</h4>
+            <p>Dark neon UI built for a creator vibe.</p>
+          </div>
+          <div class="mini-card">
+            <h4>⚡ Fast Layout</h4>
+            <p>Everything in one file and easy to edit.</p>
+          </div>
+          <div class="mini-card">
+            <h4>🚀 Interactive</h4>
+            <p>Buttons, effects, smooth scroll, counters.</p>
+          </div>
+          <div class="mini-card">
+            <h4>🌍 Ready to Grow</h4>
+            <p>You can later host it online on GitHub.</p>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div class="hero-card">
-    <div class="card-badge">About Me</div>
-    <h2>Ghee Khatam...</h2>
-    <p>
-      I’m a Class 12 CS pass-out (result abhi tak aaya nahi hai… fail bhi ho sakta hu 🥀).
-      I run a small YouTube channel with around 1.1k subscribers where I create video edits.
-      I’m also pretty interested in video games.
-    </p>
-
-    <div class="single-info-box">
-      <h3>About My Journey 🚀</h3>
-      <p>
-        I’m building my own space on the internet where I can share my edits,
-        videos, creative ideas, and future projects. This website is just the
-        beginning, and I’ll keep upgrading it with better designs, more content,
-        and cooler features over time.
-      </p>
-    </div>
-  </div>
-</div>
-<div class="milestone-wrapper">
-  <div class="progress-box">
-    <h3>Current Progress</h3>
-    <p class="progress-text">
-      Current Subscribers: <span id="currentSubsText">0</span> / <span id="goalSubsText">10,000</span>
-    </p>
-
-    <div class="progress-bar">
-      <div class="progress-fill" id="progressFill"></div>
+  <section id="content">
+    <div class="section-title">
+      <h2>Featured Content</h2>
+      <p>Your website can show different types of content here.</p>
     </div>
 
-    <p class="next-goal" id="nextGoalText">Next goal: 10,000 subscribers</p>
-  </div>
+    <div class="cards-grid">
+      <div class="content-card">
+        <div class="icon">🔥</div>
+        <h3>Minecraft Videos</h3>
+        <p>
+          Showcase your best survival, secrets, myths, updates, and challenge videos in a stylish card layout.
+        </p>
+      </div>
 
-  <div class="milestone-container">
-    <div class="milestone-card" data-goal="100">
-      <div class="milestone-number">100</div>
-      <div class="milestone-label">Subscribers</div>
-      <div class="milestone-status">Unlocked</div>
+      <div class="content-card">
+        <div class="icon">⚔️</div>
+        <h3>Gaming Projects</h3>
+        <p>
+          Add custom pages for mods, builds, community projects, or any ideas you want people to explore.
+        </p>
+      </div>
+
+      <div class="content-card">
+        <div class="icon">🎥</div>
+        <h3>Creator Branding</h3>
+        <p>
+          Show your channel identity, social links, upload schedule, and why people should follow Xenaro.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="section-title">
+      <h2>About Xenaro</h2>
+      <p>A short intro section for your audience.</p>
     </div>
 
-    <div class="milestone-card" data-goal="1000">
-      <div class="milestone-number">1,000</div>
-      <div class="milestone-label">Subscribers</div>
-      <div class="milestone-status">Unlocked</div>
+    <div class="about-box">
+      Xenaro is a gaming creator brand focused on Minecraft content, creative ideas, strong visuals,
+      and building a unique online presence. This website can become your official page where viewers
+      discover your content, join your community, and stay updated with your latest work.
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="section-title">
+      <h2>Connect With Me</h2>
+      <p>Add your real links here later.</p>
     </div>
 
-    <div class="milestone-card" data-goal="10000">
-      <div class="milestone-number">10,000</div>
-      <div class="milestone-label">Subscribers</div>
-      <div class="milestone-status">In Progress</div>
+    <div class="socials">
+      <a href="#">YouTube</a>
+      <a href="#">Discord</a>
+      <a href="#">Instagram</a>
+      <a href="#">Twitter / X</a>
     </div>
+  </section>
 
-    <div class="milestone-card" data-goal="100000">
-      <div class="milestone-number">100,000</div>
-      <div class="milestone-label">Subscribers</div>
-      <div class="milestone-status">Locked</div>
-    </div>
-  </div>
-</div>
- class="socials">
-  <a href="https://youtube.com/@xenaro.69" target="_blank">YouTube</a>
-  <a href="https://discord.gg/C64h96EGR7" target="_blank">Discord</a>
-  <a href="https://instagram.com/xenaro.69" target="_blank">Instagram</a>
-  <a href="https://x.co
+  <footer>
+    © 2026 Xenaro. All rights reserved.
+  </footer>
+
+  <script>
+    function scrollToSection(sectionId) {
+      document.getElementById(sectionId).scrollIntoView({ behavior: "smooth" });
+    }
+
+    function showMessage() {
+      alert("Welcome to Xenaro 🔥");
+    }
+
+    function animateValue(id, end, duration) {
+      let start = 0;
+      let range = end - start;
+      let current = start;
+      let increment = end > start ? 1 : -1;
+      let stepTime = Math.abs(Math.floor(duration / range));
+
+      let timer = setInterval(function () {
+        current += increment;
+        document.getElementById(id).textContent = current;
+        if (current == end) {
+          clearInterval(timer);
+        }
+      }, stepTime);
+    }
+
+    window.onload = function () {
+      animateValue("subs", 1250, 1200);
+      animateValue("videos", 48, 1200);
+      animateValue("views", 9800, 1500);
+    };
+  </script>
+
+</body>
+</html>
