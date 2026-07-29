@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XENARO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --accent:#00cfff;
+}
+
+html, body{
+    height:100%;
+    overflow:hidden;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#0a0a0a;
+    color:#f5f5f5;
+    position:relative;
+}
+
+/* scattered dot backdrop, matching the old site's particle field */
+body::before, body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:0;
+    background-repeat:repeat;
+    opacity:.55;
+}
+body::before{
+    background-image:radial-gradient(rgba(255,255,255,.35) 1px, transparent 1.5px);
+    background-size:120px 120px;
+    background-position:10px 30px;
+}
+body::after{
+    background-image:radial-gradient(rgba(255,255,255,.22) 1px, transparent 1.5px);
+    background-size:95px 95px;
+    background-position:60px 80px;
+}
+
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:64px;
+    z-index:500;
+    backdrop-filter:blur(18px);
+    background:rgba(0,0,0,.5);
+    border-bottom:1px solid rgba(255,255,255,.12);
+    display:flex;
+    align-items:center;
+}
+
+nav{
+    width:100%;
+    max-width:1680px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 clamp(24px,4vw,64px);
+}
+
+.logo{
+    font-size:22px;
+    font-weight:800;
+    letter-spacing:2px;
+    color:var(--accent);
+    text-shadow:0 0 12px var(--accent), 0 0 30px rgba(0,207,255,.6);
+}
+
+/* ============ PASSWORD GATE ============ */
+#lockScreen{
+    position:fixed;
+    inset:0;
+    z-index:1000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#0a0a0a;
+    background-image:radial-gradient(circle at 50% 30%, rgba(0,207,255,.1), transparent 60%);
+    transition:opacity .5s ease, visibility .5s ease;
+}
+
+#lockScreen.hidden{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+}
+
+.lock-box{
+    position:relative;
+    z-index:2;
+    width:min(90vw,360px);
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:22px;
+    padding:clamp(28px,4vw,42px) clamp(24px,4vw,34px);
+    backdrop-filter:blur(30px);
+    box-shadow:0 0 40px rgba(0,207,255,.12), 0 25px 60px rgba(0,0,0,.6);
+    text-align:center;
+    animation:fadeInUp .7s ease forwards;
+}
+
+@keyframes fadeInUp{
+    from{ opacity:0; transform:translateY(24px); }
+    to{ opacity:1; transform:translateY(0); }
+}
+
+.lock-icon{
+    width:56px;
+    height:56px;
+    margin:0 auto 18px;
+    border-radius:50%;
+    border:1px solid rgba(0,207,255,.4);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+    color:var(--accent);
+    text-shadow:0 0 10px var(--accent);
+}
+
+.lock-box h2{
+    font-size:20px;
+    font-weight:700;
+    margin-bottom:6px;
+    letter-spacing:1px;
+}
+
+.lock-box p{
+    font-size:12.5px;
+    color:#999;
+    margin-bottom:22px;
+}
+
+.lock-box input{
+    width:100%;
+    padding:13px 16px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,.2);
+    background:rgba(255,255,255,.06);
+    color:#f5f5f5;
+    font-size:16px;
+    letter-spacing:6px;
+    text-align:center;
+    outline:none;
+    transition:.3s;
+    font-family:'Poppins',sans-serif;
+}
+
+.lock-box input:focus{
+    border-color:var(--accent);
+    background:rgba(0,207,255,.08);
+    box-shadow:0 0 20px rgba(0,207,255,.25);
+}
+
+.lock-box input.shake{
+    animation:shake .4s ease;
+    border-color:#ff5555;
+}
+
+@keyframes shake{
+    0%,100%{transform:translateX(0);}
+    20%{transform:translateX(-8px);}
+    40%{transform:translateX(8px);}
+    60%{transform:translateX(-6px);}
+    80%{transform:translateX(6px);}
+}
+
+.lock-box button{
+    width:100%;
+    margin-top:16px;
+    padding:13px 16px;
+    border:none;
+    border-radius:40px;
+    background:#ffffff;
+    color:#000000;
+    font-weight:700;
+    font-size:14px;
+    cursor:pointer;
+    transition:.35s;
+    font-family:'Poppins',sans-serif;
+}
+
+.lock-box button:hover{
+    transform:translateY(-3px);
+    box-shadow:0 0 30px rgba(0,207,255,.5);
+}
+
+.lock-error{
+    margin-top:12px;
+    font-size:12px;
+    color:#ff6666;
+    min-height:14px;
+}
+
+/* ============ PROFILE PAGE (single page, no scroll) ============ */
+#profilePage{
+    position:fixed;
+    inset:0;
+    z-index:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:clamp(90px,10vw,120px) clamp(24px,6vw,64px) clamp(40px,6vw,60px);
+    opacity:0;
+    visibility:hidden;
+    transition:opacity .6s ease .1s, visibility .6s ease .1s;
+}
+
+#profilePage.visible{
+    opacity:1;
+    visibility:visible;
+}
+
+.profile-wrap{
+    width:100%;
+    max-width:1200px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:clamp(30px,5vw,60px);
+    flex-wrap:wrap;
+}
+
+.profile-intro{
+    flex:1;
+    min-width:280px;
+}
+
+.profile-intro h1{
+    font-size:clamp(38px,6vw,64px);
+    font-weight:800;
+    line-height:1.05;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+    margin-bottom:18px;
+}
+
+.profile-intro h1 span{
+    color:var(--accent);
+    text-shadow:0 0 16px rgba(0,207,255,.7), 0 0 40px rgba(0,207,255,.35);
+}
+
+.profile-intro p{
+    font-size:clamp(14px,1.4vw,17px);
+    line-height:1.8;
+    color:#bbb;
+    max-width:420px;
+}
+
+.profile-card{
+    position:relative;
+    flex:none;
+    width:min(92vw,440px);
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:24px;
+    padding:clamp(30px,4vw,40px);
+    backdrop-filter:blur(30px);
+    box-shadow:0 0 50px rgba(0,207,255,.1), 0 30px 70px rgba(0,0,0,.65);
+    overflow:hidden;
+}
+
+.profile-card::before{
+    content:"";
+    position:absolute;
+    top:-50%;
+    right:-30%;
+    width:70%;
+    height:180%;
+    background:radial-gradient(circle, rgba(0,207,255,.12), transparent 65%);
+    pointer-events:none;
+}
+
+.profile-top{
+    position:relative;
+    display:flex;
+    align-items:center;
+    gap:18px;
+    margin-bottom:24px;
+}
+
+.profile-photo-wrap{
+    position:relative;
+    flex:none;
+    width:80px;
+    height:80px;
+}
+
+.profile-photo-ring{
+    position:absolute;
+    inset:-6px;
+    border-radius:50%;
+    border:1px solid rgba(0,207,255,.5);
+    box-shadow:0 0 18px rgba(0,207,255,.35);
+}
+
+.profile-photo, .profile-photo-fallback{
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    object-fit:cover;
+    display:block;
+    border:2px solid rgba(255,255,255,.5);
+}
+
+.profile-photo-fallback{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(145deg,#1a1a1a,#050505);
+    color:var(--accent);
+    text-shadow:0 0 12px var(--accent);
+    font-size:28px;
+    font-weight:800;
+}
+
+.profile-names h2{
+    font-size:22px;
+    font-weight:800;
+    letter-spacing:.5px;
+    margin-bottom:4px;
+}
+
+.profile-tag{
+    font-size:12px;
+    color:#999;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+}
+
+.profile-divider{
+    height:1px;
+    width:100%;
+    background:linear-gradient(90deg, rgba(0,207,255,.4), transparent);
+    margin-bottom:22px;
+    position:relative;
+}
+
+.profile-list{
+    position:relative;
+    list-style:none;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.profile-list li{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    font-size:14px;
+    font-weight:500;
+    color:#eee;
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.09);
+    padding:14px 16px;
+    border-radius:14px;
+    transition:.3s;
+}
+
+.profile-list li:hover{
+    border-color:rgba(0,207,255,.4);
+    background:rgba(0,207,255,.06);
+    transform:translateX(4px);
+}
+
+.profile-list li i{
+    font-size:16px;
+    color:var(--accent);
+    text-shadow:0 0 8px rgba(0,207,255,.6);
+    width:18px;
+    text-align:center;
+}
+
+footer{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    z-index:2;
+    padding:16px;
+    text-align:center;
+    border-top:1px solid rgba(255,255,255,.12);
+    color:#999;
+    font-size:11px;
+    background:rgba(0,0,0,.5);
+    backdrop-filter:blur(10px);
+    opacity:0;
+    visibility:hidden;
+    transition:opacity .6s ease .2s, visibility .6s ease .2s;
+}
+
+footer.visible{
+    opacity:1;
+    visibility:visible;
+}
+
+footer h2{
+    font-size:13px;
+    margin-bottom:2px;
+    color:var(--accent);
+    text-shadow:0 0 8px rgba(0,207,255,.5);
+}
+
+@media(max-width:900px){
+    header{ height:56px; }
+    .logo{ font-size:19px; }
+
+    #profilePage{
+        padding:76px 20px 70px;
+    }
+    .profile-wrap{
+        flex-direction:column;
+        text-align:center;
+    }
+    .profile-intro{
+        text-align:center;
+    }
+    .profile-intro p{
+        margin:0 auto;
+    }
+    .profile-top{
+        justify-content:center;
+    }
+    .profile-card{
+        width:100%;
+    }
+}
+</style>
+</head>
+<body>
+
+<header>
+    <nav>
+        <span class="logo">XENARO</span>
+    </nav>
+</header>
+
+<!-- ============ PASSWORD LOCK SCREEN ============ -->
+<div id="lockScreen">
+    <div class="lock-box">
+        <div class="lock-icon"><i class="fa-solid fa-lock"></i></div>
+        <h2>Protected Page</h2>
+        <p>Enter the password to continue</p>
+        <input type="password" id="passwordInput" maxlength="8" placeholder="••••" inputmode="numeric" autofocus>
+        <button id="unlockBtn">Unlock</button>
+        <div class="lock-error" id="lockError"></div>
+    </div>
+</div>
+
+<!-- ============ PROFILE (SINGLE PAGE) ============ -->
+<div id="profilePage">
+    <div class="profile-wrap">
+        <div class="profile-intro">
+            <h1>I AM<br><span>XENARO</span></h1>
+            <p>Editing gameplay into montages, breaking down the meta, and building a community around the games I love — one video at a time.</p>
+        </div>
+
+        <div class="profile-card">
+            <div class="profile-top">
+                <div class="profile-photo-wrap">
+                    <div class="profile-photo-ring"></div>
+                    <img src="favicon.png" alt="Xenaro" class="profile-photo" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'profile-photo-fallback',textContent:'X'}))">
+                </div>
+                <div class="profile-names">
+                    <h2>Xenaro</h2>
+                    <div class="profile-tag">Gaming Content Creator</div>
+                </div>
+            </div>
+            <div class="profile-divider"></div>
+            <ul class="profile-list">
+                <li><i class="fa-solid fa-graduation-cap"></i> CSE Student</li>
+                <li><i class="fa-solid fa-gamepad"></i> I play games</li>
+                <li><i class="fa-solid fa-film"></i> I edit videos</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<footer id="siteFooter">
+    <h2>XENARO</h2>
+    <p>© 2026 All Rights Reserved.</p>
+</footer>
+
+<script>
+    const CORRECT_PASSWORD = "2401";
+
+    const lockScreen = document.getElementById("lockScreen");
+    const profilePage = document.getElementById("profilePage");
+    const siteFooter = document.getElementById("siteFooter");
+    const passwordInput = document.getElementById("passwordInput");
+    const unlockBtn = document.getElementById("unlockBtn");
+    const lockError = document.getElementById("lockError");
+
+    function tryUnlock(){
+        if(passwordInput.value.trim() === CORRECT_PASSWORD){
+            lockScreen.classList.add("hidden");
+            profilePage.classList.add("visible");
+            siteFooter.classList.add("visible");
+        } else {
+            lockError.textContent = "Incorrect password. Try again.";
+            passwordInput.classList.remove("shake");
+            void passwordInput.offsetWidth;
+            passwordInput.classList.add("shake");
+            passwordInput.value = "";
+            passwordInput.focus();
+        }
+    }
+
+    unlockBtn.addEventListener("click", tryUnlock);
+    passwordInput.addEventListener("keydown", (e) => {
+        if(e.key === "Enter") tryUnlock();
+    });
+</script>
+</body>
+</html>

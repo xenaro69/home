@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="icon" type="image/png" href="favicon.png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Xenaro</title>
@@ -94,6 +93,12 @@ align-items:center;
 padding:0 clamp(24px,4vw,64px);
 }
 
+.nav-buttons{
+display:flex;
+gap:12px;
+align-items:center;
+}
+
 .logo{
 font-size:24px;
 font-weight:800;
@@ -117,6 +122,21 @@ transition:.35s;
 nav a:hover{
 color:#ffffff;
 opacity:.7;
+}
+
+.about-btn{
+padding:9px 20px;
+background:#ffffff;
+border-radius:40px;
+color:#000000;
+font-weight:700;
+font-size:14px;
+transition:.4s;
+text-decoration:none;
+}
+.about-btn:hover{
+transform:translateY(-3px);
+box-shadow:0 0 30px rgba(255,255,255,.5);
 }
 
 .join-btn{
@@ -295,6 +315,13 @@ padding:0 20px;
 .logo{
 font-size:19px;
 }
+.nav-buttons{
+gap:8px;
+}
+.about-btn{
+padding:7px 16px;
+font-size:12.5px;
+}
 .join-btn{
 padding:7px 16px;
 font-size:12.5px;
@@ -404,9 +431,14 @@ XENARO
 <div class="logo">
 XENARO
 </div>
+<div class="nav-buttons">
+<a class="about-btn" href="index(2).html" rel="noopener">
+About Me
+</a>
 <a class="join-btn" href="https://discord.gg/C64h96EGR7" target="_blank" rel="noopener">
 Join Now
 </a>
+</div>
 </nav>
 </header>
 <div class="page">
