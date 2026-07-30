@@ -51,7 +51,7 @@
 }
 
 :root{
-    --accent:#ffffff;
+    --accent:#00e5ff;
 }
 
 html, body{
@@ -136,7 +136,41 @@ nav{
 
 .profile-intro h1 span{
     color:var(--accent);
-    text-shadow:0 0 16px rgba(255,255,255,.6), 0 0 40px rgba(255,255,255,.25);
+
+    text-shadow:
+        0 0 8px var(--accent),
+        0 0 16px var(--accent),
+        0 0 30px var(--accent),
+        0 0 60px rgba(0,255,255,.8),
+        0 0 100px rgba(0,255,255,.4);
+}
+@keyframes neonGlow{
+    0%,100%{
+        text-shadow:
+            0 0 8px var(--accent),
+            0 0 16px var(--accent),
+            0 0 30px var(--accent),
+            0 0 60px rgba(0,255,255,.8);
+    }
+
+    50%{
+        text-shadow:
+            0 0 12px var(--accent),
+            0 0 25px var(--accent),
+            0 0 45px var(--accent),
+            0 0 80px rgba(0,255,255,1);
+    }
+}
+.profile-intro h1 span{
+    color:var(--accent);
+    animation:neonGlow 2.5s ease-in-out infinite;
+}
+.logo{
+    font-size:22px;
+    font-weight:800;
+    letter-spacing:2px;
+    color:var(--accent);
+    animation:neonGlow 2.5s ease-in-out infinite;
 }
 
 .profile-intro p{
