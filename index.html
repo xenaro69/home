@@ -98,6 +98,8 @@ padding:0 clamp(24px,4vw,64px);
 display:flex;
 gap:12px;
 align-items:center;
+position:relative;
+z-index:501;
 }
 
 .logo{
@@ -113,6 +115,7 @@ display:flex;
 list-style:none;
 gap:30px;
 }
+
 nav a{
 color:#f5f5f5;
 text-decoration:none;
@@ -120,40 +123,30 @@ font-weight:500;
 font-size:14px;
 transition:.35s;
 }
+
 nav a:hover{
 color:#ffffff;
 opacity:.7;
 }
 
-.about-btn{
+.about-btn, .join-btn{
 padding:9px 20px;
 background:#ffffff;
 border-radius:40px;
 color:#000000;
 font-weight:700;
 font-size:14px;
-transition:.4s;
 text-decoration:none;
-}
-.about-btn:hover{
-transform:translateY(-3px);
-box-shadow:0 0 30px rgba(255,255,255,.5);
-color:#000000;
-opacity:1;
+transition:.4s;
+position:relative;
+z-index:10;
+text-shadow:0 1px 2px rgba(0,0,0,.1);
 }
 
-.join-btn{
-padding:9px 20px;
-background:#ffffff;
-border-radius:40px;
-color:#000000;
-font-weight:700;
-font-size:14px;
-transition:.4s;
-}
-.join-btn:hover{
+.about-btn:hover, .join-btn:hover{
 transform:translateY(-3px);
-box-shadow:0 0 30px rgba(255,255,255,.5);
+box-shadow:0 0 30px rgba(255,255,255,.5), inset 0 0 15px rgba(255,255,255,.3);
+color:#000000;
 }
 
 /* ---- One-page layout ---- */
@@ -191,6 +184,8 @@ opacity:.7;
 
 .hero-right{
 perspective:1200px;
+position:relative;
+z-index:100;
 }
 
 .glass-card{
@@ -199,17 +194,14 @@ border:1px solid rgba(255,255,255,.12);
 border-radius:22px;
 padding:clamp(20px,3vh,32px);
 backdrop-filter:blur(30px);
-box-shadow:
-    0 0 40px rgba(255,255,255,.1),
-    0 25px 60px rgba(0,0,0,.55);
+box-shadow:0 0 40px rgba(255,255,255,.1), 0 25px 60px rgba(0,0,0,.55);
 transition:box-shadow .3s ease, transform .1s ease-out;
 transform-style:preserve-3d;
 will-change:transform;
 }
+
 .glass-card:hover{
-box-shadow:
-    0 0 55px rgba(0,207,255,.18),
-    0 35px 70px rgba(0,0,0,.6);
+box-shadow:0 0 55px rgba(255,255,255,.35), 0 35px 70px rgba(0,0,0,.6);
 }
 
 .card-layer{
@@ -235,10 +227,12 @@ justify-content:space-between;
 margin-top:20px;
 transform:translateZ(30px);
 }
+
 .stats h3{
 font-size:clamp(18px,2vw,26px);
 color:#ffffff;
 }
+
 .stats span{
 opacity:.6;
 font-size:12px;
@@ -273,10 +267,12 @@ font-size:16px;
 text-decoration:none;
 transition:.35s;
 }
+
 .social-link span{
 font-size:14px;
 font-weight:500;
 }
+
 .social-link:hover{
 transform:translateY(-5px);
 color:#00cfff;
@@ -292,6 +288,7 @@ border-top:1px solid rgba(255,255,255,.12);
 color:#999;
 font-size:11px;
 }
+
 footer h2{
 font-size:13px;
 margin-bottom:2px;
@@ -312,23 +309,25 @@ padding-top:60px;
 header{
 height:56px;
 }
+
 nav{
 padding:0 20px;
 }
+
 .logo{
 font-size:19px;
 }
+
 .nav-buttons{
 gap:8px;
 }
-.about-btn{
+
+.about-btn, .join-btn{
 padding:7px 16px;
 font-size:12.5px;
+text-shadow:0 1px 2px rgba(0,0,0,.1);
 }
-.join-btn{
-padding:7px 16px;
-font-size:12.5px;
-}
+
 nav ul{
 display:none;
 }
@@ -339,10 +338,12 @@ text-align:center;
 padding:28px 20px 24px;
 gap:26px;
 }
+
 .hero h1{
 font-size:34px;
 letter-spacing:-.5px;
 }
+
 .hero p{
 font-size:14px;
 line-height:1.5;
@@ -350,22 +351,20 @@ max-width:320px;
 margin:0 auto;
 }
 
-.hero-right{
-perspective:none;
-}
 .glass-card{
 padding:22px 18px;
 border-radius:20px;
 }
+
 .glass-card:hover{
-box-shadow:
-    0 0 40px rgba(255,255,255,.1),
-    0 25px 60px rgba(0,0,0,.55);
+box-shadow:0 0 40px rgba(255,255,255,.1), 0 25px 60px rgba(0,0,0,.55);
 }
+
 .glass-card h2{
 font-size:21px;
 transform:none;
 }
+
 .glass-card > .card-layer > p{
 transform:none;
 }
@@ -379,14 +378,17 @@ padding-top:18px;
 border-top:1px solid rgba(255,255,255,.1);
 transform:none;
 }
+
 .stats > div{
 display:flex;
 flex-direction:column;
 align-items:center;
 }
+
 .stats h3{
 font-size:19px;
 }
+
 .stats span{
 font-size:10.5px;
 letter-spacing:.2px;
@@ -396,6 +398,7 @@ white-space:nowrap;
 .bottom-row{
 padding:8px 20px 28px;
 }
+
 .social-links{
 display:flex;
 flex-wrap:wrap;
@@ -405,11 +408,13 @@ align-items:center;
 max-width:360px;
 margin:0 auto;
 }
+
 .social-link{
 padding:12px 18px;
 justify-content:center;
 font-size:14px;
 }
+
 .social-link span{
 font-size:13px;
 }
@@ -418,48 +423,33 @@ footer{
 padding:16px 20px;
 }
 }
-
-
 </style>
 </head>
 <body>
 <div id="loader">
-<div class="loader-logo">
-XENARO
-</div>
+<div class="loader-logo">XENARO</div>
 </div>
 <div id="particles"></div>
 <header>
 <nav>
-<div class="logo">
-XENARO
-</div>
+<div class="logo">XENARO</div>
 <div class="nav-buttons">
 <a class="about-btn" href="aboutme/">About Me</a>
-<a class="join-btn" href="https://discord.gg/C64h96EGR7" target="_blank" rel="noopener">
-Join Now
-</a>
+<a class="join-btn" href="https://discord.gg/C64h96EGR7" target="_blank" rel="noopener">Join Now</a>
 </div>
 </nav>
 </header>
 <div class="page">
-
 <section class="top-row" id="home">
 <div class="hero-left">
-<h1>
-SCOPE, AIM, SHOOT!
-</h1>
-<p>
-simple sa ladka hu,<br>game khel ke khush ho jata hu :)
-</p>
+<h1>SCOPE, AIM, SHOOT!</h1>
+<p>simple sa ladka hu,<br>game khel ke khush ho jata hu :)</p>
 </div>
 <div class="hero-right">
 <div class="glass-card" id="mainCard">
 <div class="card-layer">
 <h2>XENARO.69</h2>
-<p>
-Gaming Creator
-</p>
+<p>Gaming Creator</p>
 <div class="stats">
 <div>
 <h3>1000+</h3>
@@ -489,124 +479,83 @@ Gaming Creator
 </div>
 
 <footer>
-<h2>
-XENARO
-</h2>
-<p>
-© 2026 All Rights Reserved.
-</p>
+<h2>XENARO</h2>
+<p>© 2026 All Rights Reserved.</p>
 </footer>
-
 </div>
-<script>
-// =========================
-// XENARO
-// Premium Script
-// =========================
 
+<script>
 window.addEventListener("load", () => {
     setTimeout(() => {
         document.getElementById("loader").style.opacity = "0";
         document.getElementById("loader").style.pointerEvents = "none";
-    },1200);
+    }, 1200);
 });
 
 const header = document.querySelector("header");
-window.addEventListener("scroll",()=>{
-    if(window.scrollY>50){
-        header.style.background="rgba(0,0,0,.8)";
-    }
-    else{
-        header.style.background="rgba(0,0,0,.5)";
-    }
+window.addEventListener("scroll", () => {
+    header.style.background = window.scrollY > 50 ? "rgba(0,0,0,.8)" : "rgba(0,0,0,.5)";
 });
 
-// Glow effect removed for cleaner look
-
-const particleContainer=document.getElementById("particles");
+const particleContainer = document.getElementById("particles");
 function createParticle(){
-const p=document.createElement("span");
-const size=Math.random()*6+2;
-p.style.position="absolute";
-p.style.width=size+"px";
-p.style.height=size+"px";
-p.style.borderRadius="50%";
-p.style.background="#ffffff";
-p.style.opacity=Math.random()*0.6;
-p.style.left=Math.random()*100+"vw";
-p.style.top="110vh";
-p.style.boxShadow="0 0 20px rgba(255,255,255,.6)";
-particleContainer.appendChild(p);
-const speed=Math.random()*5+6;
-let y=110;
-const move=setInterval(()=>{
-y-=0.2;
-p.style.top=y+"vh";
-if(y<-10){
-clearInterval(move);
-p.remove();
+    const p = document.createElement("span");
+    const size = Math.random() * 6 + 2;
+    p.style.position = "absolute";
+    p.style.width = size + "px";
+    p.style.height = size + "px";
+    p.style.borderRadius = "50%";
+    p.style.background = "#ffffff";
+    p.style.opacity = Math.random() * 0.6;
+    p.style.left = Math.random() * 100 + "vw";
+    p.style.top = "110vh";
+    p.style.boxShadow = "0 0 20px rgba(255,255,255,.6)";
+    particleContainer.appendChild(p);
+    
+    const speed = Math.random() * 5 + 6;
+    let y = 110;
+    const move = setInterval(() => {
+        y -= 0.2;
+        p.style.top = y + "vh";
+        if(y < -10){
+            clearInterval(move);
+            p.remove();
+        }
+    }, speed);
 }
-},speed);
-}
-setInterval(createParticle,120);
+setInterval(createParticle, 120);
 
-// Reveal animation: since the whole site now fits on one screen
-// with no scrolling, fade everything in on load instead of on scroll.
-document.querySelectorAll("section").forEach((section,i)=>{
-section.style.opacity="0";
-section.style.transform="translateY(30px)";
-section.style.transition=".7s";
-setTimeout(()=>{
-section.style.opacity="1";
-section.style.transform="translateY(0px)";
-},150+i*120);
+document.querySelectorAll("section").forEach((section, i) => {
+    section.style.opacity = "0";
+    section.style.transform = "translateY(30px)";
+    section.style.transition = ".7s";
+    setTimeout(() => {
+        section.style.opacity = "1";
+        section.style.transform = "translateY(0px)";
+    }, 150 + i * 120);
 });
 
-const hero=document.querySelector(".hero-left h1");
+const hero = document.querySelector(".hero-left h1");
 if(hero){
-hero.animate([
-{
-opacity:0,
-transform:"translateY(40px)"
-},
-{
-opacity:1,
-transform:"translateY(0px)"
-}
-],{
-duration:1200,
-fill:"forwards"
-});
+    hero.animate([
+        { opacity: 0, transform: "translateY(40px)" },
+        { opacity: 1, transform: "translateY(0px)" }
+    ], { duration: 1200, fill: "forwards" });
 }
 
-document.querySelectorAll("button,a").forEach(btn=>{
-btn.addEventListener("mouseenter",()=>{
-btn.style.transition=".3s";
-btn.style.transform="translateY(-4px) scale(1.02)";
+document.querySelectorAll(".glass-card").forEach(card => {
+    card.addEventListener("mousemove", (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const rx = (y - rect.height / 2) / 18;
+        const ry = (rect.width / 2 - x) / 18;
+        card.style.transform = `perspective(1200px) rotateX(${rx}deg) rotateY(${ry}deg) scale3d(1.02,1.02,1.02)`;
+    });
+    card.addEventListener("mouseleave", () => {
+        card.style.transform = "perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)";
+    });
 });
-btn.addEventListener("mouseleave",()=>{
-btn.style.transform="translateY(0px) scale(1)";
-});
-});
-
-// Random background gradient removed for stability
-
-document.querySelectorAll(".glass-card").forEach(card=>{
-card.addEventListener("mousemove",(e)=>{
-const rect=card.getBoundingClientRect();
-const x=e.clientX-rect.left;
-const y=e.clientY-rect.top;
-const rx=(y-rect.height/2)/18;
-const ry=(rect.width/2-x)/18;
-card.style.transform=
-`perspective(1200px) rotateX(${rx}deg) rotateY(${ry}deg) scale3d(1.02,1.02,1.02)`;
-});
-card.addEventListener("mouseleave",()=>{
-card.style.transform="perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)";
-});
-});
-
-
 </script>
 </body>
 </html>
