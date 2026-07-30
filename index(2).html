@@ -97,6 +97,26 @@ nav{
     font-weight:800;
     letter-spacing:2px;
     color:#00cfff;
+    text-shadow:
+        0 0 8px rgba(0,207,255,.8),
+        0 0 16px rgba(0,207,255,.6),
+        0 0 30px rgba(0,207,255,.3);
+    animation:cyanGlow 2.5s ease-in-out infinite;
+}
+
+@keyframes cyanGlow{
+    0%,100%{
+        text-shadow:
+            0 0 8px rgba(0,207,255,.8),
+            0 0 16px rgba(0,207,255,.6),
+            0 0 30px rgba(0,207,255,.3);
+    }
+    50%{
+        text-shadow:
+            0 0 12px rgba(0,207,255,1),
+            0 0 25px rgba(0,207,255,.8),
+            0 0 45px rgba(0,207,255,.5);
+    }
 }
 
 /* ============ PROFILE PAGE (single page, no scroll) ============ */
@@ -136,23 +156,6 @@ nav{
 
 .profile-intro h1 span{
     color:#ffffff;
-    text-shadow:0 0 16px rgba(255,255,255,.6), 0 0 40px rgba(255,255,255,.25);
-    animation:whiteGlow 2.5s ease-in-out infinite;
-}
-
-@keyframes whiteGlow{
-    0%,100%{
-        text-shadow:
-            0 0 8px rgba(255,255,255,.7),
-            0 0 16px rgba(255,255,255,.5),
-            0 0 30px rgba(255,255,255,.3);
-    }
-    50%{
-        text-shadow:
-            0 0 12px rgba(255,255,255,.9),
-            0 0 25px rgba(255,255,255,.6),
-            0 0 45px rgba(255,255,255,.4);
-    }
 }
 
 .profile-intro p{
@@ -163,25 +166,30 @@ nav{
 }
 
 .profile-card{
-    position:relative;
-    flex:none;
-    width:min(92vw,520px);
-    background:rgba(255,255,255,.06);
+    position:fixed;
+    width:auto;
+    height:auto;
+    top:50%;
+    right:clamp(24px,4vw,64px);
+    transform:translateY(-50%);
+    background:#000000;
     border:1px solid rgba(255,255,255,.2);
     border-radius:28px;
-    padding:50px 42px;
+    padding:52px 64px;
     backdrop-filter:blur(30px);
     box-shadow:0 0 30px rgba(255,255,255,.1), 0 8px 32px rgba(0,0,0,.5);
     overflow:hidden;
     transition:.4s cubic-bezier(.4,0,.2,1);
     cursor:pointer;
+    white-space:nowrap;
+    max-width:280px;
 }
 
 .profile-card:hover{
     border-color:rgba(255,255,255,.4);
     background:rgba(255,255,255,.09);
     box-shadow:0 0 50px rgba(255,255,255,.2), 0 8px 40px rgba(0,0,0,.6);
-    transform:translateY(-8px);
+    transform:translateY(calc(-50% - 8px));
 }
 
 .profile-card::after{
@@ -281,6 +289,7 @@ nav{
     font-weight:500;
     color:#d5d5d5;
     transition:.3s;
+    white-space:nowrap;
 }
 
 .profile-list li:hover{
@@ -402,6 +411,7 @@ footer h2{
     color:#ffffff;
     transition:.3s;
     cursor:pointer;
+    flex-shrink:0;
 }
 
 .social-link:hover{
@@ -434,7 +444,15 @@ footer h2{
         justify-content:center;
     }
     .profile-card{
+        position:relative;
+        top:auto;
+        right:auto;
+        transform:none;
         width:100%;
+        white-space:normal;
+    }
+    .profile-card:hover{
+        transform:translateY(-8px);
     }
 }
 </style>
