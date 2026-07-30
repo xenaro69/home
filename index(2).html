@@ -166,13 +166,11 @@ nav{
 }
 
 .profile-card{
-    position:fixed;
+    position:relative;
+    order:-1;
     width:640px;
     min-width:640px;
     height:auto;
-    top:50%;
-    right:clamp(24px,4vw,64px);
-    transform:translateY(-50%);
     background:#000000;
     border:1px solid rgba(255,255,255,.2);
     border-radius:28px;
@@ -190,7 +188,7 @@ nav{
     border-color:rgba(255,255,255,.4);
     background:rgba(255,255,255,.09);
     box-shadow:0 0 50px rgba(255,255,255,.2), 0 8px 40px rgba(0,0,0,.6);
-    transform:translateY(calc(-50% - 8px));
+    transform:translateY(-8px);
 }
 
 .profile-card::after{
@@ -446,10 +444,7 @@ footer h2{
         justify-content:center;
     }
     .profile-card{
-        position:relative;
-        top:auto;
-        right:auto;
-        transform:none;
+        order:0;
         width:100%;
         min-width:0;
         white-space:normal;
@@ -484,7 +479,7 @@ footer h2{
 <div id="profilePage">
     <div class="profile-wrap">
         <div class="profile-intro">
-            <h2>I AM <span>XENARO</span></h2>
+            <h1>I AM <span>XENARO</span></h1>
             <p>Editing gameplay into montages, breaking down the meta, and building a community around the games I love — one video at a time.</p>
         </div>
 
