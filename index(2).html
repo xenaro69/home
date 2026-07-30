@@ -167,7 +167,8 @@ nav{
 
 .profile-card{
     position:fixed;
-    width:auto;
+    width:640px;
+    min-width:640px;
     height:auto;
     top:50%;
     right:clamp(24px,4vw,64px);
@@ -175,14 +176,14 @@ nav{
     background:#000000;
     border:1px solid rgba(255,255,255,.2);
     border-radius:28px;
-    padding:18px 50px;
+    padding:22px 48px;
     backdrop-filter:blur(30px);
     box-shadow:0 0 30px rgba(255,255,255,.1), 0 8px 32px rgba(0,0,0,.5);
     overflow:hidden;
     transition:.4s cubic-bezier(.4,0,.2,1);
     cursor:pointer;
     white-space:nowrap;
-    max-width:280px;
+    max-width:90vw;
 }
 
 .profile-card:hover{
@@ -216,7 +217,7 @@ nav{
     display:flex;
     align-items:center;
     gap:20px;
-    margin-bottom:28px;
+    margin-bottom:16px;
 }
 
 .profile-photo-wrap{
@@ -271,6 +272,7 @@ nav{
     width:100%;
     background:rgba(255,255,255,.12);
     margin-bottom:26px;
+    display:none;
 }
 
 .profile-list{
@@ -385,7 +387,7 @@ footer h2{
 }
 
 .social-links{
-    display:flex;
+    display:none;
     gap:14px;
     margin-top:26px;
     opacity:0;
@@ -449,6 +451,7 @@ footer h2{
         right:auto;
         transform:none;
         width:100%;
+        min-width:0;
         white-space:normal;
     }
     .profile-card:hover{
