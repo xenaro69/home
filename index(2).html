@@ -51,7 +51,7 @@
 }
 
 :root{
-    --accent:#00e5ff;
+    --accent:#ffffff;
 }
 
 html, body{
@@ -96,7 +96,7 @@ nav{
     font-size:22px;
     font-weight:800;
     letter-spacing:2px;
-    color:var(--accent);
+    color:#00cfff;
 }
 
 /* ============ PROFILE PAGE (single page, no scroll) ============ */
@@ -135,40 +135,24 @@ nav{
 }
 
 .profile-intro h1 span{
-    color: var(--accent);
-
-    text-shadow:
-        0 0 2px rgba(0,255,255,.7),
-        0 0 6px rgba(0,255,255,.3);
+    color:#ffffff;
+    text-shadow:0 0 16px rgba(255,255,255,.6), 0 0 40px rgba(255,255,255,.25);
+    animation:whiteGlow 2.5s ease-in-out infinite;
 }
-@keyframes neonGlow{
+
+@keyframes whiteGlow{
     0%,100%{
         text-shadow:
-            0 0 8px var(--accent),
-            0 0 16px var(--accent),
-            0 0 30px var(--accent),
-            0 0 60px rgba(0,255,255,.8);
+            0 0 8px rgba(255,255,255,.7),
+            0 0 16px rgba(255,255,255,.5),
+            0 0 30px rgba(255,255,255,.3);
     }
-
     50%{
         text-shadow:
-            0 0 12px var(--accent),
-            0 0 25px var(--accent),
-            0 0 45px var(--accent),
-            0 0 80px rgba(0,255,255,1);
+            0 0 12px rgba(255,255,255,.9),
+            0 0 25px rgba(255,255,255,.6),
+            0 0 45px rgba(255,255,255,.4);
     }
-}
-.logo{
-    font-size:22px;
-    font-weight:800;
-    letter-spacing:2px;
-    color:var(--accent);
-
-    text-shadow:
-        0 0 3px rgba(0,255,255,.6),
-        0 0 8px rgba(0,255,255,.25);
-
-    animation:neonGlow 2.5s ease-in-out infinite;
 }
 
 .profile-intro p{
@@ -391,6 +375,41 @@ footer h2{
     font-weight:700;
 }
 
+.social-links{
+    display:flex;
+    gap:14px;
+    margin-top:26px;
+    opacity:0;
+    transform:translateY(10px);
+    transition:.4s cubic-bezier(.4,0,.2,1);
+    pointer-events:none;
+}
+
+.profile-card.active .social-links{
+    opacity:1;
+    transform:translateY(0);
+    pointer-events:auto;
+}
+
+.social-link{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.3);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#ffffff;
+    transition:.3s;
+    cursor:pointer;
+}
+
+.social-link:hover{
+    border-color:#00cfff;
+    color:#00cfff;
+    background:rgba(0,207,255,.1);
+}
+
 @media(max-width:900px){
     header{ height:56px; }
     .logo{ font-size:19px; }
@@ -465,6 +484,12 @@ footer h2{
                 <li><i class="fa-solid fa-gamepad"></i>Gaming</li>
                 <li><i class="fa-solid fa-film"></i>Video Editing</li>
             </ul>
+            <div class="social-links">
+                <a href="#" class="social-link" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#" class="social-link" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="social-link" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" class="social-link" title="Discord"><i class="fa-brands fa-discord"></i></a>
+            </div>
         </div>
     </div>
 </div>
@@ -523,6 +548,19 @@ footer h2{
                 setTimeout(()=>loadingScreen.remove(), 600);
             }
         }, 800);
+    });
+
+    // Profile card interactivity
+    const profileCard = document.querySelector('.profile-card');
+    profileCard.addEventListener('click', ()=>{
+        profileCard.classList.toggle('active');
+    });
+
+    // Close on outside click
+    document.addEventListener('click', (e)=>{
+        if(!profileCard.contains(e.target) && profileCard.classList.contains('active')){
+            profileCard.classList.remove('active');
+        }
     });
 </script>
 </body>
