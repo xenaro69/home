@@ -207,6 +207,7 @@ nav{
     width:110px;
     height:110px;
     cursor:pointer;
+    touch-action:manipulation;
 }
 
 .profile-photo-ring{
@@ -424,16 +425,32 @@ footer h2{
 }
 
 @media(max-width:900px){
+    html, body{
+        height:auto;
+        overflow:auto;
+    }
+    
     header{ height:56px; }
     .logo{ font-size:19px; }
+    
+    .back-btn{
+        top:8px;
+        right:16px;
+        height:38px;
+        padding:0 14px;
+        font-size:13px;
+    }
 
     #profilePage{
-        padding:76px 20px 70px;
+        position:relative;
+        padding:70px 16px 80px;
+        min-height:auto;
     }
     
     .profile-wrap{
         flex-direction:column;
         text-align:center;
+        gap:20px;
     }
     
     .profile-intro{
@@ -441,41 +458,63 @@ footer h2{
     }
     
     .profile-intro h1{
-        font-size:clamp(36px,5vw,52px);
+        font-size:clamp(32px,5vw,48px);
     }
     
     .profile-intro p{
         margin:0 auto;
+        font-size:13px;
     }
     
     .profile-top{
         flex-direction:column;
         align-items:center;
+        margin-bottom:16px;
     }
     
     .profile-card{
         order:0;
         width:100%;
         min-width:0;
-        padding:20px;
-    }
-    
-    .profile-card:hover{
-        transform:translateY(-8px);
+        padding:16px;
+        border-radius:20px;
     }
     
     .profile-list{
-        flex-direction:column;
-        gap:12px;
+        flex-direction:row;
+        gap:10px;
         align-items:center;
+        justify-content:center;
+        flex-wrap:wrap;
     }
     
     .profile-list li{
-        font-size:13px;
+        font-size:12px;
+        gap:6px;
+    }
+    
+    .profile-list li i{
+        font-size:14px;
     }
     
     .modal-close{
-        top:-50px;
+        top:-35px;
+        right:0;
+    }
+    
+    .modal-img{
+        max-width:95vw;
+        max-height:80vh;
+    }
+    
+    #imageModal{
+        padding:20px;
+    }
+    
+    footer{
+        position:relative;
+        padding:12px;
+        font-size:10px;
     }
 }
 </style>
@@ -608,24 +647,30 @@ document.addEventListener('keydown', (e)=>{
     }
 });
 
-document.querySelector('.profile-card').addEventListener('mousemove', (e)=>{
-    const card = document.querySelector('.profile-card');
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const rx = (y - rect.height / 2) / 18;
-    const ry = (rect.width / 2 - x) / 18;
-    card.style.transform = `perspective(1200px) rotateX(${rx}deg) rotateY(${ry}deg) scale3d(1.02,1.02,1.02)`;
-});
+const isTouchDevice = () => {
+    return (('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0));
+};
 
-document.querySelector('.profile-card').addEventListener('mouseleave', ()=>{
-    const card = document.querySelector('.profile-card');
-    card.style.transition = 'transform .4s cubic-bezier(.4,0,.2,1), border-color .3s, background .3s, box-shadow .3s';
-    card.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)';
-    setTimeout(()=>{
-        card.style.transition = 'border-color .3s, background .3s, box-shadow .3s';
-    }, 400);
-});
+if(!isTouchDevice()){
+    document.querySelector('.profile-card').addEventListener('mousemove', (e)=>{
+        const card = document.querySelector('.profile-card');
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const rx = (y - rect.height / 2) / 18;
+        const ry = (rect.width / 2 - x) / 18;
+        card.style.transform = `perspective(1200px) rotateX(${rx}deg) rotateY(${ry}deg) scale3d(1.02,1.02,1.02)`;
+    });
+
+    document.querySelector('.profile-card').addEventListener('mouseleave', ()=>{
+        const card = document.querySelector('.profile-card');
+        card.style.transition = 'transform .4s cubic-bezier(.4,0,.2,1), border-color .3s, background .3s, box-shadow .3s';
+        card.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)';
+        setTimeout(()=>{
+            card.style.transition = 'border-color .3s, background .3s, box-shadow .3s';
+        }, 400);
+    });
+}
 </script>
 </body>
 </html>
