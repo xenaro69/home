@@ -16,67 +16,6 @@
     box-sizing:border-box;
 }
 
-#particles{
-    position:fixed;
-    inset:0;
-    width:100%;
-    height:100%;
-    z-index:0;
-    pointer-events:none;
-}
-
-.back-btn{
-    position:fixed;
-    top:11px;
-    right:24px;
-    z-index:600;
-    background:#ffffff;
-    border:1px solid rgba(255,255,255,.15);
-    color:#000000;
-    height:42px;
-    padding:0 18px;
-    border-radius:40px;
-    cursor:pointer;
-    transition:.3s;
-    display:flex;
-    align-items:center;
-    gap:8px;
-    font-family:'Poppins',sans-serif;
-    font-size:14px;
-    font-weight:600;
-}
-
-.back-btn:hover{
-    background:#e6e6e6;
-    transform:translateX(3px);
-}
-
-.credits-btn{
-    position:fixed;
-    bottom:80px;
-    right:24px;
-    z-index:600;
-    background:#ffffff;
-    border:1px solid rgba(255,255,255,.15);
-    color:#000000;
-    height:42px;
-    padding:0 18px;
-    border-radius:40px;
-    cursor:pointer;
-    transition:.3s;
-    display:flex;
-    align-items:center;
-    gap:8px;
-    font-family:'Poppins',sans-serif;
-    font-size:14px;
-    font-weight:600;
-}
-
-.credits-btn:hover{
-    background:#e6e6e6;
-    transform:translateX(-3px);
-}
-
 html, body{
     height:100%;
     overflow:hidden;
@@ -89,6 +28,13 @@ body{
     position:relative;
 }
 
+#particles{
+    position:fixed;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+}
+
 header{
     position:fixed;
     top:0;
@@ -97,7 +43,6 @@ header{
     height:64px;
     z-index:500;
     backdrop-filter:blur(18px);
-    background:transparent;
     border-bottom:1px solid rgba(255,255,255,.12);
     display:flex;
     align-items:center;
@@ -107,9 +52,6 @@ nav{
     width:100%;
     max-width:1680px;
     margin:auto;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
     padding:0 clamp(24px,4vw,64px);
 }
 
@@ -129,6 +71,56 @@ nav{
     50%{
         text-shadow:0 0 12px rgba(0,207,255,1), 0 0 25px rgba(0,207,255,.8), 0 0 45px rgba(0,207,255,.5);
     }
+}
+
+.fixed-btn{
+    position:fixed;
+    z-index:600;
+    background:#ffffff;
+    border:1px solid rgba(255,255,255,.15);
+    color:#000000;
+    height:42px;
+    padding:0 18px;
+    border-radius:40px;
+    cursor:pointer;
+    transition:.3s;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-family:'Poppins',sans-serif;
+    font-size:14px;
+    font-weight:600;
+}
+
+.fixed-btn:hover{
+    background:#e6e6e6;
+}
+
+.back-btn{
+    top:11px;
+    right:24px;
+}
+
+.back-btn:hover{
+    transform:translateX(3px);
+}
+
+.support-btn{
+    top:11px;
+    right:128px;
+}
+
+.support-btn:hover{
+    transform:translateX(-3px);
+}
+
+.credits-btn{
+    bottom:80px;
+    right:24px;
+}
+
+.credits-btn:hover{
+    transform:translateX(-3px);
 }
 
 #profilePage{
@@ -181,7 +173,6 @@ nav{
     order:-1;
     width:640px;
     min-width:640px;
-    height:auto;
     background:#000000;
     border:1px solid rgba(255,255,255,.2);
     border-radius:28px;
@@ -190,8 +181,6 @@ nav{
     box-shadow:0 0 30px rgba(255,255,255,.1), 0 8px 32px rgba(0,0,0,.5);
     overflow:hidden;
     max-width:90vw;
-    transform-style:preserve-3d;
-    will-change:transform;
     transition:border-color .3s, background .3s, box-shadow .3s;
 }
 
@@ -201,27 +190,7 @@ nav{
     box-shadow:0 0 50px rgba(255,255,255,.2), 0 8px 40px rgba(0,0,0,.6);
 }
 
-.profile-card::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    border-radius:28px;
-    padding:1px;
-    background:linear-gradient(135deg, rgba(255,255,255,.3), transparent);
-    -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite:xor;
-    mask-composite:exclude;
-    opacity:0;
-    transition:.4s;
-    pointer-events:none;
-}
-
-.profile-card:hover::after{
-    opacity:1;
-}
-
 .profile-top{
-    position:relative;
     display:flex;
     align-items:center;
     gap:20px;
@@ -230,11 +199,10 @@ nav{
 
 .profile-photo-wrap{
     position:relative;
-    flex:none;
     width:110px;
     height:110px;
     cursor:pointer;
-    touch-action:manipulation;
+    flex-shrink:0;
 }
 
 .profile-photo-ring{
@@ -249,7 +217,6 @@ nav{
     height:100%;
     border-radius:50%;
     object-fit:cover;
-    display:block;
     border:3px solid rgba(255,255,255,.5);
     transition:.3s;
 }
@@ -285,7 +252,6 @@ nav{
 .profile-list{
     list-style:none;
     display:flex;
-    flex-direction:row;
     gap:12px;
     flex-wrap:nowrap;
     justify-content:center;
@@ -299,7 +265,6 @@ nav{
     font-weight:500;
     color:#d5d5d5;
     transition:.3s;
-    flex-shrink:0;
     white-space:nowrap;
 }
 
@@ -459,7 +424,6 @@ nav{
     font-weight:700;
     margin-bottom:20px;
     letter-spacing:.5px;
-    color:#f5f5f5;
 }
 
 .modal-box p{
@@ -661,7 +625,6 @@ nav{
     font-size:32px;
     cursor:pointer;
     transition:.3s;
-    padding:0;
     width:40px;
     height:40px;
     display:flex;
@@ -685,7 +648,6 @@ footer{
     border-top:1px solid rgba(255,255,255,.12);
     color:#999;
     font-size:11px;
-    background:transparent;
     backdrop-filter:blur(10px);
 }
 
@@ -709,7 +671,6 @@ footer h2{
         min-height:100%;
     }
 
-    /* ---- Top nav: compact icon-only buttons docked in the header row ---- */
     header{
         height:56px;
     }
@@ -718,8 +679,7 @@ footer h2{
         font-size:18px;
     }
 
-    .back-btn,
-    .credits-btn{
+    .fixed-btn{
         position:fixed;
         top:0;
         height:56px;
@@ -737,27 +697,28 @@ footer h2{
         right:44px;
     }
 
-    .credits-btn{
-        right:0;
+    .support-btn{
+        right:112px;
     }
 
-    .back-btn:hover,
-    .credits-btn:hover{
+    .credits-btn{
+        right:0;
+        bottom:auto;
+    }
+
+    .fixed-btn:hover{
         background:rgba(255,255,255,.08);
         transform:none;
     }
 
-    .back-btn span,
-    .credits-btn span{
+    .fixed-btn span{
         display:none;
     }
 
-    .back-btn i,
-    .credits-btn i{
+    .fixed-btn i{
         font-size:16px;
     }
 
-    /* ---- Main profile section ---- */
     #profilePage{
         position:relative;
         display:block;
@@ -792,7 +753,6 @@ footer h2{
         color:#aaa;
     }
 
-    /* ---- Profile card ---- */
     .profile-card{
         order:0;
         width:100%;
@@ -800,7 +760,6 @@ footer h2{
         max-width:100%;
         padding:24px 20px;
         border-radius:22px;
-        transform:none !important;
     }
 
     .profile-top{
@@ -827,7 +786,6 @@ footer h2{
         font-size:11px;
     }
 
-    /* Interests: stacked full-width rows instead of a cramped inline wrap */
     .profile-list{
         flex-direction:column;
         gap:8px;
@@ -855,7 +813,6 @@ footer h2{
         flex:none;
     }
 
-    /* ---- Action buttons: compact stacked buttons ---- */
     .action-buttons{
         position:static;
         transform:none;
@@ -884,7 +841,6 @@ footer h2{
         display:none;
     }
 
-    /* ---- Modals ---- */
     .modal-overlay{
         padding:20px;
     }
@@ -911,7 +867,6 @@ footer h2{
     }
 
     .specs-grid{
-        grid-template-columns:1fr 1fr;
         gap:10px;
     }
 
@@ -925,11 +880,6 @@ footer h2{
 
     .spec-value{
         font-size:12px;
-    }
-
-    .modal-close{
-        top:-40px;
-        right:0;
     }
 
     .modal-content{
@@ -946,7 +896,6 @@ footer h2{
         padding:16px;
     }
 
-    /* ---- Footer: last item in the normal flow, no longer fixed/overlapped ---- */
     footer{
         position:relative;
         margin-top:auto;
@@ -987,12 +936,16 @@ footer h2{
 
 <canvas id="particles"></canvas>
 
-<button class="back-btn" onclick="history.back()">
+<button class="fixed-btn back-btn" onclick="history.back()">
     <i class="fa-solid fa-arrow-left"></i>
     <span>Back</span>
 </button>
 
-<button class="credits-btn" onclick="openCreditsModal()">
+<button class="fixed-btn support-btn" onclick="openModal('supportModal')">
+    <span>Support Me</span>
+</button>
+
+<button class="fixed-btn credits-btn" onclick="openModal('creditsModal')">
     <i class="fa-solid fa-code"></i>
     <span>Credits</span>
 </button>
@@ -1031,7 +984,7 @@ footer h2{
 </div>
 
 <div class="action-buttons">
-    <button class="action-btn" onclick="openPasswordModal()">
+    <button class="action-btn" onclick="openModal('passwordModal')">
         More of Me
         <div class="btn-tooltip">KNOW MORE ABOUT ME</div>
     </button>
@@ -1039,7 +992,7 @@ footer h2{
         Github Page
         <div class="btn-tooltip">SOURCE CODE OF THIS WEBSITE</div>
     </button>
-    <button class="action-btn" onclick="openDevicesModal()">
+    <button class="action-btn" onclick="openModal('devicesModal')">
         My Devices
         <div class="btn-tooltip">DEVICES I USE</div>
     </button>
@@ -1047,7 +1000,7 @@ footer h2{
 
 <div id="passwordModal" class="modal-overlay">
     <div class="modal-box">
-        <button class="modal-close-btn" onclick="closePasswordModal()">&times;</button>
+        <button class="modal-close-btn" onclick="closeModal('passwordModal')">&times;</button>
         <h3>Enter Password</h3>
         <input type="password" id="passwordInput" class="password-input" placeholder="Enter password..." onkeypress="if(event.key==='Enter') submitPassword()">
         <button class="password-submit" onclick="submitPassword()">Submit</button>
@@ -1057,14 +1010,14 @@ footer h2{
 
 <div id="aboutMeModal" class="modal-overlay">
     <div class="modal-box">
-        <button class="modal-close-btn" onclick="closeAboutMeModal()">&times;</button>
+        <button class="modal-close-btn" onclick="closeModal('aboutMeModal')">&times;</button>
         <p>I'm femboy.</p>
     </div>
 </div>
 
 <div id="devicesModal" class="modal-overlay">
     <div class="modal-box">
-        <button class="modal-close-btn" onclick="closeDevicesModal()">&times;</button>
+        <button class="modal-close-btn" onclick="closeModal('devicesModal')">&times;</button>
         <div class="device-name">Lenovo LOQ 15IAX9</div>
         
         <div class="specs-grid">
@@ -1091,9 +1044,16 @@ footer h2{
     </div>
 </div>
 
+<div id="supportModal" class="modal-overlay">
+    <div class="modal-box">
+        <button class="modal-close-btn" onclick="closeModal('supportModal')">&times;</button>
+        <p>Gareeb samjha hai kya</p>
+    </div>
+</div>
+
 <div id="creditsModal" class="modal-overlay">
     <div class="modal-box">
-        <button class="modal-close-btn" onclick="closeCreditsModal()">&times;</button>
+        <button class="modal-close-btn" onclick="closeModal('creditsModal')">&times;</button>
         <h3>How did I make this website?</h3>
         <p>Using Claude and ChatGPT</p>
     </div>
@@ -1101,7 +1061,7 @@ footer h2{
 
 <div id="imageModal">
     <div class="modal-content">
-        <button class="modal-close" onclick="closeModal()">&times;</button>
+        <button class="modal-close" onclick="closeModal('imageModal')">&times;</button>
         <img src="profile.png" alt="Xenaro" class="modal-img">
     </div>
 </div>
@@ -1150,10 +1110,7 @@ animate();
 window.addEventListener('load', ()=>{
     setTimeout(()=>{
         const loadingScreen = document.getElementById('loadingScreen');
-        if(loadingScreen){
-            loadingScreen.classList.add('fade-out');
-            setTimeout(()=>loadingScreen.remove(), 600);
-        }
+        if(loadingScreen) loadingScreen.classList.add('fade-out');
     }, 800);
 });
 
@@ -1164,34 +1121,27 @@ photoWrap.addEventListener('click', ()=>{
     imageModal.classList.add('active');
 });
 
-function closeModal(){
-    imageModal.classList.remove('active');
-}
-
 imageModal.addEventListener('click', (e)=>{
-    if(e.target === imageModal){
-        closeModal();
-    }
+    if(e.target === imageModal) closeModal('imageModal');
 });
 
 document.addEventListener('keydown', (e)=>{
-    if(e.key === 'Escape' && imageModal.classList.contains('active')){
-        closeModal();
+    if(e.key === 'Escape'){
+        if(imageModal.classList.contains('active')) closeModal('imageModal');
+        document.querySelectorAll('.modal-overlay.active').forEach(m=>m.classList.remove('active'));
     }
 });
 
-// Modal Functions
-function openPasswordModal(){
-    const modal = document.getElementById('passwordModal');
+function openModal(id){
+    const modal = document.getElementById(id);
     modal.classList.add('active');
-    document.getElementById('passwordInput').focus();
-    document.getElementById('passwordError').classList.remove('show');
+    if(id === 'passwordModal') document.getElementById('passwordInput').focus();
 }
 
-function closePasswordModal(){
-    const modal = document.getElementById('passwordModal');
+function closeModal(id){
+    const modal = document.getElementById(id);
     modal.classList.remove('active');
-    document.getElementById('passwordInput').value = '';
+    if(id === 'passwordModal') document.getElementById('passwordInput').value = '';
     document.getElementById('passwordError').classList.remove('show');
 }
 
@@ -1200,83 +1150,31 @@ function submitPassword(){
     const errorEl = document.getElementById('passwordError');
     
     if(password === '2401'){
-        closePasswordModal();
-        openAboutMeModal();
+        closeModal('passwordModal');
+        openModal('aboutMeModal');
     } else {
         errorEl.classList.add('show');
         document.getElementById('passwordInput').value = '';
     }
 }
 
-function openAboutMeModal(){
-    const modal = document.getElementById('aboutMeModal');
-    modal.classList.add('active');
-}
-
-function closeAboutMeModal(){
-    const modal = document.getElementById('aboutMeModal');
-    modal.classList.remove('active');
-}
-
-function openDevicesModal(){
-    const modal = document.getElementById('devicesModal');
-    modal.classList.add('active');
-}
-
-function closeDevicesModal(){
-    const modal = document.getElementById('devicesModal');
-    modal.classList.remove('active');
-}
-
-function openCreditsModal(){
-    const modal = document.getElementById('creditsModal');
-    modal.classList.add('active');
-}
-
-function closeCreditsModal(){
-    const modal = document.getElementById('creditsModal');
-    modal.classList.remove('active');
-}
-
-// Close modals on overlay click
-document.getElementById('passwordModal').addEventListener('click', (e)=>{
-    if(e.target.id === 'passwordModal') closePasswordModal();
+document.querySelectorAll('.modal-overlay').forEach(modal=>{
+    modal.addEventListener('click', (e)=>{
+        if(e.target === modal) closeModal(modal.id);
+    });
 });
 
-document.getElementById('aboutMeModal').addEventListener('click', (e)=>{
-    if(e.target.id === 'aboutMeModal') closeAboutMeModal();
-});
-
-document.getElementById('devicesModal').addEventListener('click', (e)=>{
-    if(e.target.id === 'devicesModal') closeDevicesModal();
-});
-
-document.getElementById('creditsModal').addEventListener('click', (e)=>{
-    if(e.target.id === 'creditsModal') closeCreditsModal();
-});
-
-// Close modals on Escape key
-document.addEventListener('keydown', (e)=>{
-    if(e.key === 'Escape'){
-        closePasswordModal();
-        closeAboutMeModal();
-        closeDevicesModal();
-        closeCreditsModal();
-    }
-});
-
-// GitHub button - link to GitHub
 document.querySelector('.github-btn').addEventListener('click', ()=>{
     window.open('https://github.com/xenaro69', '_blank');
 });
 
 const isTouchDevice = () => {
-    return (('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0));
+    return (('ontouchstart' in window) || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0);
 };
 
 if(!isTouchDevice()){
-    document.querySelector('.profile-card').addEventListener('mousemove', (e)=>{
-        const card = document.querySelector('.profile-card');
+    const card = document.querySelector('.profile-card');
+    card.addEventListener('mousemove', (e)=>{
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
@@ -1285,8 +1183,7 @@ if(!isTouchDevice()){
         card.style.transform = `perspective(1200px) rotateX(${rx}deg) rotateY(${ry}deg) scale3d(1.02,1.02,1.02)`;
     });
 
-    document.querySelector('.profile-card').addEventListener('mouseleave', ()=>{
-        const card = document.querySelector('.profile-card');
+    card.addEventListener('mouseleave', ()=>{
         card.style.transition = 'transform .4s cubic-bezier(.4,0,.2,1), border-color .3s, background .3s, box-shadow .3s';
         card.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)';
         setTimeout(()=>{
