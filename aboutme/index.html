@@ -51,6 +51,32 @@
     transform:translateX(3px);
 }
 
+.credits-btn{
+    position:fixed;
+    bottom:80px;
+    right:24px;
+    z-index:600;
+    background:#ffffff;
+    border:1px solid rgba(255,255,255,.15);
+    color:#000000;
+    height:42px;
+    padding:0 18px;
+    border-radius:40px;
+    cursor:pointer;
+    transition:.3s;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-family:'Poppins',sans-serif;
+    font-size:14px;
+    font-weight:600;
+}
+
+.credits-btn:hover{
+    background:#e6e6e6;
+    transform:translateX(-3px);
+}
+
 html, body{
     height:100%;
     overflow:hidden;
@@ -291,17 +317,15 @@ nav{
 }
 
 .action-buttons{
-    margin-top:48px;
-    display:flex;
-    gap:16px;
-    justify-content:center;
-    flex-wrap:wrap;
-    width:100%;
     position:fixed;
     bottom:100px;
     left:50%;
     transform:translateX(-50%);
     z-index:400;
+    display:flex;
+    gap:16px;
+    justify-content:center;
+    flex-wrap:wrap;
     max-width:600px;
 }
 
@@ -320,7 +344,6 @@ nav{
     text-transform:uppercase;
     transition:.3s;
     backdrop-filter:blur(10px);
-    overflow:hidden;
 }
 
 .action-btn:hover{
@@ -376,6 +399,11 @@ nav{
     display:flex;
 }
 
+@keyframes fadeIn{
+    from{ opacity:0; }
+    to{ opacity:1; }
+}
+
 .modal-box{
     position:relative;
     background:#0a0a0a;
@@ -427,6 +455,14 @@ nav{
     font-weight:700;
     margin-bottom:20px;
     letter-spacing:.5px;
+    color:#f5f5f5;
+}
+
+.modal-box p{
+    font-size:16px;
+    line-height:1.6;
+    text-align:center;
+    color:#d5d5d5;
 }
 
 .password-input{
@@ -482,41 +518,12 @@ nav{
     display:block;
 }
 
-.modal-box p{
-    font-size:16px;
-    line-height:1.6;
-    text-align:center;
-    color:#d5d5d5;
-}
-
-.device-spec{
-    margin:12px 0;
-    padding:12px;
-    background:rgba(255,255,255,.06);
-    border-left:3px solid #00cfff;
-    border-radius:8px;
-}
-
-.device-spec strong{
-    color:#00cfff;
-    display:block;
-    font-size:12px;
-    letter-spacing:.5px;
-    text-transform:uppercase;
-    margin-bottom:4px;
-}
-
-.device-spec span{
-    color:#bbb;
-    font-size:13px;
-}
-
 .device-name{
     font-size:16px;
     font-weight:700;
     margin-bottom:24px;
     text-align:center;
-    color:#f5f5f5;
+    color:#bbb;
 }
 
 .specs-grid{
@@ -527,7 +534,7 @@ nav{
 
 .spec-box{
     background:rgba(255,255,255,.06);
-    border:1px solid rgba(0,207,255,.3);
+    border:1px solid rgba(255,255,255,.2);
     border-radius:12px;
     padding:14px;
     text-align:center;
@@ -535,8 +542,8 @@ nav{
 }
 
 .spec-box:hover{
-    background:rgba(0,207,255,.08);
-    border-color:rgba(0,207,255,.6);
+    background:rgba(255,255,255,.1);
+    border-color:rgba(255,255,255,.4);
     transform:translateY(-2px);
 }
 
@@ -550,48 +557,9 @@ nav{
 }
 
 .spec-value{
-    color:#00cfff;
+    color:#d5d5d5;
     font-size:13px;
     font-weight:700;
-}
-
-@media(max-width:900px){
-    .action-buttons{
-        margin-top:32px;
-        gap:12px;
-        bottom:80px;
-        width:calc(100% - 32px);
-        left:16px;
-        transform:none;
-        max-width:none;
-    }
-    
-    .action-btn{
-        padding:10px 20px;
-        font-size:12px;
-    }
-    
-    .modal-box{
-        padding:28px;
-        max-width:85%;
-    }
-    
-    .specs-grid{
-        grid-template-columns:1fr 1fr;
-        gap:10px;
-    }
-    
-    .spec-box{
-        padding:12px;
-    }
-    
-    .spec-label{
-        font-size:10px;
-    }
-    
-    .spec-value{
-        font-size:12px;
-    }
 }
 
 #loadingScreen{
@@ -661,11 +629,6 @@ nav{
 
 #imageModal.active{
     display:flex;
-}
-
-@keyframes fadeIn{
-    from{ opacity:0; }
-    to{ opacity:1; }
 }
 
 .modal-content{
@@ -745,6 +708,14 @@ footer h2{
         padding:0 14px;
         font-size:13px;
     }
+    
+    .credits-btn{
+        top:8px;
+        right:160px;
+        height:38px;
+        padding:0 12px;
+        font-size:12px;
+    }
 
     #profilePage{
         position:relative;
@@ -802,6 +773,41 @@ footer h2{
         font-size:14px;
     }
     
+    .action-buttons{
+        bottom:80px;
+        left:16px;
+        transform:none;
+        gap:12px;
+        max-width:calc(100% - 32px);
+    }
+    
+    .action-btn{
+        padding:10px 20px;
+        font-size:12px;
+    }
+    
+    .modal-box{
+        padding:28px;
+        max-width:85%;
+    }
+    
+    .specs-grid{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+    }
+    
+    .spec-box{
+        padding:12px;
+    }
+    
+    .spec-label{
+        font-size:10px;
+    }
+    
+    .spec-value{
+        font-size:12px;
+    }
+    
     .modal-close{
         top:-35px;
         right:0;
@@ -836,6 +842,11 @@ footer h2{
 <button class="back-btn" onclick="history.back()">
     <i class="fa-solid fa-arrow-left"></i>
     <span>Back</span>
+</button>
+
+<button class="credits-btn" onclick="openCreditsModal()">
+    <i class="fa-solid fa-code"></i>
+    <span>Credits</span>
 </button>
 
 <header>
@@ -923,6 +934,14 @@ footer h2{
                 <span class="spec-value">512GB SSD</span>
             </div>
         </div>
+    </div>
+</div>
+
+<div id="creditsModal" class="modal-overlay">
+    <div class="modal-box">
+        <button class="modal-close-btn" onclick="closeCreditsModal()">&times;</button>
+        <h3>How did I make this website?</h3>
+        <p>Using Claude and ChatGPT</p>
     </div>
 </div>
 
@@ -1055,6 +1074,16 @@ function closeDevicesModal(){
     modal.classList.remove('active');
 }
 
+function openCreditsModal(){
+    const modal = document.getElementById('creditsModal');
+    modal.classList.add('active');
+}
+
+function closeCreditsModal(){
+    const modal = document.getElementById('creditsModal');
+    modal.classList.remove('active');
+}
+
 // Close modals on overlay click
 document.getElementById('passwordModal').addEventListener('click', (e)=>{
     if(e.target.id === 'passwordModal') closePasswordModal();
@@ -1068,12 +1097,17 @@ document.getElementById('devicesModal').addEventListener('click', (e)=>{
     if(e.target.id === 'devicesModal') closeDevicesModal();
 });
 
+document.getElementById('creditsModal').addEventListener('click', (e)=>{
+    if(e.target.id === 'creditsModal') closeCreditsModal();
+});
+
 // Close modals on Escape key
 document.addEventListener('keydown', (e)=>{
     if(e.key === 'Escape'){
         closePasswordModal();
         closeAboutMeModal();
         closeDevicesModal();
+        closeCreditsModal();
     }
 });
 
