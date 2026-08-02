@@ -71,7 +71,7 @@ header{
     height:64px;
     z-index:500;
     backdrop-filter:blur(18px);
-    background:rgba(0,0,0,.5);
+    background:transparent;
     border-bottom:1px solid rgba(255,255,255,.12);
     display:flex;
     align-items:center;
@@ -112,7 +112,7 @@ nav{
     display:flex;
     align-items:center;
     justify-content:center;
-    padding:clamp(90px,10vw,120px) clamp(24px,6vw,64px) clamp(40px,6vw,60px);
+    padding:clamp(90px,10vw,120px) clamp(24px,6vw,64px) clamp(200px,15vw,240px);
 }
 
 .profile-wrap{
@@ -290,6 +290,310 @@ nav{
     color:#ffffff;
 }
 
+.action-buttons{
+    margin-top:48px;
+    display:flex;
+    gap:16px;
+    justify-content:center;
+    flex-wrap:wrap;
+    width:100%;
+    position:fixed;
+    bottom:100px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:400;
+    max-width:600px;
+}
+
+.action-btn{
+    position:relative;
+    background:#1a1a1a;
+    border:1px solid rgba(255,255,255,.2);
+    color:#f5f5f5;
+    padding:12px 28px;
+    border-radius:20px;
+    cursor:pointer;
+    font-family:'Poppins',sans-serif;
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+    transition:.3s;
+    backdrop-filter:blur(10px);
+    overflow:hidden;
+}
+
+.action-btn:hover{
+    border-color:rgba(255,255,255,.4);
+    background:rgba(255,255,255,.08);
+    transform:translateY(-2px);
+    box-shadow:0 8px 24px rgba(0,207,255,.15);
+}
+
+.action-btn:active{
+    transform:translateY(0);
+}
+
+.action-btn.github-btn{
+    position:relative;
+}
+
+.github-tooltip{
+    position:absolute;
+    bottom:100%;
+    left:50%;
+    transform:translateX(-50%);
+    background:rgba(0,0,0,.95);
+    border:1px solid rgba(255,255,255,.2);
+    color:#bbb;
+    padding:8px 14px;
+    border-radius:8px;
+    font-size:11px;
+    white-space:nowrap;
+    opacity:0;
+    pointer-events:none;
+    transition:.3s;
+    margin-bottom:8px;
+}
+
+.github-btn:hover .github-tooltip{
+    opacity:1;
+}
+
+.modal-overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:8000;
+    background:rgba(0,0,0,.85);
+    backdrop-filter:blur(8px);
+    align-items:center;
+    justify-content:center;
+    animation:fadeIn .3s ease-out;
+}
+
+.modal-overlay.active{
+    display:flex;
+}
+
+.modal-box{
+    position:relative;
+    background:#0a0a0a;
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:20px;
+    padding:40px;
+    max-width:400px;
+    width:90%;
+    backdrop-filter:blur(30px);
+    box-shadow:0 0 40px rgba(0,207,255,.15), 0 8px 32px rgba(0,0,0,.6);
+    animation:slideUp .3s cubic-bezier(.4,0,.2,1);
+}
+
+@keyframes slideUp{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.modal-close-btn{
+    position:absolute;
+    top:12px;
+    right:12px;
+    background:none;
+    border:none;
+    color:#ffffff;
+    font-size:24px;
+    cursor:pointer;
+    width:32px;
+    height:32px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:.3s;
+}
+
+.modal-close-btn:hover{
+    color:#00cfff;
+    transform:rotate(90deg);
+}
+
+.modal-box h3{
+    font-size:18px;
+    font-weight:700;
+    margin-bottom:20px;
+    letter-spacing:.5px;
+}
+
+.password-input{
+    width:100%;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.2);
+    color:#f5f5f5;
+    padding:12px 16px;
+    border-radius:12px;
+    font-family:'Poppins',sans-serif;
+    font-size:14px;
+    margin-bottom:16px;
+    transition:.3s;
+}
+
+.password-input:focus{
+    outline:none;
+    border-color:rgba(0,207,255,.6);
+    background:rgba(255,255,255,.12);
+    box-shadow:0 0 12px rgba(0,207,255,.2);
+}
+
+.password-submit{
+    width:100%;
+    background:#00cfff;
+    border:none;
+    color:#000000;
+    padding:12px;
+    border-radius:12px;
+    font-family:'Poppins',sans-serif;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:.5px;
+    cursor:pointer;
+    transition:.3s;
+    text-transform:uppercase;
+}
+
+.password-submit:hover{
+    background:#00e6ff;
+    transform:translateY(-2px);
+    box-shadow:0 8px 20px rgba(0,207,255,.3);
+}
+
+.password-error{
+    color:#ff6b6b;
+    font-size:12px;
+    margin-top:8px;
+    display:none;
+}
+
+.password-error.show{
+    display:block;
+}
+
+.modal-box p{
+    font-size:16px;
+    line-height:1.6;
+    text-align:center;
+    color:#d5d5d5;
+}
+
+.device-spec{
+    margin:12px 0;
+    padding:12px;
+    background:rgba(255,255,255,.06);
+    border-left:3px solid #00cfff;
+    border-radius:8px;
+}
+
+.device-spec strong{
+    color:#00cfff;
+    display:block;
+    font-size:12px;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+    margin-bottom:4px;
+}
+
+.device-spec span{
+    color:#bbb;
+    font-size:13px;
+}
+
+.device-name{
+    font-size:16px;
+    font-weight:700;
+    margin-bottom:24px;
+    text-align:center;
+    color:#f5f5f5;
+}
+
+.specs-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.spec-box{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(0,207,255,.3);
+    border-radius:12px;
+    padding:14px;
+    text-align:center;
+    transition:.3s;
+}
+
+.spec-box:hover{
+    background:rgba(0,207,255,.08);
+    border-color:rgba(0,207,255,.6);
+    transform:translateY(-2px);
+}
+
+.spec-label{
+    color:#888;
+    font-size:11px;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+    margin-bottom:6px;
+    display:block;
+}
+
+.spec-value{
+    color:#00cfff;
+    font-size:13px;
+    font-weight:700;
+}
+
+@media(max-width:900px){
+    .action-buttons{
+        margin-top:32px;
+        gap:12px;
+        bottom:80px;
+        width:calc(100% - 32px);
+        left:16px;
+        transform:none;
+        max-width:none;
+    }
+    
+    .action-btn{
+        padding:10px 20px;
+        font-size:12px;
+    }
+    
+    .modal-box{
+        padding:28px;
+        max-width:85%;
+    }
+    
+    .specs-grid{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+    }
+    
+    .spec-box{
+        padding:12px;
+    }
+    
+    .spec-label{
+        font-size:10px;
+    }
+    
+    .spec-value{
+        font-size:12px;
+    }
+}
+
 #loadingScreen{
     position:fixed;
     inset:0;
@@ -414,7 +718,7 @@ footer{
     border-top:1px solid rgba(255,255,255,.12);
     color:#999;
     font-size:11px;
-    background:rgba(0,0,0,.5);
+    background:transparent;
     backdrop-filter:blur(10px);
 }
 
@@ -444,7 +748,7 @@ footer h2{
 
     #profilePage{
         position:relative;
-        padding:70px 16px 80px;
+        padding:70px 16px 150px;
         min-height:auto;
     }
     
@@ -567,6 +871,61 @@ footer h2{
     </div>
 </div>
 
+<div class="action-buttons">
+    <button class="action-btn" onclick="openPasswordModal()">More of Me</button>
+    <button class="action-btn github-btn">
+        Github Page
+        <div class="github-tooltip">Source code of this website</div>
+    </button>
+    <button class="action-btn" onclick="openDevicesModal()">My Devices</button>
+</div>
+
+<div id="passwordModal" class="modal-overlay">
+    <div class="modal-box">
+        <button class="modal-close-btn" onclick="closePasswordModal()">&times;</button>
+        <h3>Enter Password</h3>
+        <input type="password" id="passwordInput" class="password-input" placeholder="Enter password..." onkeypress="if(event.key==='Enter') submitPassword()">
+        <button class="password-submit" onclick="submitPassword()">Submit</button>
+        <div class="password-error" id="passwordError">Incorrect password</div>
+    </div>
+</div>
+
+<div id="aboutMeModal" class="modal-overlay">
+    <div class="modal-box">
+        <button class="modal-close-btn" onclick="closeAboutMeModal()">&times;</button>
+        <p>I'm Male</p>
+    </div>
+</div>
+
+<div id="devicesModal" class="modal-overlay">
+    <div class="modal-box">
+        <button class="modal-close-btn" onclick="closeDevicesModal()">&times;</button>
+        <div class="device-name">Lenovo LOQ 15IAX9</div>
+        
+        <div class="specs-grid">
+            <div class="spec-box">
+                <span class="spec-label">Processor</span>
+                <span class="spec-value">Intel Core i5</span>
+            </div>
+            
+            <div class="spec-box">
+                <span class="spec-label">Graphics</span>
+                <span class="spec-value">RTX 3050</span>
+            </div>
+            
+            <div class="spec-box">
+                <span class="spec-label">RAM</span>
+                <span class="spec-value">16GB</span>
+            </div>
+            
+            <div class="spec-box">
+                <span class="spec-label">Storage</span>
+                <span class="spec-value">512GB SSD</span>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div id="imageModal">
     <div class="modal-content">
         <button class="modal-close" onclick="closeModal()">&times;</button>
@@ -646,6 +1005,81 @@ document.addEventListener('keydown', (e)=>{
     if(e.key === 'Escape' && imageModal.classList.contains('active')){
         closeModal();
     }
+});
+
+// Modal Functions
+function openPasswordModal(){
+    const modal = document.getElementById('passwordModal');
+    modal.classList.add('active');
+    document.getElementById('passwordInput').focus();
+    document.getElementById('passwordError').classList.remove('show');
+}
+
+function closePasswordModal(){
+    const modal = document.getElementById('passwordModal');
+    modal.classList.remove('active');
+    document.getElementById('passwordInput').value = '';
+    document.getElementById('passwordError').classList.remove('show');
+}
+
+function submitPassword(){
+    const password = document.getElementById('passwordInput').value;
+    const errorEl = document.getElementById('passwordError');
+    
+    if(password === '2401'){
+        closePasswordModal();
+        openAboutMeModal();
+    } else {
+        errorEl.classList.add('show');
+        document.getElementById('passwordInput').value = '';
+    }
+}
+
+function openAboutMeModal(){
+    const modal = document.getElementById('aboutMeModal');
+    modal.classList.add('active');
+}
+
+function closeAboutMeModal(){
+    const modal = document.getElementById('aboutMeModal');
+    modal.classList.remove('active');
+}
+
+function openDevicesModal(){
+    const modal = document.getElementById('devicesModal');
+    modal.classList.add('active');
+}
+
+function closeDevicesModal(){
+    const modal = document.getElementById('devicesModal');
+    modal.classList.remove('active');
+}
+
+// Close modals on overlay click
+document.getElementById('passwordModal').addEventListener('click', (e)=>{
+    if(e.target.id === 'passwordModal') closePasswordModal();
+});
+
+document.getElementById('aboutMeModal').addEventListener('click', (e)=>{
+    if(e.target.id === 'aboutMeModal') closeAboutMeModal();
+});
+
+document.getElementById('devicesModal').addEventListener('click', (e)=>{
+    if(e.target.id === 'devicesModal') closeDevicesModal();
+});
+
+// Close modals on Escape key
+document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape'){
+        closePasswordModal();
+        closeAboutMeModal();
+        closeDevicesModal();
+    }
+});
+
+// GitHub button - link to GitHub
+document.querySelector('.github-btn').addEventListener('click', ()=>{
+    window.open('https://github.com/xenaro69', '_blank');
 });
 
 const isTouchDevice = () => {
