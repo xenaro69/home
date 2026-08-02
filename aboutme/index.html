@@ -286,7 +286,9 @@ nav{
     list-style:none;
     display:flex;
     flex-direction:row;
-    gap:24px;
+    gap:12px;
+    flex-wrap:nowrap;
+    justify-content:center;
 }
 
 .profile-list li{
@@ -297,6 +299,8 @@ nav{
     font-weight:500;
     color:#d5d5d5;
     transition:.3s;
+    flex-shrink:0;
+    white-space:nowrap;
 }
 
 .profile-list li:hover{
@@ -318,15 +322,15 @@ nav{
 
 .action-buttons{
     position:fixed;
-    bottom:100px;
+    bottom:150px;
     left:50%;
     transform:translateX(-50%);
     z-index:400;
     display:flex;
     gap:16px;
     justify-content:center;
-    flex-wrap:wrap;
-    max-width:600px;
+    flex-wrap:nowrap;
+    max-width:90vw;
 }
 
 .action-btn{
@@ -334,16 +338,17 @@ nav{
     background:#1a1a1a;
     border:1px solid rgba(255,255,255,.2);
     color:#f5f5f5;
-    padding:12px 28px;
+    padding:10px 20px;
     border-radius:20px;
     cursor:pointer;
     font-family:'Poppins',sans-serif;
-    font-size:13px;
+    font-size:12px;
     font-weight:600;
     letter-spacing:.5px;
     text-transform:uppercase;
     transition:.3s;
     backdrop-filter:blur(10px);
+    flex-shrink:0;
 }
 
 .action-btn:hover{
@@ -694,137 +699,281 @@ footer h2{
 @media(max-width:900px){
     html, body{
         height:auto;
-        overflow:auto;
-    }
-    
-    header{ height:56px; }
-    .logo{ font-size:19px; }
-    
-    .back-btn{
-        top:8px;
-        right:16px;
-        height:38px;
-        padding:0 14px;
-        font-size:13px;
-    }
-    
-    .credits-btn{
-        bottom:80px;
-        right:16px;
-        height:38px;
-        padding:0 12px;
-        font-size:12px;
+        overflow-x:hidden;
+        overflow-y:auto;
     }
 
+    body{
+        display:flex;
+        flex-direction:column;
+        min-height:100%;
+    }
+
+    /* ---- Top nav: compact icon-only buttons docked in the header row ---- */
+    header{
+        height:56px;
+    }
+
+    .logo{
+        font-size:18px;
+    }
+
+    .back-btn,
+    .credits-btn{
+        position:fixed;
+        top:0;
+        height:56px;
+        width:44px;
+        padding:0;
+        border-radius:0;
+        background:transparent;
+        border:none;
+        color:#f5f5f5;
+        justify-content:center;
+        z-index:600;
+    }
+
+    .back-btn{
+        right:44px;
+    }
+
+    .credits-btn{
+        right:0;
+    }
+
+    .back-btn:hover,
+    .credits-btn:hover{
+        background:rgba(255,255,255,.08);
+        transform:none;
+    }
+
+    .back-btn span,
+    .credits-btn span{
+        display:none;
+    }
+
+    .back-btn i,
+    .credits-btn i{
+        font-size:16px;
+    }
+
+    /* ---- Main profile section ---- */
     #profilePage{
         position:relative;
-        padding:70px 16px 150px;
+        display:block;
+        padding:80px 18px 32px;
         min-height:auto;
     }
-    
+
     .profile-wrap{
         flex-direction:column;
         text-align:center;
-        gap:20px;
+        gap:24px;
+        max-width:420px;
+        margin:0 auto;
     }
-    
+
     .profile-intro{
         text-align:center;
+        min-width:0;
     }
-    
-    .profile-intro h1{
-        font-size:clamp(32px,5vw,48px);
+
+    .profile-intro h2{
+        font-size:26px;
+        font-weight:700;
+        margin-bottom:8px;
     }
-    
+
     .profile-intro p{
         margin:0 auto;
-        font-size:13px;
+        font-size:13.5px;
+        line-height:1.65;
+        max-width:320px;
+        color:#aaa;
     }
-    
-    .profile-top{
-        flex-direction:column;
-        align-items:center;
-        margin-bottom:16px;
-    }
-    
+
+    /* ---- Profile card ---- */
     .profile-card{
         order:0;
         width:100%;
         min-width:0;
-        padding:16px;
-        border-radius:20px;
+        max-width:100%;
+        padding:24px 20px;
+        border-radius:22px;
+        transform:none !important;
     }
-    
-    .profile-list{
-        flex-direction:row;
-        gap:10px;
+
+    .profile-top{
+        flex-direction:column;
         align-items:center;
-        justify-content:center;
-        flex-wrap:wrap;
+        gap:14px;
+        margin-bottom:20px;
     }
-    
+
+    .profile-photo-wrap{
+        width:88px;
+        height:88px;
+    }
+
+    .profile-names{
+        text-align:center;
+    }
+
+    .profile-names h2{
+        font-size:20px;
+    }
+
+    .profile-tag{
+        font-size:11px;
+    }
+
+    /* Interests: stacked full-width rows instead of a cramped inline wrap */
+    .profile-list{
+        flex-direction:column;
+        gap:8px;
+        align-items:stretch;
+    }
+
     .profile-list li{
-        font-size:12px;
-        gap:6px;
-    }
-    
-    .profile-list li i{
-        font-size:14px;
-    }
-    
-    .action-buttons{
-        bottom:80px;
-        left:16px;
-        transform:none;
+        justify-content:flex-start;
+        font-size:13.5px;
         gap:12px;
-        max-width:calc(100% - 32px);
+        padding:12px 14px;
+        border-radius:12px;
+        background:rgba(255,255,255,.05);
+        border:1px solid rgba(255,255,255,.08);
     }
-    
+
+    .profile-list li:hover{
+        transform:none;
+        background:rgba(255,255,255,.08);
+    }
+
+    .profile-list li i{
+        font-size:15px;
+        width:20px;
+        flex:none;
+    }
+
+    /* ---- Action buttons: compact stacked buttons ---- */
+    .action-buttons{
+        position:static;
+        transform:none;
+        left:auto;
+        bottom:auto;
+        flex-direction:row;
+        width:auto;
+        max-width:100%;
+        margin:48px auto 0;
+        gap:10px;
+        padding:0 16px;
+    }
+
     .action-btn{
-        padding:10px 20px;
-        font-size:12px;
+        padding:11px 18px;
+        font-size:12.5px;
+        border-radius:12px;
+        text-align:center;
     }
-    
+
+    .action-btn:hover{
+        transform:none;
+    }
+
+    .btn-tooltip{
+        display:none;
+    }
+
+    /* ---- Modals ---- */
+    .modal-overlay{
+        padding:20px;
+    }
+
     .modal-box{
-        padding:28px;
-        max-width:85%;
+        padding:26px 22px;
+        width:100%;
+        max-width:360px;
+        border-radius:18px;
     }
-    
+
+    .modal-box h3{
+        font-size:16px;
+        margin-bottom:16px;
+    }
+
+    .modal-box p{
+        font-size:14.5px;
+    }
+
+    .device-name{
+        font-size:15px;
+        margin-bottom:18px;
+    }
+
     .specs-grid{
         grid-template-columns:1fr 1fr;
         gap:10px;
     }
-    
+
     .spec-box{
         padding:12px;
     }
-    
+
     .spec-label{
         font-size:10px;
     }
-    
+
     .spec-value{
         font-size:12px;
     }
-    
+
     .modal-close{
-        top:-35px;
+        top:-40px;
         right:0;
     }
-    
-    .modal-img{
-        max-width:95vw;
+
+    .modal-content{
+        max-width:92vw;
         max-height:80vh;
     }
-    
-    #imageModal{
-        padding:20px;
+
+    .modal-img{
+        max-width:92vw;
+        max-height:80vh;
     }
-    
+
+    #imageModal{
+        padding:16px;
+    }
+
+    /* ---- Footer: last item in the normal flow, no longer fixed/overlapped ---- */
     footer{
         position:relative;
-        padding:12px;
-        font-size:10px;
+        margin-top:auto;
+        padding:18px 12px calc(18px + env(safe-area-inset-bottom, 0px));
+        font-size:10.5px;
+    }
+
+    footer h2{
+        font-size:12.5px;
+    }
+}
+
+@media(max-width:380px){
+    .profile-card{
+        padding:20px 16px;
+    }
+
+    .action-buttons{
+        gap:8px;
+    }
+
+    .modal-box{
+        padding:22px 18px;
+    }
+
+    .specs-grid{
+        gap:8px;
     }
 }
 </style>
