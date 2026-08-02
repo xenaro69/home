@@ -350,18 +350,14 @@ nav{
     border-color:rgba(255,255,255,.4);
     background:rgba(255,255,255,.08);
     transform:translateY(-2px);
-    box-shadow:0 8px 24px rgba(0,207,255,.15);
+    box-shadow:0 0 24px rgba(255,255,255,.35), 0 8px 24px rgba(255,255,255,.15);
 }
 
 .action-btn:active{
     transform:translateY(0);
 }
 
-.action-btn.github-btn{
-    position:relative;
-}
-
-.github-tooltip{
+.btn-tooltip{
     position:absolute;
     bottom:100%;
     left:50%;
@@ -377,9 +373,12 @@ nav{
     pointer-events:none;
     transition:.3s;
     margin-bottom:8px;
+    text-transform:none;
+    letter-spacing:normal;
+    font-weight:500;
 }
 
-.github-btn:hover .github-tooltip{
+.action-btn:hover .btn-tooltip{
     opacity:1;
 }
 
@@ -859,7 +858,7 @@ footer h2{
     <div class="profile-wrap">
         <div class="profile-intro">
             <h2>I'm <span>Ankit</span></h2>
-            <p>A cse student with quite interest in web developing. love playing games and making video edits.</p>
+            <p>A CSE student with a keen interest in web development. I love playing games and making video edits.</p>
         </div>
 
         <div class="profile-card">
@@ -883,12 +882,18 @@ footer h2{
 </div>
 
 <div class="action-buttons">
-    <button class="action-btn" onclick="openPasswordModal()">More of Me</button>
+    <button class="action-btn" onclick="openPasswordModal()">
+        More of Me
+        <div class="btn-tooltip">Know more about me</div>
+    </button>
     <button class="action-btn github-btn">
         Github Page
-        <div class="github-tooltip">Source code of this website</div>
+        <div class="btn-tooltip">Source code of this website</div>
     </button>
-    <button class="action-btn" onclick="openDevicesModal()">My Devices</button>
+    <button class="action-btn" onclick="openDevicesModal()">
+        My Devices
+        <div class="btn-tooltip">Device that I use</div>
+    </button>
 </div>
 
 <div id="passwordModal" class="modal-overlay">
@@ -904,7 +909,7 @@ footer h2{
 <div id="aboutMeModal" class="modal-overlay">
     <div class="modal-box">
         <button class="modal-close-btn" onclick="closeAboutMeModal()">&times;</button>
-        <p>I'm Male</p>
+        <p>I'm male.</p>
     </div>
 </div>
 
