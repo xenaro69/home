@@ -277,11 +277,38 @@ font-size:14px;
 font-weight:500;
 }
 
+.social-link{
+position:relative;
+}
+
+.social-link::after{
+content:attr(data-label);
+position:absolute;
+bottom:100%;
+left:50%;
+transform:translateX(-50%);
+background:rgba(0,0,0,.95);
+color:#ffffff;
+padding:6px 12px;
+border-radius:6px;
+font-size:12px;
+font-weight:600;
+white-space:nowrap;
+opacity:0;
+pointer-events:none;
+transition:opacity .3s ease;
+margin-bottom:8px;
+}
+
 .social-link:hover{
 transform:translateY(-5px);
 color:#ffffff;
 border-color:#ffffff;
 box-shadow:0 0 25px rgba(255,255,255,.4);
+}
+
+.social-link:hover::after{
+opacity:1;
 }
 
 footer{
@@ -550,10 +577,10 @@ font-size:11px;
 
 <div class="bottom-row">
 <div class="social-links">
-<a href="https://www.youtube.com/@xenaro.69" target="_blank" rel="noopener" class="social-link"><i class="fa-brands fa-youtube"></i><span>YouTube</span></a>
-<a href="https://www.instagram.com/xenaro.69/" target="_blank" rel="noopener" class="social-link"><i class="fa-brands fa-instagram"></i><span>Instagram</span></a>
-<a href="https://discord.gg/C64h96EGR7" target="_blank" rel="noopener" class="social-link"><i class="fa-brands fa-discord"></i><span>Discord</span></a>
-<a href="https://x.com/xenaro_69" target="_blank" rel="noopener" class="social-link"><i class="fa-brands fa-twitter"></i><span>Twitter</span></a>
+<a href="https://www.youtube.com/@xenaro.69" target="_blank" rel="noopener" class="social-link" data-label="YOUTUBE CHANNEL"><i class="fa-brands fa-youtube"></i><span>YouTube</span></a>
+<a href="https://www.instagram.com/xenaro.69/" target="_blank" rel="noopener" class="social-link" data-label="INSTAGRAM ACCOUNT"><i class="fa-brands fa-instagram"></i><span>Instagram</span></a>
+<a href="https://discord.gg/C64h96EGR7" target="_blank" rel="noopener" class="social-link" data-label="DISCORD SERVER"><i class="fa-brands fa-discord"></i><span>Discord</span></a>
+<a href="https://x.com/xenaro_69" target="_blank" rel="noopener" class="social-link" data-label="TWITTER PROFILE"><i class="fa-brands fa-twitter"></i><span>Twitter</span></a>
 </div>
 </div>
 
