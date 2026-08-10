@@ -120,6 +120,7 @@ display:flex;
 justify-content:space-between;
 align-items:center;
 padding:0 clamp(24px,4vw,64px);
+width:100%;
 }
 
 .logo{
@@ -136,6 +137,10 @@ gap:12px;
 align-items:center;
 position:relative;
 z-index:501;
+}
+
+.nav-center{
+display:none;
 }
 
 nav ul{
@@ -178,21 +183,6 @@ font-family:'Poppins',sans-serif;
 transform:translateY(-3px);
 box-shadow:0 0 30px rgba(255,255,255,.5), inset 0 0 15px rgba(255,255,255,.3);
 color:#000000;
-}
-
-.nav-buttons .hire-btn{
-padding:8px 18px;
-font-size:13px;
-background:rgba(255,255,255,.1);
-color:#ffffff;
-border:1px solid rgba(255,255,255,.3);
-text-shadow:none;
-}
-
-.nav-buttons .hire-btn:hover{
-background:rgba(255,255,255,.2);
-color:#ffffff;
-box-shadow:0 0 20px rgba(255,255,255,.3);
 }
 
 .mobile-notice{
@@ -308,8 +298,7 @@ flex:0;
 }
 
 .bottom-row .hire-btn{
-margin-left:0;
-margin-top:20px;
+display:none;
 }
 
 .social-links{
@@ -481,12 +470,6 @@ word-break:break-all;
 color:#00cfff;
 }
 
-footer h2{
-font-size:13px;
-margin-bottom:2px;
-color:#f5f5f5;
-}
-
 @media(max-width:900px){
 html, body{
 height:auto;
@@ -552,6 +535,10 @@ text-shadow:0 1px 2px rgba(0,0,0,.1);
 }
 
 nav ul{
+display:none;
+}
+
+.nav-center{
 display:none;
 }
 
@@ -665,12 +652,7 @@ flex:0;
 }
 
 .bottom-row .hire-btn{
-margin-left:0;
-margin-top:12px;
-width:100%;
-max-width:220px;
-background:#ffffff;
-color:#000000;
+display:none;
 }
 
 .social-link{
@@ -741,14 +723,10 @@ font-size:12px;
 <div class="logo">XENARO</div>
 <div class="nav-buttons">
 <button class="hire-btn" onclick="window.history.back()">← Back</button>
+<button class="hire-btn" onclick="document.getElementById('contactModal').classList.add('active')">Use Me As Paid Editor</button>
 </div>
 </nav>
 </header>
-
-<div class="mobile-notice">
-<p>for best experience, use a windows laptop</p>
-</div>
-
 <div class="page">
 <section class="top-row" id="home">
 <div class="hero-left">
@@ -781,12 +759,11 @@ font-size:12px;
 
 <div class="bottom-row">
 <div class="social-links">
-<a href="https://www.youtube.com/@xenaroedits" target="_blank" rel="noopener" class="social-link" data-label="YOUTUBE EDITS"><i class="fa-brands fa-youtube"></i><span>YouTube</span></a>
-<a href="https://www.instagram.com/xenaroedits/" target="_blank" rel="noopener" class="social-link" data-label="INSTAGRAM PORTFOLIO"><i class="fa-brands fa-instagram"></i><span>Instagram</span></a>
+<a href="https://www.youtube.com/@xenaroedits" target="_blank" rel="noopener" class="social-link" data-label="YOUTUBE CHANNEL"><i class="fa-brands fa-youtube"></i><span>YouTube</span></a>
+<a href="https://www.instagram.com/xenaroedits/" target="_blank" rel="noopener" class="social-link" data-label="INSTAGRAM ACCOUNT"><i class="fa-brands fa-instagram"></i><span>Instagram</span></a>
 <a href="https://xenaro.xyz/discord" target="_blank" rel="noopener" class="social-link" data-label="DISCORD SERVER"><i class="fa-brands fa-discord"></i><span>Discord</span></a>
 <a href="https://x.com/xenaro_69" target="_blank" rel="noopener" class="social-link" data-label="TWITTER PROFILE"><i class="fa-brands fa-twitter"></i><span>Twitter</span></a>
 </div>
-<button class="hire-btn" onclick="document.getElementById('contactModal').classList.add('active')">Use Me As Paid Editor</button>
 </div>
 
 <div id="contactModal">
