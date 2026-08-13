@@ -51,14 +51,14 @@ body{
 position:fixed;
 inset:0;
 z-index:99999;
-background:#0a0a0a;
+background:#000000;
 display:flex;
 flex-direction:column;
 align-items:center;
 justify-content:center;
 gap:24px;
 opacity:1;
-transition:opacity .6s ease-out;
+transition:opacity 1s ease-out;
 }
 
 #loadingScreen.fade-out{
@@ -66,38 +66,19 @@ opacity:0;
 pointer-events:none;
 }
 
-.loader{
-width:60px;
-height:60px;
-position:relative;
+.loader-logo{
+    font-size:60px;
+    font-weight:800;
+    letter-spacing:10px;
+    color:#00cfff;
+    animation:pulse 1.2s infinite;
+    text-shadow:0 0 12px #00cfff;
 }
 
-.loader::before{
-content:"";
-position:absolute;
-inset:0;
-border:3px solid rgba(255,255,255,.2);
-border-top-color:#ffffff;
-border-radius:50%;
-animation:spin .8s linear infinite;
-}
-
-@keyframes spin{
-to{ transform:rotate(360deg); }
-}
-
-.loader-text{
-font-size:14px;
-color:#ffffff;
-font-weight:500;
-letter-spacing:1px;
-text-transform:uppercase;
-animation:loaderPulse 1.5s ease-in-out infinite;
-}
-
-@keyframes loaderPulse{
-0%, 100%{ opacity:.6; }
-50%{ opacity:1; }
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.1);text-shadow:0 0 20px #00cfff,0 0 50px #00cfff;}
+    100%{transform:scale(1);}
 }
 
 header{
@@ -606,8 +587,7 @@ font-size:11px;
 </head>
 <body>
 <div id="loadingScreen">
-<div class="loader"></div>
-<div class="loader-text">Loading</div>
+<div class="loader-logo">XENARO</div>
 </div>
 <div id="particles"></div>
 <header>
@@ -671,9 +651,9 @@ window.addEventListener("load", () => {
         const loadingScreen = document.getElementById("loadingScreen");
         if(loadingScreen){
             loadingScreen.classList.add("fade-out");
-            setTimeout(() => loadingScreen.remove(), 600);
+            setTimeout(() => loadingScreen.remove(), 1000);
         }
-    }, 800);
+    }, 1200);
 });
 
 const header = document.querySelector("header");
