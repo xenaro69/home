@@ -136,6 +136,12 @@ font-weight:800;
 letter-spacing:2px;
 color:#00cfff;
 text-shadow:0 0 12px #00cfff, 0 0 30px rgba(0,207,255,.6);
+animation:logoPulse 2s ease-in-out infinite;
+}
+
+@keyframes logoPulse{
+0%, 100%{ text-shadow:0 0 12px #00cfff, 0 0 30px rgba(0,207,255,.6); }
+50%{ text-shadow:0 0 20px #00cfff, 0 0 50px rgba(0,207,255,.8); }
 }
 
 nav ul{
@@ -195,6 +201,7 @@ display:flex;
 flex-direction:column;
 max-width:1680px;
 margin:auto;
+position:relative;
 }
 
 .top-row{
@@ -282,6 +289,7 @@ display:flex;
 align-items:center;
 justify-content:center;
 padding:0 clamp(24px,4vw,64px);
+position:relative;
 }
 
 .social-links{
@@ -342,6 +350,34 @@ box-shadow:0 0 25px rgba(255,255,255,.4);
 
 .social-link:hover::after{
 opacity:1;
+}
+
+.about-editing-btn{
+position:absolute;
+bottom:20px;
+left:clamp(24px,4vw,64px);
+padding:11px 22px;
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.15);
+border-radius:40px;
+color:#f5f5f5;
+font-size:14px;
+font-weight:600;
+text-decoration:none;
+cursor:pointer;
+transition:.35s;
+font-family:'Poppins',sans-serif;
+display:flex;
+align-items:center;
+gap:8px;
+}
+
+.about-editing-btn:hover{
+transform:translateY(-3px);
+color:#ffffff;
+border-color:#ffffff;
+box-shadow:0 0 25px rgba(255,255,255,.4);
+background:rgba(255,255,255,.1);
 }
 
 footer{
@@ -510,9 +546,10 @@ margin-top:4px;
 .bottom-row{
 flex:none;
 min-height:auto;
-padding:20px 20px 30px;
+padding:20px 20px 80px;
 margin-bottom:0;
 width:100%;
+position:relative;
 }
 
 .social-links{
@@ -542,6 +579,14 @@ font-size:12px;
 font-size:16px;
 }
 
+.about-editing-btn{
+position:fixed;
+bottom:20px;
+left:20px;
+padding:10px 16px;
+font-size:12px;
+}
+
 footer{
 padding:18px 20px;
 margin-top:auto;
@@ -569,7 +614,7 @@ font-size:11px;
 <nav>
 <div class="logo">XENARO</div>
 <div class="nav-buttons">
-<button class="join-btn" onclick="window.history.back()">← Back</button>
+<a class="about-btn" href="about/">About Me</a>
 <a class="join-btn" href="https://discord.gg/C64h96EGR7" target="_blank" rel="noopener">Join Now</a>
 </div>
 </nav>
@@ -611,6 +656,7 @@ font-size:11px;
 <a href="https://discord.gg/C64h96EGR7" target="_blank" rel="noopener" class="social-link" data-label="DISCORD SERVER"><i class="fa-brands fa-discord"></i><span>Discord</span></a>
 <a href="https://x.com/xenaro_69" target="_blank" rel="noopener" class="social-link" data-label="TWITTER PROFILE"><i class="fa-brands fa-twitter"></i><span>Twitter</span></a>
 </div>
+<a href="editing/" class="about-editing-btn"><i class="fas fa-film"></i>About Editing</a>
 </div>
 
 <footer>
