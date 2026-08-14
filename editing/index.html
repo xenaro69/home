@@ -4,807 +4,754 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Xenaro</title>
+<title>Xenaro Edits</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 <style>
 /* ==========================
-   XENARO EDITS
-   Black & White Theme
+   XENARO EDITS - NEW LAYOUT
+   Simplified & Centered
 ========================== */
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-html{
-    scroll-behavior:smooth;
+html {
+    scroll-behavior: smooth;
 }
 
-html, body{
-    height:100%;
+html, body {
+    height: 100%;
 }
 
-body{
-    font-family:'Poppins',sans-serif;
-    background:#0a0a0a;
-    color:#f5f5f5;
-    overflow:hidden;
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #0a0a0a;
+    color: #f5f5f5;
+    overflow-x: hidden;
 }
 
-::-webkit-scrollbar{
-    width:10px;
+::-webkit-scrollbar {
+    width: 10px;
 }
-::-webkit-scrollbar-track{
-    background:#0f0f0f;
-}
-::-webkit-scrollbar-thumb{
-    background:#ffffff;
-    border-radius:100px;
-}
-
-#loadingScreen{
-position:fixed;
-inset:0;
-z-index:99999;
-background:#0a0a0a;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-gap:24px;
-opacity:1;
-transition:opacity .6s ease-out;
-}
-
-#loadingScreen.fade-out{
-opacity:0;
-pointer-events:none;
-}
-
-.loader{
-width:60px;
-height:60px;
-position:relative;
-}
-
-.loader::before{
-content:"";
-position:absolute;
-inset:0;
-border:3px solid rgba(255,255,255,.2);
-border-top-color:#ffffff;
-border-radius:50%;
-animation:spin .8s linear infinite;
-}
-
-@keyframes spin{
-to{ transform:rotate(360deg); }
-}
-
-.loader-text{
-font-size:14px;
-color:#ffffff;
-font-weight:500;
-letter-spacing:1px;
-text-transform:uppercase;
-animation:loaderPulse 1.5s ease-in-out infinite;
-}
-
-@keyframes loaderPulse{
-0%, 100%{ opacity:.6; }
-50%{ opacity:1; }
-}
-
-header{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:64px;
-z-index:500;
-backdrop-filter:blur(18px);
-background:rgba(0,0,0,.5);
-border-bottom:1px solid rgba(255,255,255,.12);
-}
-
-nav{
-max-width:1680px;
-height:100%;
-margin:auto;
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:0 clamp(24px,4vw,64px);
-width:100%;
-}
-
-.logo{
-font-size:24px;
-font-weight:800;
-letter-spacing:2px;
-color:#00cfff;
-text-shadow:0 0 8px rgba(0,207,255,.8);
-}
-
-.nav-buttons{
-display:flex;
-gap:12px;
-align-items:center;
-position:relative;
-z-index:501;
-}
-
-.nav-center{
-display:none;
-}
-
-nav ul{
-display:flex;
-list-style:none;
-gap:30px;
-}
-
-nav a{
-color:#f5f5f5;
-text-decoration:none;
-font-weight:500;
-font-size:14px;
-transition:.35s;
-}
-
-nav a:hover{
-color:#ffffff;
-opacity:.7;
-}
-
-.hire-btn, .join-btn{
-padding:9px 20px;
-background:#ffffff;
-border-radius:40px;
-color:#000000;
-font-weight:700;
-font-size:14px;
-text-decoration:none;
-transition:.4s;
-position:relative;
-z-index:10;
-text-shadow:0 1px 2px rgba(0,0,0,.1);
-border:none;
-cursor:pointer;
-font-family:'Poppins',sans-serif;
-}
-
-.hire-btn:hover, .join-btn:hover{
-transform:translateY(-3px);
-box-shadow:0 0 30px rgba(255,255,255,.5), inset 0 0 15px rgba(255,255,255,.3);
-color:#000000;
-}
-
-.mobile-notice{
-display:none;
-}
-
-/* ---- One-page layout ---- */
-
-.page{
-height:100vh;
-padding-top:64px;
-display:flex;
-flex-direction:column;
-max-width:1680px;
-margin:auto;
-}
-
-.top-row{
-flex:1.15;
-min-height:0;
-display:grid;
-grid-template-columns:1.1fr .9fr;
-align-items:center;
-gap:clamp(20px,4vw,90px);
-padding:1.5vh clamp(24px,4vw,64px);
-}
-
-.hero h1{
-font-size:clamp(30px,4.2vw,60px);
-line-height:1.05;
-font-weight:800;
-margin-bottom:14px;
-}
-
-.hero p{
-font-size:clamp(13px,1.4vw,19px);
-opacity:.7;
-}
-
-.hero-right{
-perspective:1200px;
-position:relative;
-z-index:100;
-}
-
-.glass-card{
-background:rgba(255,255,255,.05);
-border:1px solid rgba(255,255,255,.12);
-border-radius:22px;
-padding:clamp(20px,3vh,32px);
-backdrop-filter:blur(30px);
-box-shadow:0 0 40px rgba(255,255,255,.1), 0 25px 60px rgba(0,0,0,.55);
-transition:box-shadow .3s ease, transform .1s ease-out;
-transform-style:preserve-3d;
-will-change:transform;
-}
-
-.glass-card:hover{
-box-shadow:0 0 55px rgba(255,255,255,.35), 0 35px 70px rgba(0,0,0,.6);
-}
-
-.card-layer{
-transform-style:preserve-3d;
-}
-
-.glass-card h2{
-font-size:clamp(20px,2.4vw,30px);
-margin-bottom:4px;
-transform:translateZ(45px);
-text-shadow:0 8px 20px rgba(0,0,0,.5);
-}
-
-.glass-card > .card-layer > p{
-font-size:13px;
-opacity:.65;
-transform:translateZ(35px);
-}
-
-.stats{
-display:flex;
-justify-content:space-between;
-margin-top:20px;
-transform:translateZ(30px);
-}
-
-.stats h3{
-font-size:clamp(18px,2vw,26px);
-color:#ffffff;
-}
-
-.stats span{
-opacity:.6;
-font-size:12px;
-}
-
-.bottom-row{
-flex:.6;
-min-height:0;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-padding:0 clamp(24px,4vw,64px);
-gap:24px;
-}
-
-.bottom-row .social-links{
-display:flex;
-gap:22px;
-align-items:center;
-justify-content:center;
-flex:0;
-}
-
-.bottom-row .hire-btn{
-display:none;
-}
-
-.social-links{
-display:flex;
-gap:22px;
-align-items:center;
-justify-content:center;
-}
-
-.social-link{
-display:flex;
-align-items:center;
-gap:10px;
-padding:12px 22px;
-border-radius:40px;
-background:rgba(255,255,255,.05);
-border:1px solid rgba(255,255,255,.15);
-color:#f5f5f5;
-font-size:16px;
-text-decoration:none;
-transition:.35s;
-}
-
-.social-link span{
-font-size:14px;
-font-weight:500;
-}
-
-.social-link{
-position:relative;
-}
-
-.social-link::after{
-content:attr(data-label);
-position:absolute;
-bottom:100%;
-left:50%;
-transform:translateX(-50%);
-background:rgba(0,0,0,.95);
-color:#ffffff;
-padding:6px 12px;
-border-radius:6px;
-font-size:12px;
-font-weight:600;
-white-space:nowrap;
-opacity:0;
-pointer-events:none;
-transition:opacity .3s ease;
-margin-bottom:8px;
-}
-
-.social-link:hover{
-transform:translateY(-5px);
-color:#ffffff;
-border-color:#ffffff;
-box-shadow:0 0 25px rgba(255,255,255,.4);
-}
-
-.social-link:hover::after{
-opacity:1;
-}
 
-footer{
-flex:0 0 auto;
-padding:10px;
-text-align:center;
-border-top:1px solid rgba(255,255,255,.12);
-color:#999;
-font-size:11px;
+::-webkit-scrollbar-track {
+    background: #0f0f0f;
 }
 
-footer h2{
-font-size:13px;
-margin-bottom:2px;
-color:#f5f5f5;
+::-webkit-scrollbar-thumb {
+    background: #ffffff;
+    border-radius: 100px;
 }
 
-#contactModal{
-display:none;
-position:fixed;
-inset:0;
-z-index:10000;
-background:rgba(0,0,0,.7);
-backdrop-filter:blur(4px);
-align-items:center;
-justify-content:center;
+/* Loading Screen */
+#loadingScreen {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: #0a0a0a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    opacity: 1;
+    transition: opacity 0.6s ease-out;
 }
 
-#contactModal.active{
-display:flex;
+#loadingScreen.fade-out {
+    opacity: 0;
+    pointer-events: none;
 }
 
-.modal-content{
-background:rgba(255,255,255,.05);
-border:1px solid rgba(255,255,255,.12);
-border-radius:22px;
-padding:40px;
-backdrop-filter:blur(30px);
-box-shadow:0 0 60px rgba(0,0,0,.8);
-max-width:400px;
-text-align:center;
-animation:modalSlideIn .4s ease-out;
-position:relative;
+.loader {
+    width: 60px;
+    height: 60px;
+    position: relative;
 }
 
-@keyframes modalSlideIn{
-from{
-opacity:0;
-transform:scale(.95) translateY(-20px);
+.loader::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
 }
-to{
-opacity:1;
-transform:scale(1) translateY(0);
-}
-}
-
-.modal-close{
-position:absolute;
-top:20px;
-right:20px;
-background:none;
-border:none;
-color:#f5f5f5;
-font-size:28px;
-cursor:pointer;
-transition:.3s;
-width:30px;
-height:30px;
-display:flex;
-align-items:center;
-justify-content:center;
-}
-
-.modal-close:hover{
-color:#00cfff;
-transform:rotate(90deg);
-}
-
-.modal-content h2{
-font-size:24px;
-margin-bottom:24px;
-color:#00cfff;
-text-shadow:0 0 12px #00cfff;
-}
-
-.contact-item{
-margin:16px 0;
-padding:14px;
-background:rgba(255,255,255,.03);
-border:1px solid rgba(255,255,255,.08);
-border-radius:12px;
-}
-
-.contact-item p{
-font-size:12px;
-opacity:.6;
-margin-bottom:6px;
-}
-
-.contact-item a, .contact-item span{
-font-size:14px;
-color:#ffffff;
-font-weight:600;
-text-decoration:none;
-word-break:break-all;
-}
-
-.contact-item a:hover{
-color:#00cfff;
-}
-
-@media(max-width:900px){
-html, body{
-height:auto;
-overflow-x:hidden;
-overflow-y:auto;
-}
-
-body{
-overflow:auto;
-}
-
-.mobile-notice{
-display:block;
-background:rgba(0,207,255,.1);
-border:1px solid rgba(0,207,255,.3);
-border-radius:12px;
-padding:14px 16px;
-margin:12px 16px 0;
-text-align:center;
-font-size:13px;
-color:#f5f5f5;
-opacity:.85;
-line-height:1.5;
-margin-top:70px;
-}
-
-.mobile-notice p{
-margin:0;
-}
-
-.page{
-height:auto;
-padding-top:60px;
-flex-direction:column;
-gap:40px;
-}
-
-header{
-height:56px;
-}
-
-nav{
-padding:0 20px;
-}
-
-.logo-section{
-flex-direction:column;
-gap:4px;
-}
-
-.logo{
-font-size:19px;
-}
-
-.nav-buttons{
-gap:8px;
-}
-
-.hire-btn, .join-btn{
-padding:7px 16px;
-font-size:12.5px;
-text-shadow:0 1px 2px rgba(0,0,0,.1);
-}
-
-nav ul{
-display:none;
-}
-
-.nav-center{
-display:none;
-}
 
-.top-row{
-grid-template-columns:1fr;
-text-align:center;
-padding:40px 20px 35px;
-gap:32px;
-flex:none;
-min-height:auto;
-margin-bottom:0;
+@keyframes spin {
+    to { transform: rotate(360deg); }
 }
 
-.hero h1{
-font-size:38px;
-letter-spacing:-.5px;
-line-height:1.2;
-margin-bottom:16px;
+.loader-text {
+    font-size: 14px;
+    color: #ffffff;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    animation: loaderPulse 1.5s ease-in-out infinite;
 }
 
-.hero p{
-font-size:14px;
-line-height:1.6;
-max-width:100%;
-margin:0 auto;
-opacity:.8;
+@keyframes loaderPulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
 }
 
-.hero-right{
-perspective:1200px;
+/* Header */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 64px;
+    z-index: 500;
+    backdrop-filter: blur(18px);
+    background: rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-.glass-card{
-padding:24px 20px;
-border-radius:20px;
-width:100%;
-max-width:320px;
-margin:0 auto;
-}
-
-.glass-card:hover{
-box-shadow:0 0 40px rgba(255,255,255,.1), 0 25px 60px rgba(0,0,0,.55);
-transform:none;
-}
-
-.glass-card h2{
-font-size:24px;
-margin-bottom:6px;
-transform:none;
-}
-
-.glass-card > .card-layer > p{
-font-size:13px;
-opacity:.65;
-transform:none;
-}
-
-.stats{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:12px;
-margin-top:24px;
-padding-top:24px;
-border-top:1px solid rgba(255,255,255,.1);
-transform:none;
-text-align:center;
-}
-
-.stats > div{
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-}
-
-.stats h3{
-font-size:20px;
-margin:0;
-}
-
-.stats span{
-font-size:11px;
-letter-spacing:.3px;
-white-space:nowrap;
-opacity:.7;
-margin-top:4px;
-}
-
-.bottom-row{
-flex:none;
-min-height:auto;
-padding:20px 20px 30px;
-margin-bottom:0;
-width:100%;
-gap:16px;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-}
-
-.bottom-row .social-links{
-display:flex;
-flex-wrap:wrap;
-gap:10px;
-justify-content:center;
-align-items:center;
-max-width:100%;
-margin:0 auto;
-row-gap:12px;
-flex:0;
-}
-
-.bottom-row .hire-btn{
-display:none;
-}
-
-.social-link{
-padding:11px 16px;
-justify-content:center;
-font-size:13px;
-flex:0 1 calc(50% - 5px);
-max-width:160px;
-}
-
-.social-link span{
-font-size:12px;
-}
-
-.social-link i{
-font-size:16px;
-}
-
-footer{
-padding:18px 20px;
-margin-top:auto;
-flex:0 0 auto;
-}
-
-footer h2{
-font-size:14px;
-margin-bottom:4px;
-}
-
-footer p{
-font-size:11px;
-}
-
-.modal-content{
-max-width:90%;
-padding:30px 20px;
-}
-
-.modal-content h2{
-font-size:20px;
-margin-bottom:20px;
-}
-
-.contact-item{
-margin:12px 0;
-padding:12px;
-font-size:13px;
-}
-
-.contact-item p{
-font-size:11px;
-}
-
-.contact-item a, .contact-item span{
-font-size:12px;
-}
+nav {
+    max-width: 1680px;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 clamp(24px, 4vw, 64px);
+    width: 100%;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #00cfff;
+    text-shadow: 0 0 8px rgba(0, 207, 255, 0.8);
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.back-btn {
+    padding: 9px 20px;
+    background: #ffffff;
+    border-radius: 40px;
+    color: #000000;
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+    transition: 0.4s;
+    border: none;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+}
+
+.back-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+/* Main Content */
+.page {
+    height: 100vh;
+    padding-top: 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 1680px;
+    margin: auto;
+    width: 100%;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    text-align: center;
+    padding: 0 clamp(24px, 4vw, 64px);
+}
+
+.hero-section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-section h1 {
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 800;
+    line-height: 1.1;
+    margin: 0;
+}
+
+.hero-section p {
+    font-size: clamp(14px, 1.6vw, 22px);
+    opacity: 0.7;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* CTA Button */
+.cta-section {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.cta-btn {
+    padding: 16px 48px;
+    background: linear-gradient(135deg, #00cfff, #0099cc);
+    border: 2px solid #00cfff;
+    border-radius: 50px;
+    color: #000000;
+    font-weight: 700;
+    font-size: 16px;
+    text-decoration: none;
+    transition: 0.4s;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 0 30px rgba(0, 207, 255, 0.4);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.cta-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 50px rgba(0, 207, 255, 0.7), 0 0 20px rgba(0, 207, 255, 0.5);
+    background: linear-gradient(135deg, #00dfff, #00aadd);
+}
+
+.cta-btn:active {
+    transform: translateY(-2px);
+}
+
+/* Social Links */
+.social-section {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    border-radius: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #f5f5f5;
+    font-size: 16px;
+    text-decoration: none;
+    transition: 0.35s;
+    position: relative;
+}
+
+.social-link:hover {
+    transform: translateY(-5px);
+    color: #ffffff;
+    border-color: #ffffff;
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+}
+
+.social-link span {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.social-link i {
+    font-size: 18px;
+}
+
+/* Footer */
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    color: #999;
+    font-size: 12px;
+}
+
+footer h2 {
+    font-size: 13px;
+    margin-bottom: 4px;
+    color: #f5f5f5;
+}
+
+/* Modal */
+#contactModal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    align-items: center;
+    justify-content: center;
+}
+
+#contactModal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+    border: 1px solid rgba(0, 207, 255, 0.3);
+    border-radius: 28px;
+    padding: 60px;
+    backdrop-filter: blur(40px);
+    box-shadow: 0 0 80px rgba(0, 207, 255, 0.2), 0 0 120px rgba(0, 0, 0, 0.6);
+    max-width: 550px;
+    width: 90%;
+    text-align: center;
+    animation: modalSlideIn 0.4s ease-out;
+    position: relative;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.modal-close {
+    position: absolute;
+    top: 28px;
+    right: 28px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #f5f5f5;
+    font-size: 26px;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.modal-close:hover {
+    color: #00cfff;
+    background: rgba(0, 207, 255, 0.15);
+    border-color: #00cfff;
+    transform: rotate(90deg);
+}
+
+.modal-content h2 {
+    font-size: 36px;
+    margin-bottom: 16px;
+    color: #00cfff;
+    text-shadow: 0 0 20px rgba(0, 207, 255, 0.5);
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.modal-subtitle {
+    font-size: 14px;
+    opacity: 0.7;
+    margin-bottom: 40px;
+    color: #f5f5f5;
+    line-height: 1.5;
+}
+
+/* Modal Stats */
+.modal-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+    padding: 24px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-item h3 {
+    font-size: 28px;
+    font-weight: 800;
+    color: #00cfff;
+    text-shadow: 0 0 15px rgba(0, 207, 255, 0.4);
+    margin-bottom: 6px;
+}
+
+.stat-item p {
+    font-size: 12px;
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0;
+}
+
+.contact-items-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.contact-item {
+    margin: 0;
+    padding: 24px 20px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.contact-item:hover {
+    background: rgba(0, 207, 255, 0.1);
+    border-color: rgba(0, 207, 255, 0.4);
+    transform: translateY(-5px);
+}
+
+.contact-item p {
+    font-size: 12px;
+    opacity: 0.6;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.contact-item a, .contact-item span {
+    font-size: 15px;
+    color: #ffffff;
+    font-weight: 700;
+    text-decoration: none;
+    word-break: break-all;
+    display: inline-block;
+}
+
+.contact-item a:hover {
+    color: #00cfff;
+    text-shadow: 0 0 10px rgba(0, 207, 255, 0.5);
+}
+
+.contact-item i {
+    font-size: 28px;
+    margin-bottom: 12px;
+    opacity: 0.8;
+}
+
+.modal-cta-btn {
+    padding: 14px 40px;
+    background: linear-gradient(135deg, #00cfff, #0099cc);
+    border: 2px solid #00cfff;
+    border-radius: 50px;
+    color: #000000;
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+    transition: 0.4s;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 0 30px rgba(0, 207, 255, 0.4);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+}
+
+.modal-cta-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 50px rgba(0, 207, 255, 0.7), 0 0 20px rgba(0, 207, 255, 0.5);
+    background: linear-gradient(135deg, #00dfff, #00aadd);
+    color: #000000;
+    text-decoration: none;
+}
+
+/* Particles */
+#particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+#particles span {
+    position: absolute;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    header {
+        height: 56px;
+    }
+
+    nav {
+        padding: 0 20px;
+    }
+
+    .logo {
+        font-size: 19px;
+    }
+
+    .back-btn {
+        padding: 7px 16px;
+        font-size: 12.5px;
+    }
+
+    .page {
+        height: auto;
+        padding-top: 70px;
+        padding-bottom: 120px;
+        min-height: 100vh;
+    }
+
+    .content-wrapper {
+        gap: 48px;
+        padding: 40px 20px;
+    }
+
+    .hero-section h1 {
+        font-size: 32px;
+    }
+
+    .hero-section p {
+        font-size: 15px;
+    }
+
+    .cta-btn {
+        padding: 14px 40px;
+        font-size: 15px;
+    }
+
+    .social-section {
+        gap: 12px;
+    }
+
+    .social-link {
+        padding: 10px 18px;
+        font-size: 14px;
+        flex: 0 1 calc(50% - 6px);
+    }
+
+    .social-link span {
+        font-size: 12px;
+    }
+
+    .social-link i {
+        font-size: 16px;
+    }
+
+    .modal-content {
+        max-width: 95%;
+        padding: 40px 24px;
+        border-radius: 24px;
+    }
+
+    .modal-content h2 {
+        font-size: 28px;
+        margin-bottom: 12px;
+    }
+
+    .modal-subtitle {
+        font-size: 13px;
+        margin-bottom: 30px;
+    }
+
+    .modal-stats {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin-bottom: 28px;
+        padding: 18px 0;
+    }
+
+    .stat-item h3 {
+        font-size: 22px;
+        margin-bottom: 4px;
+    }
+
+    .stat-item p {
+        font-size: 11px;
+    }
+
+    .contact-items-wrapper {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-bottom: 30px;
+    }
+
+    .contact-item {
+        padding: 20px 16px;
+    }
+
+    .contact-item i {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .contact-item p {
+        font-size: 11px;
+    }
+
+    .contact-item a, .contact-item span {
+        font-size: 14px;
+    }
+
+    .modal-cta-btn {
+        padding: 12px 32px;
+        font-size: 13px;
+    }
+
+    footer {
+        padding: 16px 20px;
+    }
+
+    footer h2 {
+        font-size: 12px;
+        margin-bottom: 2px;
+    }
+
+    footer p {
+        font-size: 10px;
+    }
 }
 </style>
 </head>
 <body>
 <div id="loadingScreen">
-<div class="loader"></div>
-<div class="loader-text">Loading</div>
+    <div class="loader"></div>
+    <div class="loader-text">Loading</div>
 </div>
+
 <div id="particles"></div>
+
 <header>
-<nav>
-<div class="logo">XENARO</div>
-<div class="nav-buttons">
-<button class="hire-btn" onclick="window.history.back()">← Back</button>
-<button class="hire-btn" onclick="document.getElementById('contactModal').classList.add('active')">Use Me As Paid Editor</button>
-</div>
-</nav>
+    <nav>
+        <div class="logo">XENARO</div>
+        <div class="nav-buttons">
+            <button class="back-btn" onclick="window.history.back()">← Back</button>
+        </div>
+    </nav>
 </header>
+
 <div class="page">
-<section class="top-row" id="home">
-<div class="hero-left">
-<h1>Professional Edits</h1>
-<p>High Quality Video Editing Services</p>
-</div>
-<div class="hero-right">
-<div class="glass-card" id="mainCard">
-<div class="card-layer">
-<h2>XENARO EDITS</h2>
-<p>Video Editor</p>
-<div class="stats">
-<div>
-<h3>100+</h3>
-<span>Projects</span>
-</div>
-<div>
-<h3>500+</h3>
-<span>Hours Edited</span>
-</div>
-<div>
-<h3>4.9★</h3>
-<span>Rating</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
+    <div class="content-wrapper">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <h1>Professional Edits</h1>
+            <p>High Quality Video Editing Services</p>
+        </section>
 
-<div class="bottom-row">
-<div class="social-links">
-<a href="https://www.youtube.com/@xenaroedits" target="_blank" rel="noopener" class="social-link" data-label="YOUTUBE CHANNEL"><i class="fa-brands fa-youtube"></i><span>YouTube</span></a>
-<a href="https://www.instagram.com/xenaroedits/" target="_blank" rel="noopener" class="social-link" data-label="INSTAGRAM ACCOUNT"><i class="fa-brands fa-instagram"></i><span>Instagram</span></a>
-<a href="https://xenaro.xyz/discord" target="_blank" rel="noopener" class="social-link" data-label="DISCORD SERVER"><i class="fa-brands fa-discord"></i><span>Discord</span></a>
-<a href="https://x.com/xenaro_69" target="_blank" rel="noopener" class="social-link" data-label="TWITTER PROFILE"><i class="fa-brands fa-twitter"></i><span>Twitter</span></a>
-</div>
-</div>
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <button class="cta-btn" onclick="document.getElementById('contactModal').classList.add('active')">
+                Use Me As Paid Editor
+            </button>
+        </section>
 
-<div id="contactModal">
-<div class="modal-content">
-<button class="modal-close" onclick="document.getElementById('contactModal').classList.remove('active')">×</button>
-<h2>Get In Touch</h2>
-<div class="contact-item">
-<p>Email</p>
-<a href="mailto:ankit@xenaro.com">ankit@xenaro.com</a>
-</div>
-<div class="contact-item">
-<p>Instagram</p>
-<a href="https://instagram.com/xenaroedits" target="_blank">@xenaroedits</a>
-</div>
-</div>
-</div>
+        <!-- Social Links -->
+        <section class="social-section">
+            <a href="https://www.youtube.com/@xenaroedits" target="_blank" rel="noopener" class="social-link">
+                <i class="fa-brands fa-youtube"></i>
+                <span>YouTube</span>
+            </a>
+            <a href="https://www.instagram.com/xenaroedits/" target="_blank" rel="noopener" class="social-link">
+                <i class="fa-brands fa-instagram"></i>
+                <span>Instagram</span>
+            </a>
+        </section>
+    </div>
 
-<footer>
-<h2>XENARO EDITS</h2>
-<p>© 2026 All Rights Reserved.</p>
-</footer>
+    <!-- Contact Modal -->
+    <div id="contactModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="document.getElementById('contactModal').classList.remove('active')">×</button>
+            <h2>Let's Work Together</h2>
+            <p class="modal-subtitle">Professional Video Editing Services</p>
+            
+            <!-- Stats Section -->
+            <div class="modal-stats">
+                <div class="stat-item">
+                    <h3>500+</h3>
+                    <p>Hours Edited</p>
+                </div>
+                <div class="stat-item">
+                    <h3>100+</h3>
+                    <p>Projects</p>
+                </div>
+                <div class="stat-item">
+                    <h3>4.9★</h3>
+                    <p>Rating</p>
+                </div>
+            </div>
+
+            <a href="https://instagram.com/xenaroedits" target="_blank" class="modal-cta-btn">
+                DM me on Instagram if Interested
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <h2>XENARO EDITS</h2>
+        <p>© 2026 All Rights Reserved.</p>
+    </footer>
 </div>
 
 <script>
+// Loading Screen
 window.addEventListener("load", () => {
     setTimeout(() => {
         const loadingScreen = document.getElementById("loadingScreen");
-        if(loadingScreen){
+        if(loadingScreen) {
             loadingScreen.classList.add("fade-out");
             setTimeout(() => loadingScreen.remove(), 600);
         }
     }, 800);
 });
 
+// Header scroll effect
 const header = document.querySelector("header");
 window.addEventListener("scroll", () => {
     header.style.background = window.scrollY > 50 ? "rgba(0,0,0,.8)" : "rgba(0,0,0,.5)";
 });
 
+// Particle System
 const particleContainer = document.getElementById("particles");
-function createParticle(){
+function createParticle() {
     const p = document.createElement("span");
     const size = Math.random() * 6 + 2;
     p.style.position = "absolute";
@@ -823,7 +770,7 @@ function createParticle(){
     const move = setInterval(() => {
         y -= 0.2;
         p.style.top = y + "vh";
-        if(y < -10){
+        if(y < -10) {
             clearInterval(move);
             p.remove();
         }
@@ -831,40 +778,9 @@ function createParticle(){
 }
 setInterval(createParticle, 120);
 
-document.querySelectorAll("section").forEach((section, i) => {
-    section.style.opacity = "0";
-    section.style.transform = "translateY(30px)";
-    section.style.transition = ".7s";
-    setTimeout(() => {
-        section.style.opacity = "1";
-        section.style.transform = "translateY(0px)";
-    }, 150 + i * 120);
-});
-
-const hero = document.querySelector(".hero-left h1");
-if(hero){
-    hero.animate([
-        { opacity: 0, transform: "translateY(40px)" },
-        { opacity: 1, transform: "translateY(0px)" }
-    ], { duration: 1200, fill: "forwards" });
-}
-
-document.querySelectorAll(".glass-card").forEach(card => {
-    card.addEventListener("mousemove", (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const rx = (y - rect.height / 2) / 18;
-        const ry = (rect.width / 2 - x) / 18;
-        card.style.transform = `perspective(1200px) rotateX(${rx}deg) rotateY(${ry}deg) scale3d(1.02,1.02,1.02)`;
-    });
-    card.addEventListener("mouseleave", () => {
-        card.style.transform = "perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)";
-    });
-});
-
-document.getElementById("contactModal").addEventListener("click", function(e){
-    if(e.target === this){
+// Modal click outside to close
+document.getElementById("contactModal").addEventListener("click", function(e) {
+    if(e.target === this) {
         this.classList.remove("active");
     }
 });
