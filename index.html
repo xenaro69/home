@@ -6,15 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Xenaro</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-<style>
-/* ==========================
-   XENARO
-   Black & White Theme
-========================== */
 
+<style>
 *{
     margin:0;
     padding:0;
@@ -25,45 +21,47 @@ html{
     scroll-behavior:smooth;
 }
 
-html, body{
-    height:100%;
-}
-
 body{
+    min-height:100%;
     font-family:'Poppins',sans-serif;
     background:#0a0a0a;
     color:#f5f5f5;
-    overflow:hidden;
+    overflow-x:hidden;
+    overflow-y:auto;
 }
 
-::-webkit-scrollbar{
-    width:10px;
-}
-::-webkit-scrollbar-track{
-    background:#0f0f0f;
-}
+::-webkit-scrollbar{ width:10px; }
+::-webkit-scrollbar-track{ background:#0f0f0f; }
 ::-webkit-scrollbar-thumb{
-    background:#ffffff;
+    background:#fff;
     border-radius:100px;
 }
 
+/* Background particles */
+#particles{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:0;
+}
+
+/* Loader */
 #loadingScreen{
-position:fixed;
-inset:0;
-z-index:99999;
-background:#000000;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-gap:24px;
-opacity:1;
-transition:opacity 1s ease-out;
+    position:fixed;
+    inset:0;
+    z-index:99999;
+    background:#000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    opacity:1;
+    transition:opacity 1s ease-out;
 }
 
 #loadingScreen.fade-out{
-opacity:0;
-pointer-events:none;
+    opacity:0;
+    pointer-events:none;
 }
 
 .loader-logo{
@@ -76,537 +74,564 @@ pointer-events:none;
 }
 
 @keyframes pulse{
-    0%{transform:scale(1);}
-    50%{transform:scale(1.1);text-shadow:0 0 20px #00cfff,0 0 50px #00cfff;}
-    100%{transform:scale(1);}
+    0%{ transform:scale(1); }
+    50%{ transform:scale(1.1); text-shadow:0 0 20px #00cfff,0 0 50px #00cfff; }
+    100%{ transform:scale(1); }
 }
 
+/* Header */
 header{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:64px;
-z-index:500;
-backdrop-filter:blur(18px);
-background:rgba(0,0,0,.5);
-border-bottom:1px solid rgba(255,255,255,.12);
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:64px;
+    z-index:500;
+    backdrop-filter:blur(18px);
+    background:rgba(0,0,0,.5);
+    border-bottom:1px solid rgba(255,255,255,.12);
 }
 
 nav{
-max-width:1680px;
-height:100%;
-margin:auto;
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:0 clamp(24px,4vw,64px);
-}
-
-.nav-buttons{
-display:flex;
-gap:12px;
-align-items:center;
-position:relative;
-z-index:501;
+    max-width:1680px;
+    height:100%;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 clamp(24px,4vw,64px);
 }
 
 .logo{
-font-size:24px;
-font-weight:800;
-letter-spacing:2px;
-color:#00cfff;
-text-shadow:0 0 12px #00cfff, 0 0 30px rgba(0,207,255,.6);
-animation:logoPulse 2s ease-in-out infinite;
+    font-size:24px;
+    font-weight:800;
+    letter-spacing:2px;
+    color:#00cfff;
+    text-shadow:0 0 12px #00cfff,0 0 30px rgba(0,207,255,.6);
+    animation:logoPulse 2s ease-in-out infinite;
 }
 
 @keyframes logoPulse{
-0%, 100%{ text-shadow:0 0 12px #00cfff, 0 0 30px rgba(0,207,255,.6); }
-50%{ text-shadow:0 0 20px #00cfff, 0 0 50px rgba(0,207,255,.8); }
-}
-
-nav ul{
-display:flex;
-list-style:none;
-gap:30px;
-}
-
-nav a{
-color:#f5f5f5;
-text-decoration:none;
-font-weight:500;
-font-size:14px;
-transition:.35s;
-}
-
-nav a:hover{
-color:#ffffff;
-opacity:.7;
-}
-
-.about-btn, .join-btn{
-padding:9px 20px;
-background:#ffffff;
-border-radius:40px;
-color:#000000;
-font-weight:700;
-font-size:14px;
-text-decoration:none;
-transition:.4s;
-position:relative;
-z-index:10;
-text-shadow:0 1px 2px rgba(0,0,0,.1);
-border:none;
-cursor:pointer;
-font-family:'Poppins',sans-serif;
-}
-
-.about-btn:hover, .join-btn:hover{
-transform:translateY(-3px);
-box-shadow:0 0 30px rgba(255,255,255,.5), inset 0 0 15px rgba(255,255,255,.3);
-color:#000000;
-}
-
-
-
-.mobile-notice{
-display:none;
-}
-
-/* ---- One-page layout ---- */
-
-.page{
-height:100vh;
-padding-top:64px;
-display:flex;
-flex-direction:column;
-max-width:1680px;
-margin:auto;
-position:relative;
-}
-
-.top-row{
-flex:1.15;
-min-height:0;
-display:grid;
-grid-template-columns:1.1fr .9fr;
-align-items:center;
-gap:clamp(20px,4vw,90px);
-padding:1.5vh clamp(24px,4vw,64px);
-}
-
-.hero h1{
-font-size:clamp(30px,4.2vw,60px);
-line-height:1.05;
-font-weight:800;
-margin-bottom:14px;
-}
-
-.hero p{
-font-size:clamp(13px,1.4vw,19px);
-opacity:.7;
-}
-
-.hero-right{
-perspective:1200px;
-position:relative;
-z-index:100;
-}
-
-.glass-card{
-background:rgba(255,255,255,.05);
-border:1px solid rgba(255,255,255,.12);
-border-radius:22px;
-padding:clamp(20px,3vh,32px);
-backdrop-filter:blur(30px);
-box-shadow:0 0 40px rgba(255,255,255,.1), 0 25px 60px rgba(0,0,0,.55);
-transition:box-shadow .3s ease, transform .1s ease-out;
-transform-style:preserve-3d;
-will-change:transform;
-}
-
-.glass-card:hover{
-box-shadow:0 0 55px rgba(255,255,255,.35), 0 35px 70px rgba(0,0,0,.6);
-}
-
-.card-layer{
-transform-style:preserve-3d;
-}
-
-.glass-card h2{
-font-size:clamp(20px,2.4vw,30px);
-margin-bottom:4px;
-transform:translateZ(45px);
-text-shadow:0 8px 20px rgba(0,0,0,.5);
-}
-
-.glass-card > .card-layer > p{
-font-size:13px;
-opacity:.65;
-transform:translateZ(35px);
-}
-
-.stats{
-display:flex;
-justify-content:space-between;
-margin-top:20px;
-transform:translateZ(30px);
-}
-
-.stats h3{
-font-size:clamp(18px,2vw,26px);
-color:#ffffff;
-}
-
-.stats span{
-opacity:.6;
-font-size:12px;
-}
-
-.bottom-row{
-flex:.6;
-min-height:0;
-display:flex;
-align-items:center;
-justify-content:center;
-padding:0 clamp(24px,4vw,64px);
-position:relative;
-}
-
-.social-links{
-display:flex;
-gap:22px;
-align-items:center;
-justify-content:center;
-}
-
-.social-link{
-display:flex;
-align-items:center;
-gap:10px;
-padding:12px 22px;
-border-radius:40px;
-background:rgba(255,255,255,.05);
-border:1px solid rgba(255,255,255,.15);
-color:#f5f5f5;
-font-size:16px;
-text-decoration:none;
-transition:.35s;
-}
-
-.social-link span{
-font-size:14px;
-font-weight:500;
-}
-
-.social-link{
-position:relative;
-}
-
-.social-link::after{
-content:attr(data-label);
-position:absolute;
-bottom:100%;
-left:50%;
-transform:translateX(-50%);
-background:rgba(0,0,0,.95);
-color:#ffffff;
-padding:6px 12px;
-border-radius:6px;
-font-size:12px;
-font-weight:600;
-white-space:nowrap;
-opacity:0;
-pointer-events:none;
-transition:opacity .3s ease;
-margin-bottom:8px;
-}
-
-.social-link:hover{
-transform:translateY(-5px);
-color:#ffffff;
-border-color:#ffffff;
-box-shadow:0 0 25px rgba(255,255,255,.4);
-}
-
-.social-link:hover::after{
-opacity:1;
-}
-
-footer{
-flex:0 0 auto;
-padding:10px;
-text-align:center;
-border-top:1px solid rgba(255,255,255,.12);
-color:#999;
-font-size:11px;
-}
-
-footer h2{
-font-size:13px;
-margin-bottom:2px;
-color:#f5f5f5;
-}
-
-@media(max-width:900px){
-html, body{
-height:auto;
-overflow-x:hidden;
-overflow-y:auto;
-}
-
-body{
-overflow:auto;
-}
-
-.mobile-notice{
-display:block;
-background:rgba(0,207,255,.1);
-border:1px solid rgba(0,207,255,.3);
-border-radius:12px;
-padding:14px 16px;
-margin:12px 16px 0;
-text-align:center;
-font-size:13px;
-color:#f5f5f5;
-opacity:.85;
-line-height:1.5;
-margin-top:70px;
-}
-
-.mobile-notice p{
-margin:0;
-}
-
-.page{
-height:auto;
-padding-top:60px;
-flex-direction:column;
-gap:40px;
-}
-
-header{
-height:56px;
-}
-
-nav{
-padding:0 20px;
-}
-
-.logo{
-font-size:19px;
+    0%,100%{ text-shadow:0 0 12px #00cfff,0 0 30px rgba(0,207,255,.6); }
+    50%{ text-shadow:0 0 20px #00cfff,0 0 50px rgba(0,207,255,.8); }
 }
 
 .nav-buttons{
-gap:8px;
+    display:flex;
+    gap:12px;
+    align-items:center;
 }
 
-.about-btn, .join-btn{
-padding:7px 16px;
-font-size:12.5px;
-text-shadow:0 1px 2px rgba(0,0,0,.1);
+.about-btn,
+.join-btn{
+    padding:9px 20px;
+    background:#fff;
+    border-radius:40px;
+    color:#000;
+    font-weight:700;
+    font-size:14px;
+    text-decoration:none;
+    transition:.35s;
 }
 
-nav ul{
-display:none;
+.about-btn:hover,
+.join-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 0 30px rgba(255,255,255,.5);
 }
 
-.top-row{
-grid-template-columns:1fr;
-text-align:center;
-padding:40px 20px 35px;
-gap:32px;
-flex:none;
-min-height:auto;
-margin-bottom:0;
+/* Page */
+.page{
+    position:relative;
+    z-index:2;
+    padding-top:64px;
 }
 
-.hero h1{
-font-size:38px;
-letter-spacing:-.5px;
-line-height:1.2;
-margin-bottom:16px;
+
+.top-ad-wrap{
+    width:min(1180px,calc(100% - 48px));
+    margin:28px auto 0;
+}
+.top-ad-wrap .ad-slot{
+    min-height:120px;
 }
 
-.hero p{
-font-size:14px;
-line-height:1.6;
-max-width:100%;
-margin:0 auto;
-opacity:.8;
+/* Original-style hero: WSP left, XENARO.69 right */
+.hero-section{
+    width:100%;
+    max-width:1680px;
+    min-height:auto;
+    margin:0 auto;
+    padding:42px clamp(24px,4vw,64px) 52px;
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    gap:clamp(30px,6vw,100px);
+    align-items:center;
+}
+
+.hero-left h2{
+    font-size:clamp(30px,4.2vw,60px);
+    line-height:1.02;
+    font-weight:800;
+    margin-bottom:16px;
+}
+
+.hero-left p{
+    font-size:clamp(15px,1.5vw,20px);
+    opacity:.7;
 }
 
 .hero-right{
-perspective:1200px;
+    perspective:1200px;
+    position:relative;
+    z-index:10;
 }
 
 .glass-card{
-padding:24px 20px;
-border-radius:20px;
-width:100%;
-max-width:320px;
-margin:0 auto;
+    width:100%;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:22px;
+    padding:clamp(24px,3.4vw,38px);
+    backdrop-filter:blur(30px);
+    box-shadow:0 0 40px rgba(255,255,255,.1),0 25px 60px rgba(0,0,0,.55);
+    transition:box-shadow .3s ease,transform .1s ease-out;
+    transform-style:preserve-3d;
+    will-change:transform;
 }
 
 .glass-card:hover{
-box-shadow:0 0 40px rgba(255,255,255,.1), 0 25px 60px rgba(0,0,0,.55);
-transform:none;
+    box-shadow:0 0 55px rgba(255,255,255,.28),0 35px 70px rgba(0,0,0,.6);
 }
 
+.card-layer{ transform-style:preserve-3d; }
+
 .glass-card h2{
-font-size:24px;
-margin-bottom:6px;
-transform:none;
+    font-size:clamp(20px,2.4vw,30px);
+    margin-bottom:5px;
+    transform:translateZ(45px);
 }
 
 .glass-card > .card-layer > p{
-font-size:13px;
-opacity:.65;
-transform:none;
+    font-size:13px;
+    opacity:.65;
+    transform:translateZ(35px);
 }
 
 .stats{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:12px;
-margin-top:24px;
-padding-top:24px;
-border-top:1px solid rgba(255,255,255,.1);
-transform:none;
-text-align:center;
-}
-
-.stats > div{
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
+    display:flex;
+    justify-content:space-between;
+    gap:22px;
+    margin-top:24px;
+    transform:translateZ(30px);
 }
 
 .stats h3{
-font-size:20px;
-margin:0;
+    font-size:clamp(18px,2vw,26px);
+    color:#fff;
 }
 
 .stats span{
-font-size:11px;
-letter-spacing:.3px;
-white-space:nowrap;
-opacity:.7;
-margin-top:4px;
+    display:block;
+    margin-top:3px;
+    opacity:.6;
+    font-size:12px;
 }
 
-.bottom-row{
-flex:none;
-min-height:auto;
-padding:20px 20px 30px;
-margin-bottom:0;
-width:100%;
-position:relative;
+/* Scrolling content area */
+.content-flow{
+    width:min(1180px,calc(100% - 48px));
+    margin:0 auto;
+    padding:20px 0 90px;
+}
+
+.content-block{
+    margin:0 0 54px;
+}
+
+.section-eyebrow{
+    text-align:center;
+    font-size:11px;
+    letter-spacing:2.2px;
+    text-transform:uppercase;
+    color:rgba(255,255,255,.42);
+    margin-bottom:14px;
+}
+
+/* AdSense placeholders */
+.ad-slot{
+    width:100%;
+    min-height:190px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:28px;
+    border:1px dashed rgba(255,255,255,.24);
+    border-radius:24px;
+    background:rgba(255,255,255,.025);
+    box-shadow:inset 0 0 35px rgba(255,255,255,.02);
+    color:rgba(255,255,255,.38);
+    font-size:12px;
+    letter-spacing:1.6px;
+    text-transform:uppercase;
+}
+
+.ad-slot.large{ min-height:220px; }
+
+/* Action buttons below first ad */
+.action-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:22px;
+}
+
+.action-btn{
+    min-height:145px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+    padding:28px 30px;
+    border-radius:24px;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.14);
+    color:#f5f5f5;
+    text-decoration:none;
+    backdrop-filter:blur(28px);
+    box-shadow:0 18px 45px rgba(0,0,0,.35);
+    transition:.35s ease;
+}
+
+.action-btn:hover{
+    transform:translateY(-6px);
+    border-color:rgba(255,255,255,.45);
+    box-shadow:0 0 35px rgba(255,255,255,.14),0 24px 55px rgba(0,0,0,.5);
+}
+
+.action-copy{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+}
+
+.action-copy strong{
+    font-size:clamp(18px,2vw,25px);
+}
+
+.action-copy span{
+    font-size:12px;
+    line-height:1.5;
+    opacity:.62;
+}
+
+.action-btn i{
+    font-size:25px;
+    opacity:.9;
+}
+
+/* Social links at bottom of content */
+.social-section{
+    padding-top:12px;
 }
 
 .social-links{
-display:flex;
-flex-wrap:wrap;
-gap:10px;
-justify-content:center;
-align-items:center;
-max-width:100%;
-margin:0 auto;
-row-gap:12px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:18px;
+    justify-content:center;
+    align-items:center;
 }
 
 .social-link{
-padding:11px 16px;
-justify-content:center;
-font-size:13px;
-flex:0 1 calc(50% - 5px);
-max-width:160px;
+    position:relative;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:13px 23px;
+    border-radius:40px;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.15);
+    color:#f5f5f5;
+    font-size:16px;
+    text-decoration:none;
+    transition:.35s;
 }
 
 .social-link span{
-font-size:12px;
+    font-size:14px;
+    font-weight:500;
 }
 
-.social-link i{
-font-size:16px;
+.social-link::after{
+    content:attr(data-label);
+    position:absolute;
+    bottom:100%;
+    left:50%;
+    transform:translateX(-50%);
+    background:rgba(0,0,0,.95);
+    color:#fff;
+    padding:6px 12px;
+    border-radius:6px;
+    font-size:12px;
+    font-weight:600;
+    white-space:nowrap;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .3s ease;
+    margin-bottom:8px;
 }
+
+.social-link:hover{
+    transform:translateY(-5px);
+    border-color:#fff;
+    box-shadow:0 0 25px rgba(255,255,255,.35);
+}
+
+.social-link:hover::after{ opacity:1; }
 
 footer{
-padding:18px 20px;
-margin-top:auto;
-flex:0 0 auto;
+    position:relative;
+    z-index:2;
+    padding:24px 20px;
+    text-align:center;
+    border-top:1px solid rgba(255,255,255,.12);
+    color:#999;
+    font-size:11px;
 }
 
 footer h2{
-font-size:14px;
-margin-bottom:4px;
+    font-size:14px;
+    margin-bottom:4px;
+    color:#f5f5f5;
 }
 
-footer p{
-font-size:11px;
+@media(max-width:900px){
+    .top-ad-wrap{
+        width:calc(100% - 40px);
+        margin-top:20px;
+    }
+    .top-ad-wrap .ad-slot{
+        min-height:100px;
+    }
+    header{ height:56px; }
+    nav{ padding:0 18px; }
+    .logo{ font-size:19px; }
+    .nav-buttons{ gap:8px; }
+    .about-btn,.join-btn{ padding:7px 14px; font-size:12px; }
+
+    .page{ padding-top:56px; }
+
+    .hero-section{
+        min-height:auto;
+        grid-template-columns:1fr;
+        gap:38px;
+        padding:70px 20px 64px;
+        text-align:center;
+    }
+
+    .hero-left h2{
+        font-size:clamp(38px,11vw,58px);
+        margin-bottom:14px;
+    }
+
+    .hero-right{
+        width:100%;
+        max-width:520px;
+        margin:0 auto;
+    }
+
+    .glass-card{
+        padding:26px 22px;
+        transform:none !important;
+    }
+
+    .glass-card h2,
+    .glass-card > .card-layer > p,
+    .stats{
+        transform:none;
+    }
+
+    .content-flow{
+        width:min(100% - 32px,700px);
+        padding:10px 0 64px;
+    }
+
+    .content-block{ margin-bottom:34px; }
+
+    .ad-slot,
+    .ad-slot.large{
+        min-height:220px;
+        border-radius:20px;
+    }
+
+    .action-grid{
+        grid-template-columns:1fr;
+        gap:16px;
+    }
+
+    .action-btn{
+        min-height:115px;
+        padding:22px;
+    }
+
+    .social-links{ gap:10px; }
+    .social-link{
+        flex:0 1 calc(50% - 5px);
+        max-width:170px;
+        justify-content:center;
+        padding:11px 14px;
+        font-size:13px;
+    }
+    .social-link span{ font-size:12px; }
 }
+
+@media(max-width:520px){
+    .stats{
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
+        gap:8px;
+        padding-top:20px;
+        border-top:1px solid rgba(255,255,255,.1);
+    }
+
+    .stats h3{ font-size:clamp(18px,2vw,26px); }
+    .stats span{ font-size:10px; }
 }
+
+@media(max-width:900px){
+    .hero-left h2{font-size:38px;}
+    .hero p{font-size:14px;}
+    .glass-card h2{font-size:24px;}
+    .stats h3{font-size:20px;}
+}
+
 </style>
 </head>
+
 <body>
 <div id="loadingScreen">
-<div class="loader-logo">XENARO</div>
+    <div class="loader-logo">XENARO</div>
 </div>
-<div id="particles"></div>
-<header>
-<nav>
-<div class="logo">XENARO</div>
-<div class="nav-buttons">
-<a class="about-btn" href="about/">About Me</a>
-<a class="join-btn" href="https://discord.gg/C64h96EGR7" target="_blank" rel="noopener">Join Now</a>
-</div>
-</nav>
-</header>
-<div class="page">
-<section class="top-row" id="home">
-<div class="hero-left">
-<h1>Wsp Homies!!!</h1>
-<p>Subscribe Kar Diye Ho Nahh??</p>
-</div>
-<div class="hero-right">
-<div class="glass-card" id="mainCard">
-<div class="card-layer">
-<h2>XENARO.69</h2>
-<p>Gaming Creator</p>
-<div class="stats">
-<div>
-<h3>1000+</h3>
-<span>Subscribers</span>
-</div>
-<div>
-<h3>300+</h3>
-<span>Videos</span>
-</div>
-<div>
-<h3>375K+</h3>
-<span>Views</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
 
-<div class="bottom-row">
-<div class="social-links">
-<a href="https://www.youtube.com/@xenaro.69" target="_blank" rel="noopener" class="social-link" data-label="YOUTUBE CHANNEL"><i class="fa-brands fa-youtube"></i><span>YouTube</span></a>
-<a href="https://www.instagram.com/xenaro.69/" target="_blank" rel="noopener" class="social-link" data-label="INSTAGRAM ACCOUNT"><i class="fa-brands fa-instagram"></i><span>Instagram</span></a>
-<a href="https://discord.gg/C64h96EGR7" target="_blank" rel="noopener" class="social-link" data-label="DISCORD SERVER"><i class="fa-brands fa-discord"></i><span>Discord</span></a>
-<a href="https://x.com/xenaro_69" target="_blank" rel="noopener" class="social-link" data-label="TWITTER PROFILE"><i class="fa-brands fa-twitter"></i><span>Twitter</span></a>
-</div>
-</div>
+<div id="particles"></div>
+
+<header>
+    <nav>
+        <div class="logo">XENARO</div>
+        <div class="nav-buttons">
+            <a class="about-btn" href="about/">About Me</a>
+            <a class="join-btn" href="https://discord.gg/C64h96EGR7" target="_blank" rel="noopener">Join Now</a>
+        </div>
+    </nav>
+</header>
+
+<main class="page">
+
+    <!-- TOP ADVERTISEMENT -->
+    <section class="top-ad-wrap">
+        <div class="section-eyebrow">Advertisement</div>
+        <div class="ad-slot">
+            AdSense Ad Space 01
+            <!-- Replace this text with your AdSense ad unit code -->
+        </div>
+    </section>
+
+    <!-- ORIGINAL-STYLE TOP HERO -->
+    <section class="hero-section" id="home">
+        <div class="hero-left">
+            <h2>Wsp Homies!!!</h2>
+            <p>Subscribe Kar Diye Ho Nahh??</p>
+        </div>
+
+        <div class="hero-right">
+            <div class="glass-card" id="mainCard">
+                <div class="card-layer">
+                    <h2>XENARO.69</h2>
+                    <p>Gaming Creator</p>
+                    <div class="stats">
+                        <div>
+                            <h3>1000+</h3>
+                            <span>Subscribers</span>
+                        </div>
+                        <div>
+                            <h3>300+</h3>
+                            <span>Videos</span>
+                        </div>
+                        <div>
+                            <h3>375K+</h3>
+                            <span>Views</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCROLLING CONTENT -->
+    <div class="content-flow">
+
+        
+
+        <section class="content-block">
+            <div class="section-eyebrow">Advertisement</div>
+            <div class="ad-slot">
+                AdSense Ad Space 02
+                <!-- Replace this text with your AdSense ad unit code -->
+            </div>
+        </section>
+
+<section class="content-block">
+            <div class="action-grid">
+                <a class="action-btn" href="#">
+                    <div class="action-copy">
+                        <strong>Hire Me as a Paid Editor</strong>
+                        <span>Video editing for YouTube, shorts and gaming content</span>
+                    </div>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+                <a class="action-btn" href="#">
+                    <div class="action-copy">
+                        <strong>Mods / Resource Packs</strong>
+                        <span>Browse Minecraft mods, packs and downloads</span>
+                    </div>
+                    <i class="fa-solid fa-cubes"></i>
+                </a>
+            </div>
+        </section>
+
+        <section class="content-block">
+            <div class="section-eyebrow">Advertisement</div>
+            <div class="ad-slot">
+                AdSense Ad Space 03
+                <!-- Replace this text with your AdSense ad unit code -->
+            </div>
+        </section>
+
+        <section class="social-section" id="socials">
+            <div class="social-links">
+                <a href="https://www.youtube.com/@xenaro.69" target="_blank" rel="noopener" class="social-link" data-label="YOUTUBE CHANNEL">
+                    <i class="fa-brands fa-youtube"></i><span>YouTube</span>
+                </a>
+                <a href="https://www.instagram.com/xenaro.69/" target="_blank" rel="noopener" class="social-link" data-label="INSTAGRAM ACCOUNT">
+                    <i class="fa-brands fa-instagram"></i><span>Instagram</span>
+                </a>
+                <a href="https://discord.gg/C64h96EGR7" target="_blank" rel="noopener" class="social-link" data-label="DISCORD SERVER">
+                    <i class="fa-brands fa-discord"></i><span>Discord</span>
+                </a>
+                <a href="https://x.com/xenaro_69" target="_blank" rel="noopener" class="social-link" data-label="TWITTER PROFILE">
+                    <i class="fa-brands fa-twitter"></i><span>Twitter</span>
+                </a>
+            </div>
+        </section>
+    </div>
+</main>
 
 <footer>
-<h2>XENARO</h2>
-<p>© 2026 All Rights Reserved.</p>
+    <h2>XENARO</h2>
+    <p>© 2026 All Rights Reserved.</p>
 </footer>
-</div>
 
 <script>
 window.addEventListener("load", () => {
@@ -621,7 +646,7 @@ window.addEventListener("load", () => {
 
 const header = document.querySelector("header");
 window.addEventListener("scroll", () => {
-    header.style.background = window.scrollY > 50 ? "rgba(0,0,0,.8)" : "rgba(0,0,0,.5)";
+    header.style.background = window.scrollY > 50 ? "rgba(0,0,0,.84)" : "rgba(0,0,0,.5)";
 });
 
 const particleContainer = document.getElementById("particles");
@@ -638,7 +663,7 @@ function createParticle(){
     p.style.top = "110vh";
     p.style.boxShadow = "0 0 20px rgba(255,255,255,.6)";
     particleContainer.appendChild(p);
-    
+
     const speed = Math.random() * 5 + 6;
     let y = 110;
     const move = setInterval(() => {
@@ -650,28 +675,19 @@ function createParticle(){
         }
     }, speed);
 }
-setInterval(createParticle, 120);
-
-document.querySelectorAll("section").forEach((section, i) => {
-    section.style.opacity = "0";
-    section.style.transform = "translateY(30px)";
-    section.style.transition = ".7s";
-    setTimeout(() => {
-        section.style.opacity = "1";
-        section.style.transform = "translateY(0px)";
-    }, 150 + i * 120);
-});
+setInterval(createParticle,120);
 
 const hero = document.querySelector(".hero-left h1");
 if(hero){
     hero.animate([
-        { opacity: 0, transform: "translateY(40px)" },
-        { opacity: 1, transform: "translateY(0px)" }
-    ], { duration: 1200, fill: "forwards" });
+        { opacity:0, transform:"translateY(40px)" },
+        { opacity:1, transform:"translateY(0px)" }
+    ],{ duration:1200, fill:"forwards" });
 }
 
 document.querySelectorAll(".glass-card").forEach(card => {
-    card.addEventListener("mousemove", (e) => {
+    card.addEventListener("mousemove", e => {
+        if(window.innerWidth <= 900) return;
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
@@ -679,6 +695,7 @@ document.querySelectorAll(".glass-card").forEach(card => {
         const ry = (rect.width / 2 - x) / 18;
         card.style.transform = `perspective(1200px) rotateX(${rx}deg) rotateY(${ry}deg) scale3d(1.02,1.02,1.02)`;
     });
+
     card.addEventListener("mouseleave", () => {
         card.style.transform = "perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)";
     });
