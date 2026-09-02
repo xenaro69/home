@@ -10,6 +10,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 <style>
+@font-face{
+    font-family:'Sunrise Brown';
+    src:url('Sunrise Brown.otf') format('opentype');
+    font-weight:normal;
+    font-style:normal;
+    font-display:swap;
+}
+
+:root{
+    --site-font:'Sunrise Brown','Poppins',sans-serif;
+}
+
 *{
     margin:0;
     padding:0;
@@ -41,7 +53,7 @@
     display:flex;
     align-items:center;
     gap:8px;
-    font-family:'Poppins',sans-serif;
+    font-family:var(--site-font);
     font-size:14px;
     font-weight:600;
 }
@@ -67,7 +79,7 @@
     display:flex;
     align-items:center;
     gap:8px;
-    font-family:'Poppins',sans-serif;
+    font-family:var(--site-font);
     font-size:14px;
     font-weight:600;
 }
@@ -83,7 +95,7 @@ html, body{
 }
 
 body{
-    font-family:'Poppins',sans-serif;
+    font-family:var(--site-font);
     background:#0a0a0a;
     color:#f5f5f5;
     position:relative;
@@ -341,7 +353,7 @@ nav{
     padding:10px 20px;
     border-radius:20px;
     cursor:pointer;
-    font-family:'Poppins',sans-serif;
+    font-family:var(--site-font);
     font-size:12px;
     font-weight:600;
     letter-spacing:.5px;
@@ -476,7 +488,7 @@ nav{
     color:#f5f5f5;
     padding:12px 16px;
     border-radius:12px;
-    font-family:'Poppins',sans-serif;
+    font-family:var(--site-font);
     font-size:14px;
     margin-bottom:16px;
     transition:.3s;
@@ -496,7 +508,7 @@ nav{
     color:#000000;
     padding:12px;
     border-radius:12px;
-    font-family:'Poppins',sans-serif;
+    font-family:var(--site-font);
     font-size:13px;
     font-weight:700;
     letter-spacing:.5px;
@@ -522,48 +534,129 @@ nav{
     display:block;
 }
 
+.devices-box{
+    max-width:620px;
+    padding:34px;
+    overflow:hidden;
+    background:
+        radial-gradient(circle at 85% 0%,rgba(0,207,255,.13),transparent 35%),
+        #0a0a0a;
+}
+
+.devices-box::before{
+    content:"";
+    position:absolute;
+    width:170px;
+    height:170px;
+    top:-90px;
+    right:-65px;
+    border-radius:50%;
+    border:1px solid rgba(0,207,255,.18);
+    box-shadow:0 0 70px rgba(0,207,255,.08);
+    pointer-events:none;
+}
+
+.device-header{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    padding:4px 42px 22px 0;
+    margin-bottom:18px;
+    border-bottom:1px solid rgba(255,255,255,.1);
+}
+
+.device-icon{
+    width:52px;
+    height:52px;
+    flex:none;
+    display:grid;
+    place-items:center;
+    border-radius:15px;
+    color:#00cfff;
+    font-size:22px;
+    background:rgba(0,207,255,.1);
+    border:1px solid rgba(0,207,255,.3);
+    box-shadow:inset 0 0 18px rgba(0,207,255,.06);
+}
+
+.device-eyebrow{
+    color:#00cfff;
+    font-size:10px;
+    letter-spacing:1.8px;
+    text-transform:uppercase;
+    margin-bottom:4px;
+}
+
 .device-name{
-    font-size:16px;
+    color:#f5f5f5;
+    font-size:20px;
     font-weight:700;
-    margin-bottom:24px;
-    text-align:center;
-    color:#bbb;
+    line-height:1.25;
 }
 
 .specs-grid{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:12px;
+    gap:10px;
 }
 
 .spec-box{
-    background:rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.2);
-    border-radius:12px;
-    padding:14px;
-    text-align:center;
+    position:relative;
+    display:grid;
+    grid-template-columns:40px 1fr;
+    align-items:center;
+    gap:12px;
+    min-height:82px;
+    background:rgba(255,255,255,.035);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:15px;
+    padding:14px 15px;
+    text-align:left;
     transition:.3s;
 }
 
 .spec-box:hover{
-    background:rgba(255,255,255,.1);
-    border-color:rgba(255,255,255,.4);
-    transform:translateY(-2px);
+    background:rgba(0,207,255,.07);
+    border-color:rgba(0,207,255,.32);
+    transform:translateY(-3px);
+    box-shadow:0 10px 24px rgba(0,0,0,.22);
+}
+
+.spec-icon{
+    width:40px;
+    height:40px;
+    display:grid;
+    place-items:center;
+    border-radius:11px;
+    background:rgba(255,255,255,.06);
+    color:#00cfff;
+    font-size:16px;
+    transition:.3s;
+}
+
+.spec-box:hover .spec-icon{
+    background:#00cfff;
+    color:#071014;
+}
+
+.spec-info{
+    min-width:0;
 }
 
 .spec-label{
     color:#888;
-    font-size:11px;
-    letter-spacing:.5px;
+    font-size:10px;
+    letter-spacing:1px;
     text-transform:uppercase;
-    margin-bottom:6px;
+    margin-bottom:3px;
     display:block;
 }
 
 .spec-value{
-    color:#d5d5d5;
-    font-size:13px;
+    color:#f2f2f2;
+    font-size:14px;
     font-weight:700;
+    line-height:1.25;
 }
 
 #loadingScreen{
@@ -703,6 +796,23 @@ footer h2{
         max-width:calc(100vw - 48px);
         padding:20px 24px;
     }
+
+    .devices-box{
+        padding:28px 20px 22px;
+    }
+
+    .specs-grid{
+        grid-template-columns:1fr;
+    }
+
+    .device-header{
+        gap:12px;
+        padding-right:36px;
+    }
+
+    .device-name{
+        font-size:17px;
+    }
 }
 </style>
 </head>
@@ -791,29 +901,47 @@ footer h2{
 </div>
 
 <div id="devicesModal" class="modal-overlay">
-    <div class="modal-box">
+    <div class="modal-box devices-box">
         <button class="modal-close-btn" onclick="closeDevicesModal()">&times;</button>
-        <div class="device-name">Lenovo LOQ 15IAX9</div>
+        <div class="device-header">
+            <div class="device-icon"><i class="fa-solid fa-laptop"></i></div>
+            <div>
+                <div class="device-eyebrow">My daily machine</div>
+                <div class="device-name">Lenovo LOQ 15IAX9</div>
+            </div>
+        </div>
         
         <div class="specs-grid">
             <div class="spec-box">
-                <span class="spec-label">Processor</span>
-                <span class="spec-value">Intel Core i5</span>
+                <div class="spec-icon"><i class="fa-solid fa-microchip"></i></div>
+                <div class="spec-info">
+                    <span class="spec-label">Processor</span>
+                    <span class="spec-value">Intel Core i5</span>
+                </div>
             </div>
             
             <div class="spec-box">
-                <span class="spec-label">Graphics</span>
-                <span class="spec-value">RTX 3050</span>
+                <div class="spec-icon"><i class="fa-solid fa-display"></i></div>
+                <div class="spec-info">
+                    <span class="spec-label">Graphics</span>
+                    <span class="spec-value">NVIDIA RTX 3050</span>
+                </div>
             </div>
             
             <div class="spec-box">
-                <span class="spec-label">RAM</span>
-                <span class="spec-value">16GB</span>
+                <div class="spec-icon"><i class="fa-solid fa-memory"></i></div>
+                <div class="spec-info">
+                    <span class="spec-label">Memory</span>
+                    <span class="spec-value">16 GB RAM</span>
+                </div>
             </div>
             
             <div class="spec-box">
-                <span class="spec-label">Storage</span>
-                <span class="spec-value">512GB SSD</span>
+                <div class="spec-icon"><i class="fa-solid fa-hard-drive"></i></div>
+                <div class="spec-info">
+                    <span class="spec-label">Storage</span>
+                    <span class="spec-value">512 GB SSD</span>
+                </div>
             </div>
         </div>
     </div>
