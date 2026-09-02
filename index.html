@@ -6,13 +6,21 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Xenaro</title>
+<title>Xenaro | Updated</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
 <style>
+@font-face{
+    font-family:'Sunrise Brown';
+    src:url('Sunrise Brown.otf') format('opentype');
+    font-weight:normal;
+    font-style:normal;
+    font-display:swap;
+}
+
 *{
     margin:0;
     padding:0;
@@ -25,7 +33,7 @@ html{
 
 body{
     min-height:100%;
-    font-family:'Poppins',sans-serif;
+    font-family:'Sunrise Brown','Poppins',sans-serif;
     background:#0a0a0a;
     color:#f5f5f5;
     overflow-x:hidden;
@@ -67,7 +75,7 @@ body{
 }
 
 .loader-logo{
-    font-size:60px;
+    font-size:clamp(32px,5vw,48px);
     font-weight:800;
     letter-spacing:10px;
     color:#00cfff;
@@ -151,7 +159,7 @@ nav{
 
 
 .top-ad-wrap{
-    width:min(1180px,calc(100% - 48px));
+    width:min(960px,calc(100% - 80px));
     margin:28px auto 0;
 }
 .top-ad-wrap .ad-slot{
@@ -161,29 +169,35 @@ nav{
 /* Original-style hero: WSP left, XENARO.69 right */
 .hero-section{
     width:100%;
-    max-width:1680px;
+    max-width:1320px;
     min-height:auto;
     margin:0 auto;
     padding:42px clamp(24px,4vw,64px) 52px;
     display:grid;
-    grid-template-columns:1.1fr .9fr;
-    gap:clamp(30px,6vw,100px);
+    grid-template-columns:1fr;
+    gap:30px;
     align-items:center;
 }
 
+.hero-left{
+    text-align:center;
+}
+
 .hero-left h2{
-    font-size:clamp(30px,4.2vw,60px);
+    font-size:clamp(26px,3.4vw,48px);
     line-height:1.02;
     font-weight:800;
     margin-bottom:16px;
 }
 
 .hero-left p{
-    font-size:clamp(15px,1.5vw,20px);
+    font-size:clamp(13px,1.2vw,17px);
     opacity:.7;
 }
 
 .hero-right{
+    width:min(100%,1000px);
+    margin:0 auto;
     perspective:1200px;
     position:relative;
     z-index:10;
@@ -197,7 +211,7 @@ nav{
     padding:clamp(24px,3.4vw,38px);
     backdrop-filter:blur(30px);
     box-shadow:0 0 40px rgba(255,255,255,.1),0 25px 60px rgba(0,0,0,.55);
-    transition:box-shadow .3s ease,transform .1s ease-out;
+    transition:box-shadow .3s ease,transform .22s ease-out;
     transform-style:preserve-3d;
     will-change:transform;
 }
@@ -215,14 +229,14 @@ nav{
 }
 
 .glass-card > .card-layer > p{
-    font-size:13px;
+    font-size:16px;
     opacity:.65;
     transform:translateZ(35px);
 }
 
 .stats{
-    display:flex;
-    justify-content:space-between;
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
     gap:22px;
     margin-top:24px;
     transform:translateZ(30px);
@@ -237,12 +251,13 @@ nav{
     display:block;
     margin-top:3px;
     opacity:.6;
-    font-size:12px;
+    font-size:15px;
+    line-height:1.4;
 }
 
 /* Scrolling content area */
 .content-flow{
-    width:min(1180px,calc(100% - 48px));
+    width:min(960px,calc(100% - 80px));
     margin:0 auto;
     padding:20px 0 90px;
 }
@@ -253,7 +268,7 @@ nav{
 
 .section-eyebrow{
     text-align:center;
-    font-size:11px;
+    font-size:14px;
     letter-spacing:2.2px;
     text-transform:uppercase;
     color:rgba(255,255,255,.42);
@@ -268,24 +283,42 @@ nav{
     align-items:center;
     justify-content:center;
     text-align:center;
-    padding:28px;
-    border:1px dashed rgba(255,255,255,.24);
-    border-radius:24px;
-    background:rgba(255,255,255,.025);
-    box-shadow:inset 0 0 35px rgba(255,255,255,.02);
+    padding:0;
+    border:0;
+    border-radius:0;
+    background:transparent;
+    box-shadow:none;
     color:rgba(255,255,255,.38);
-    font-size:12px;
+    font-size:15px;
     letter-spacing:1.6px;
     text-transform:uppercase;
 }
 
 .ad-slot.large{ min-height:220px; }
 
+.ad-slot .adsbygoogle{
+    display:block !important;
+    width:100% !important;
+    max-width:100%;
+    min-height:inherit;
+    border:0 !important;
+    background:transparent !important;
+}
+
+.ad-slot .adsbygoogle[data-ad-status="unfilled"]{
+    display:none !important;
+}
+
+.ad-slot iframe{
+    max-width:100% !important;
+    border:0 !important;
+}
+
 /* Action buttons below first ad */
 .action-grid{
     display:grid;
     grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:22px;
+    gap:16px;
 }
 
 .action-btn{
@@ -318,11 +351,11 @@ nav{
 }
 
 .action-copy strong{
-    font-size:clamp(18px,2vw,25px);
+    font-size:clamp(16px,1.6vw,21px);
 }
 
 .action-copy span{
-    font-size:12px;
+    font-size:15px;
     line-height:1.5;
     opacity:.62;
 }
@@ -375,7 +408,7 @@ nav{
     color:#fff;
     padding:6px 12px;
     border-radius:6px;
-    font-size:12px;
+    font-size:13px;
     font-weight:600;
     white-space:nowrap;
     opacity:0;
@@ -399,11 +432,11 @@ footer{
     text-align:center;
     border-top:1px solid rgba(255,255,255,.12);
     color:#999;
-    font-size:11px;
+    font-size:14px;
 }
 
 footer h2{
-    font-size:14px;
+    font-size:18px;
     margin-bottom:4px;
     color:#f5f5f5;
 }
@@ -420,20 +453,20 @@ footer h2{
     nav{ padding:0 18px; }
     .logo{ font-size:19px; }
     .nav-buttons{ gap:8px; }
-    .about-btn,.join-btn{ padding:7px 14px; font-size:12px; }
+    .about-btn,.join-btn{ padding:7px 14px; font-size:13px; }
 
     .page{ padding-top:56px; }
 
     .hero-section{
         min-height:auto;
         grid-template-columns:1fr;
-        gap:38px;
-        padding:70px 20px 64px;
+        gap:26px;
+        padding:52px 20px 56px;
         text-align:center;
     }
 
     .hero-left h2{
-        font-size:clamp(38px,11vw,58px);
+        font-size:clamp(27px,8vw,38px);
         margin-bottom:14px;
     }
 
@@ -468,13 +501,13 @@ footer h2{
     }
 
     .action-grid{
-        grid-template-columns:1fr;
+        grid-template-columns:repeat(2,minmax(0,1fr));
         gap:16px;
     }
 
     .action-btn{
         min-height:115px;
-        padding:22px;
+        padding:18px;
     }
 
     .social-links{ gap:10px; }
@@ -485,27 +518,37 @@ footer h2{
         padding:11px 14px;
         font-size:13px;
     }
-    .social-link span{ font-size:12px; }
+    .social-link span{ font-size:14px; }
 }
 
 @media(max-width:520px){
+    .action-grid{ gap:10px; }
+    .action-btn{
+        min-height:105px;
+        padding:14px;
+        gap:10px;
+    }
+    .action-copy strong{ font-size:16px; }
+    .action-copy span{ font-size:14px; }
+    .action-btn i{ font-size:18px; }
+
     .stats{
         display:grid;
-        grid-template-columns:repeat(3,1fr);
-        gap:8px;
+        grid-template-columns:repeat(2,1fr);
+        gap:18px 10px;
         padding-top:20px;
         border-top:1px solid rgba(255,255,255,.1);
     }
 
     .stats h3{ font-size:clamp(18px,2vw,26px); }
-    .stats span{ font-size:10px; }
+    .stats span{ font-size:13px; }
 }
 
 @media(max-width:900px){
-    .hero-left h2{font-size:38px;}
-    .hero p{font-size:14px;}
-    .glass-card h2{font-size:24px;}
-    .stats h3{font-size:20px;}
+    .hero-left h2{font-size:clamp(27px,8vw,38px);}
+    .hero-left p{font-size:16px;}
+    .glass-card h2{font-size:21px;}
+    .stats h3{font-size:18px;}
 }
 
 </style>
@@ -564,15 +607,19 @@ footer h2{
                     <div class="stats">
                         <div>
                             <h3>1000+</h3>
-                            <span>Subscribers</span>
+                            <span>YouTube Subscribers</span>
                         </div>
                         <div>
-                            <h3>300+</h3>
-                            <span>Videos</span>
+                            <h3>60+</h3>
+                            <span>Instagram Followers</span>
                         </div>
                         <div>
-                            <h3>375K+</h3>
-                            <span>Views</span>
+                            <h3>30+</h3>
+                            <span>Discord Members</span>
+                        </div>
+                        <div>
+                            <h3>0+</h3>
+                            <span>Twitter Followers</span>
                         </div>
                     </div>
                 </div>
@@ -601,20 +648,20 @@ footer h2{
             </div>
         </section>
 
-<section class="content-block">
+        <section class="content-block">
             <div class="action-grid">
                 <a class="action-btn" href="#">
                     <div class="action-copy">
-                        <strong>Hire Me as a Paid Editor</strong>
-                        <span>Video editing for YouTube, shorts and gaming content</span>
+                        <strong>Resource Packs</strong>
+                        <span>Browse Minecraft resource packs</span>
                     </div>
-                    <i class="fa-solid fa-arrow-right"></i>
+                    <i class="fa-solid fa-box-open"></i>
                 </a>
 
                 <a class="action-btn" href="#">
                     <div class="action-copy">
-                        <strong>Mods / Resource Packs</strong>
-                        <span>Browse Minecraft mods, packs and downloads</span>
+                        <strong>Mod Packs</strong>
+                        <span>Browse Minecraft mods and modpacks</span>
                     </div>
                     <i class="fa-solid fa-cubes"></i>
                 </a>
@@ -719,9 +766,9 @@ document.querySelectorAll(".glass-card").forEach(card => {
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
-        const rx = (y - rect.height / 2) / 18;
-        const ry = (rect.width / 2 - x) / 18;
-        card.style.transform = `perspective(1200px) rotateX(${rx}deg) rotateY(${ry}deg) scale3d(1.02,1.02,1.02)`;
+        const rx = ((y / rect.height) - 0.5) * 10;
+        const ry = (0.5 - (x / rect.width)) * 10;
+        card.style.transform = `perspective(1200px) rotateX(${rx}deg) rotateY(${ry}deg) scale3d(1.003,1.003,1.003)`;
     });
 
     card.addEventListener("mouseleave", () => {
