@@ -6,7 +6,9 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Xenaro</title>
+<title>Xenaro | Minecraft Guides, Resource Packs & Gaming</title>
+<meta name="description" content="Original Minecraft guides, survival tips, PvP advice, building ideas, resource pack recommendations and modding information from Xenaro.">
+<meta name="robots" content="index,follow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -604,6 +606,87 @@ footer h2{
     .minecraft-intro,.minecraft-guide{padding:22px 19px;}
 }
 
+
+/* AdSense-readiness / content-first improvements */
+.main-nav-links{
+    display:flex;
+    gap:18px;
+    align-items:center;
+}
+.main-nav-links a{
+    color:#f5f5f5;
+    text-decoration:none;
+    font-family:'Poppins',sans-serif;
+    font-size:14px;
+    opacity:.78;
+    transition:.25s;
+}
+.main-nav-links a:hover{opacity:1;}
+.article-list{
+    display:grid;
+    gap:18px;
+}
+.article-card{
+    padding:30px;
+    border-radius:24px;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.14);
+    box-shadow:0 18px 45px rgba(0,0,0,.28);
+}
+.article-card h2{
+    font-size:clamp(24px,2.8vw,34px);
+    margin-bottom:14px;
+}
+.article-card h3{
+    font-size:20px;
+    margin:22px 0 8px;
+}
+.article-card p,
+.article-card li{
+    font-family:'Poppins',sans-serif;
+    font-size:15px;
+    line-height:1.85;
+    color:rgba(255,255,255,.76);
+}
+.article-card ul{margin:10px 0 0 22px;}
+.article-meta{
+    font-family:'Poppins',sans-serif;
+    font-size:13px;
+    opacity:.45;
+    margin-bottom:15px;
+}
+.site-info-grid{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:14px;
+}
+.site-info-card{
+    padding:22px;
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:20px;
+    background:rgba(255,255,255,.035);
+}
+.site-info-card h3{margin-bottom:8px;}
+.site-info-card p{
+    font-family:'Poppins',sans-serif;
+    line-height:1.7;
+    font-size:14px;
+    opacity:.68;
+}
+.site-info-card a{color:#fff;}
+.footer-links{
+    margin-top:10px;
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+.footer-links a{color:#bbb;text-decoration:none;font-family:'Poppins',sans-serif;}
+@media(max-width:900px){
+    .main-nav-links{display:none;}
+    .site-info-grid{grid-template-columns:1fr;}
+}
+
 </style>
 </head>
 
@@ -617,6 +700,12 @@ footer h2{
 <header>
     <nav>
         <div class="logo">XENARO</div>
+        <div class="main-nav-links" aria-label="Main navigation">
+            <a href="#minecraft">Minecraft</a>
+            <a href="#guides">Guides</a>
+            <a href="#resources">Resources</a>
+            <a href="#about-site">About</a>
+        </div>
         <div class="nav-buttons">
             <a class="about-btn" href="about/">About Me</a>
             <a class="join-btn" href="https://discord.gg/C64h96EGR7" target="_blank" rel="noopener">Join Now</a>
@@ -808,6 +897,126 @@ footer h2{
             </div>
         </section>
 
+
+        <section class="content-block article-list" id="guides">
+            <div class="section-eyebrow">Featured Minecraft Guides</div>
+
+            <article class="article-card">
+                <div class="article-meta">Minecraft Survival • Beginner Guide</div>
+                <h2>How to Start a New Minecraft Survival World</h2>
+                <p>
+                    The first few Minecraft days decide how comfortable the rest of a survival world will feel.
+                    I prefer to begin by collecting enough wood for basic tools, then immediately looking for
+                    exposed stone so I can replace the wooden pickaxe. After that, food and shelter become the
+                    priority. A temporary base does not need to look impressive; it only needs storage, a furnace,
+                    a crafting table, a bed when available, and enough lighting to make the area safe.
+                </p>
+                <h3>What I collect first</h3>
+                <p>
+                    I normally keep logs instead of converting all of them into planks because logs are more
+                    flexible later. Coal is useful, but charcoal works perfectly when coal is difficult to find.
+                    Iron is the first important mining target because a shield, bucket, iron pickaxe and basic
+                    armour make exploration much safer.
+                </p>
+                <h3>Before leaving your base</h3>
+                <ul>
+                    <li>Save the coordinates of your base or another recognizable landmark.</li>
+                    <li>Carry food, blocks, torches and at least one spare tool.</li>
+                    <li>Store items you do not need so one bad trip does not erase all your progress.</li>
+                    <li>Explore one direction at a time so finding the way home stays simple.</li>
+                </ul>
+            </article>
+
+            <article class="article-card">
+                <div class="article-meta">Minecraft Mining • Practical Tips</div>
+                <h2>Safer Mining and Cave Exploration</h2>
+                <p>
+                    Large caves can give you resources quickly, but they also expose you to more mobs and dangerous
+                    drops. I like to light the route as I move instead of rushing deep into a cave. Keeping torches
+                    consistently on one side of the path can also make the return journey easier. When a cave splits,
+                    I finish or mark one branch before exploring another.
+                </p>
+                <p>
+                    A water bucket is one of the most useful items underground. It can help with lava, steep drops
+                    and climbing. I also carry cheap blocks because closing a dangerous opening or creating a small
+                    barrier is often safer than fighting every mob immediately. Valuable ores should be stored back
+                    at the base regularly instead of carrying everything through a long exploration session.
+                </p>
+            </article>
+
+            <article class="article-card">
+                <div class="article-meta">Minecraft PvP • Improvement Guide</div>
+                <h2>Simple Ways to Improve at Minecraft PvP</h2>
+                <p>
+                    PvP improvement comes from repeating good habits. Sensitivity and keybinds matter, but constantly
+                    changing them can make practice harder. I recommend finding settings that feel comfortable and
+                    giving yourself enough time to build muscle memory. Movement and positioning are just as important
+                    as attacking because a player who controls distance can create better opportunities to hit,
+                    retreat or use an item.
+                </p>
+                <h3>Practice with a purpose</h3>
+                <p>
+                    Instead of only counting wins, focus on one skill during a session: movement, aim, hotbar
+                    switching, timing or awareness. Recording a few fights can reveal mistakes that are difficult to
+                    notice while playing. Different Minecraft editions and versions can also have different combat
+                    behaviour, so practice in the version you actually intend to play.
+                </p>
+            </article>
+
+            <article class="article-card">
+                <div class="article-meta">Minecraft Building • Creative Tips</div>
+                <h2>Making Simple Minecraft Builds Look Better</h2>
+                <p>
+                    A basic rectangular house can become much more interesting without turning into a huge project.
+                    The easiest improvement is depth: move pillars, windows, roofs and entrances slightly forward or
+                    backward instead of keeping every block on one flat wall. A small block palette also helps the
+                    build look intentional. Choose a main block, a supporting block and one or two accent materials.
+                </p>
+                <p>
+                    The area around a build matters too. Paths, trees, farms, fences, lighting and small terrain
+                    changes make a base feel connected to the world. I usually finish the main shape first and add
+                    decoration afterward; trying to perfect every detail while building the frame makes the process
+                    much slower.
+                </p>
+            </article>
+        </section>
+
+        <section class="content-block" id="resources">
+            <div class="section-eyebrow">Minecraft Downloads & Resources</div>
+            <div class="site-info-grid">
+                <div class="site-info-card">
+                    <h3>Resource Packs</h3>
+                    <p>Browse the Minecraft resource packs I feature on Xenaro. Each listing should explain what the pack changes and which edition/version it is intended for.</p>
+                </div>
+                <div class="site-info-card">
+                    <h3>Mods & Modpacks</h3>
+                    <p>Find mod and modpack recommendations together with basic compatibility information and installation notes.</p>
+                </div>
+                <div class="site-info-card">
+                    <h3>More Guides Coming</h3>
+                    <p>I plan to keep expanding the site with Minecraft guides based on topics I actually play, test and create content about.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-block" id="about-site">
+            <div class="section-eyebrow">About Xenaro</div>
+            <article class="article-card">
+                <h2>About This Website</h2>
+                <p>
+                    Xenaro is my gaming website focused mainly on Minecraft. I use it to organize my guides,
+                    resource-pack discoveries, mod recommendations and gaming content in one place. The written
+                    guides on this site are intended to be useful on their own rather than existing only as pages
+                    for advertisements.
+                </p>
+                <p>
+                    Minecraft changes over time, so version-specific information may need updating after major game
+                    releases. When a download or external resource is featured, visitors should always verify that it
+                    matches their Minecraft edition and version before installing it.
+                </p>
+            </article>
+        </section>
+
         <section class="content-block">
             <div class="action-grid">
                 <a class="action-btn" href="resources/">
@@ -866,6 +1075,11 @@ footer h2{
 <footer>
     <h2>XENARO</h2>
     <p>© 2026 All Rights Reserved.</p>
+    <div class="footer-links">
+        <a href="about/">About</a>
+        <a href="contact/">Contact</a>
+        <a href="privacy/">Privacy Policy</a>
+    </div>
 </footer>
 
 <script>
