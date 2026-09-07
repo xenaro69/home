@@ -240,12 +240,24 @@ nav{
 
 .auth-box{
     position:relative;
-    width:min(410px,90%);
-    padding:32px;
+    width:min(820px,92%);
+    padding:40px 48px;
     border-radius:24px;
     background:#111;
     border:1px solid rgba(255,255,255,.18);
     box-shadow:0 30px 80px rgba(0,0,0,.8);
+    font-family:'Sunrise Brown','Poppins',sans-serif;
+}
+
+.auth-box,
+.auth-box button,
+.auth-box input,
+.auth-box label,
+.auth-box a,
+.auth-box p,
+.auth-box div,
+.auth-box span{
+    font-family:'Sunrise Brown','Poppins',sans-serif;
 }
 
 .close-auth{
@@ -263,15 +275,17 @@ nav{
 
 .auth-title{
     text-align:center;
-    font-size:30px;
+    font-size:34px;
     color:#00cfff;
     margin-bottom:5px;
+    letter-spacing:2px;
+    font-family:'Sunrise Brown','Poppins',sans-serif;
 }
 
 .auth-subtitle{
     text-align:center;
-    font-family:'Poppins',sans-serif;
-    font-size:13px;
+    font-family:'Sunrise Brown','Poppins',sans-serif;
+    font-size:15px;
     opacity:.55;
     margin-bottom:25px;
 }
@@ -286,13 +300,15 @@ nav{
 
 .auth-tab{
     flex:1;
-    padding:11px;
+    padding:13px;
     border:none;
     border-radius:10px;
     background:transparent;
     color:#aaa;
     font-weight:600;
     cursor:pointer;
+    font-family:'Sunrise Brown','Poppins',sans-serif;
+    font-size:15px;
 }
 
 .auth-tab.active{
@@ -301,14 +317,14 @@ nav{
 }
 
 .input-group{
-    margin-bottom:16px;
+    margin-bottom:18px;
 }
 
 .input-group label{
     display:block;
-    margin-bottom:7px;
-    font-family:'Poppins',sans-serif;
-    font-size:13px;
+    margin-bottom:8px;
+    font-family:'Sunrise Brown','Poppins',sans-serif;
+    font-size:14px;
     opacity:.7;
 }
 
@@ -326,12 +342,18 @@ nav{
 
 .input-wrapper input{
     width:100%;
-    padding:14px 45px;
+    padding:15px 45px;
     border-radius:13px;
     border:1px solid rgba(255,255,255,.14);
     background:rgba(255,255,255,.05);
     color:white;
     outline:none;
+    font-family:'Sunrise Brown','Poppins',sans-serif;
+    font-size:15px;
+}
+
+.input-wrapper input::placeholder{
+    font-family:'Sunrise Brown','Poppins',sans-serif;
 }
 
 .password-eye{
@@ -352,24 +374,27 @@ nav{
 .forgot-password{
     color:#00cfff;
     text-decoration:none;
-    font-size:12px;
+    font-size:13px;
+    font-family:'Sunrise Brown','Poppins',sans-serif;
 }
 
 .auth-submit{
     width:100%;
-    padding:14px;
+    padding:15px;
     border:none;
     border-radius:13px;
     background:#fff;
     color:#000;
     font-weight:700;
     cursor:pointer;
+    font-size:15px;
+    font-family:'Sunrise Brown','Poppins',sans-serif;
 }
 
 .auth-message{
     margin-top:15px;
     text-align:center;
-    font-family:'Poppins',sans-serif;
+    font-family:'Sunrise Brown','Poppins',sans-serif;
     font-size:13px;
     min-height:20px;
 }
@@ -378,28 +403,38 @@ nav{
     display:none;
 }
 
+.otp-stage{display:none;}
+.otp-note{text-align:center;font-size:14px;opacity:.65;margin:0 0 18px;line-height:1.6;}
+.otp-email{color:#00cfff;word-break:break-all;}
+#otp{letter-spacing:8px;text-align:center;font-size:22px;font-weight:700;padding-left:45px;}
+.otp-actions{display:flex;gap:10px;margin-top:12px;}
+.otp-secondary{flex:1;padding:13px;border-radius:13px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);color:#fff;cursor:pointer;font-family:'Sunrise Brown','Poppins',sans-serif;}
+.otp-secondary:disabled{opacity:.5;cursor:not-allowed;}
+
 .account-box{
     display:none;
     text-align:center;
 }
 
 .account-email{
-    font-family:'Poppins',sans-serif;
+    font-family:'Sunrise Brown','Poppins',sans-serif;
     margin-bottom:20px;
-    font-size:14px;
+    font-size:15px;
     color:#ccc;
     word-break:break-all;
 }
 
 .logout-btn{
     width:100%;
-    padding:14px;
+    padding:15px;
     border:none;
     border-radius:13px;
     background:#fff;
     color:#000;
     font-weight:700;
     cursor:pointer;
+    font-size:15px;
+    font-family:'Sunrise Brown','Poppins',sans-serif;
 }
 
 footer{
@@ -428,6 +463,11 @@ footer{
         min-width:100%;
         max-width:420px;
     }
+
+    .auth-box{
+        width:min(650px,92%);
+        padding:35px;
+    }
 }
 
 @media(max-width:600px){
@@ -452,6 +492,11 @@ footer{
     .about-btn{
         font-size:11px;
         padding:7px 10px;
+    }
+
+    .auth-box{
+        width:92%;
+        padding:28px 22px;
     }
 }
 
@@ -520,9 +565,6 @@ footer{
 
 </main>
 
-
-<!-- AUTH POPUP -->
-
 <div class="auth-overlay" id="authOverlay">
 
 <div class="auth-box">
@@ -535,149 +577,41 @@ footer{
         XENARO
     </h2>
 
-
-    <!-- LOGIN / SIGNUP AREA -->
-
     <div id="authArea">
 
-        <p class="auth-subtitle" id="authSubtitle">
-            Welcome back! Login to your account.
-        </p>
-
-        <div class="auth-tabs">
-
-            <button
-            type="button"
-            class="auth-tab active"
-            id="loginTab">
-                Login
-            </button>
-
-            <button
-            type="button"
-            class="auth-tab"
-            id="signupTab">
-                Sign Up
-            </button>
-
-        </div>
-
+        <p class="auth-subtitle" id="authSubtitle">Login or create an account with a secure email OTP.</p>
 
         <form id="authForm">
-
-            <div class="input-group">
-
-                <label>Email Address</label>
-
-                <div class="input-wrapper">
-
-                    <i class="fa-solid fa-envelope input-icon"></i>
-
-                    <input
-                    type="email"
-                    id="email"
-                    placeholder="Enter your email"
-                    required>
-
+            <div id="emailStage">
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-envelope input-icon"></i>
+                        <input type="email" id="email" placeholder="Enter your email" required>
+                    </div>
                 </div>
-
+                <button type="submit" class="auth-submit" id="authSubmit">Send OTP</button>
             </div>
 
-
-            <div class="input-group">
-
-                <label>Password</label>
-
-                <div class="input-wrapper">
-
-                    <i class="fa-solid fa-lock input-icon"></i>
-
-                    <input
-                    type="password"
-                    id="password"
-                    placeholder="Enter your password"
-                    required>
-
-                    <span
-                    class="password-eye"
-                    onclick="togglePassword('password',this)">
-
-                        <i class="fa-solid fa-eye"></i>
-
-                    </span>
-
+            <div class="otp-stage" id="otpStage">
+                <p class="otp-note">We sent a verification code to<br><span class="otp-email" id="otpEmail"></span></p>
+                <div class="input-group">
+                    <label>Verification Code</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-shield-halved input-icon"></i>
+                        <input type="text" id="otp" inputmode="numeric" autocomplete="one-time-code" maxlength="8" placeholder="Enter OTP">
+                    </div>
                 </div>
-
-            </div>
-
-
-            <div
-            class="input-group"
-            id="confirmPasswordGroup">
-
-                <label>
-                    Confirm Password
-                </label>
-
-                <div class="input-wrapper">
-
-                    <i class="fa-solid fa-lock input-icon"></i>
-
-                    <input
-                    type="password"
-                    id="confirmPassword"
-                    placeholder="Confirm your password">
-
-                    <span
-                    class="password-eye"
-                    onclick="togglePassword('confirmPassword',this)">
-
-                        <i class="fa-solid fa-eye"></i>
-
-                    </span>
-
+                <button type="button" class="auth-submit" id="verifyOtpButton">Verify & Continue</button>
+                <div class="otp-actions">
+                    <button type="button" class="otp-secondary" id="changeEmailButton">Change Email</button>
+                    <button type="button" class="otp-secondary" id="resendOtpButton" disabled>Resend in 60s</button>
                 </div>
-
             </div>
 
-
-            <div
-            class="auth-options"
-            id="forgotContainer">
-
-                <a
-                href="#"
-                class="forgot-password"
-                id="forgotPassword">
-
-                    Forgot Password?
-
-                </a>
-
-            </div>
-
-
-            <button
-            type="submit"
-            class="auth-submit"
-            id="authSubmit">
-
-                Login
-
-            </button>
-
-
-            <div
-            class="auth-message"
-            id="authMessage">
-            </div>
-
+            <div class="auth-message" id="authMessage"></div>
         </form>
-
     </div>
-
-
-    <!-- LOGGED IN ACCOUNT AREA -->
 
     <div
     class="account-box"
@@ -706,7 +640,6 @@ footer{
 
 </div>
 
-
 <footer>
 
     <div>XENARO</div>
@@ -717,16 +650,9 @@ footer{
 
 </footer>
 
-
-<!-- SUPABASE -->
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-
-/* =========================
-   SUPABASE CONNECTION
-========================= */
 
 const SUPABASE_URL =
 "https://bvmcuoiprayzeksljnyo.supabase.co";
@@ -734,814 +660,118 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 "sb_publishable_RlXQ4_mUAhiKxuTsxGLU-Q_ILaQT_8C";
 
-
 const supabaseClient =
 supabase.createClient(
     SUPABASE_URL,
     SUPABASE_KEY
 );
 
-
-/* =========================
-   LOADER
-========================= */
-
 window.addEventListener("load",()=>{
-
     setTimeout(()=>{
-
-        const loadingScreen =
-        document.getElementById(
-            "loadingScreen"
-        );
-
+        const loadingScreen=document.getElementById("loadingScreen");
         if(loadingScreen){
-
-            loadingScreen.classList.add(
-                "fade-out"
-            );
-
-            setTimeout(()=>{
-
-                loadingScreen.remove();
-
-            },1000);
-
+            loadingScreen.classList.add("fade-out");
+            setTimeout(()=>loadingScreen.remove(),1000);
         }
-
     },1200);
-
 });
 
-
-/* =========================
-   AUTH VARIABLES
-========================= */
-
-const openAuth =
-document.getElementById(
-    "openAuth"
-);
-
-const closeAuth =
-document.getElementById(
-    "closeAuth"
-);
-
-const authOverlay =
-document.getElementById(
-    "authOverlay"
-);
-
-const loginTab =
-document.getElementById(
-    "loginTab"
-);
-
-const signupTab =
-document.getElementById(
-    "signupTab"
-);
-
-const authForm =
-document.getElementById(
-    "authForm"
-);
-
-const authSubmit =
-document.getElementById(
-    "authSubmit"
-);
-
-const authMessage =
-document.getElementById(
-    "authMessage"
-);
-
-const confirmPasswordGroup =
-document.getElementById(
-    "confirmPasswordGroup"
-);
-
-const confirmPassword =
-document.getElementById(
-    "confirmPassword"
-);
-
-const forgotContainer =
-document.getElementById(
-    "forgotContainer"
-);
-
-const authSubtitle =
-document.getElementById(
-    "authSubtitle"
-);
-
-const loginButtonText =
-document.getElementById(
-    "loginButtonText"
-);
-
-const authArea =
-document.getElementById(
-    "authArea"
-);
-
-const accountArea =
-document.getElementById(
-    "accountArea"
-);
-
-const accountEmail =
-document.getElementById(
-    "accountEmail"
-);
-
-const logoutButton =
-document.getElementById(
-    "logoutButton"
-);
-
-
-/* =========================
-   OPEN / CLOSE POPUP
-========================= */
-
-openAuth.addEventListener(
-"click",
-()=>{
-
-    authOverlay.classList.add(
-        "active"
-    );
-
-});
-
-
-closeAuth.addEventListener(
-"click",
-()=>{
-
-    authOverlay.classList.remove(
-        "active"
-    );
-
-});
-
-
-authOverlay.addEventListener(
-"click",
-(event)=>{
-
-    if(event.target === authOverlay){
-
-        authOverlay.classList.remove(
-            "active"
-        );
-
-    }
-
-});
-
-
-document.addEventListener(
-"keydown",
-(event)=>{
-
-    if(event.key === "Escape"){
-
-        authOverlay.classList.remove(
-            "active"
-        );
-
-    }
-
-});
-
-
-/* =========================
-   LOGIN TAB
-========================= */
-
-loginTab.addEventListener(
-"click",
-()=>{
-
-    loginTab.classList.add(
-        "active"
-    );
-
-    signupTab.classList.remove(
-        "active"
-    );
-
-    confirmPasswordGroup.style.display =
-        "none";
-
-    confirmPassword.required =
-        false;
-
-    forgotContainer.style.display =
-        "flex";
-
-    authSubmit.textContent =
-        "Login";
-
-    authSubtitle.textContent =
-        "Welcome back! Login to your account.";
-
-    authMessage.textContent =
-        "";
-
-});
-
-
-/* =========================
-   SIGNUP TAB
-========================= */
-
-signupTab.addEventListener(
-"click",
-()=>{
-
-    signupTab.classList.add(
-        "active"
-    );
-
-    loginTab.classList.remove(
-        "active"
-    );
-
-    confirmPasswordGroup.style.display =
-        "block";
-
-    confirmPassword.required =
-        true;
-
-    forgotContainer.style.display =
-        "none";
-
-    authSubmit.textContent =
-        "Create Account";
-
-    authSubtitle.textContent =
-        "Create your Xenaro account.";
-
-    authMessage.textContent =
-        "";
-
-});
-
-
-/* =========================
-   SHOW PASSWORD
-========================= */
-
-function togglePassword(
-    inputId,
-    element
-){
-
-    const input =
-    document.getElementById(
-        inputId
-    );
-
-    const icon =
-    element.querySelector(
-        "i"
-    );
-
-
-    if(input.type === "password"){
-
-        input.type =
-            "text";
-
-        icon.classList.remove(
-            "fa-eye"
-        );
-
-        icon.classList.add(
-            "fa-eye-slash"
-        );
-
-    }
-
-    else{
-
-        input.type =
-            "password";
-
-        icon.classList.remove(
-            "fa-eye-slash"
-        );
-
-        icon.classList.add(
-            "fa-eye"
-        );
-
-    }
-
+const openAuth=document.getElementById("openAuth");
+const closeAuth=document.getElementById("closeAuth");
+const authOverlay=document.getElementById("authOverlay");
+const authForm=document.getElementById("authForm");
+const authSubmit=document.getElementById("authSubmit");
+const authMessage=document.getElementById("authMessage");
+const authArea=document.getElementById("authArea");
+const accountArea=document.getElementById("accountArea");
+const accountEmail=document.getElementById("accountEmail");
+const logoutButton=document.getElementById("logoutButton");
+const loginButtonText=document.getElementById("loginButtonText");
+const emailStage=document.getElementById("emailStage");
+const otpStage=document.getElementById("otpStage");
+const otpEmail=document.getElementById("otpEmail");
+const otpInput=document.getElementById("otp");
+const verifyOtpButton=document.getElementById("verifyOtpButton");
+const resendOtpButton=document.getElementById("resendOtpButton");
+const changeEmailButton=document.getElementById("changeEmailButton");
+let pendingEmail="";
+let resendTimer=null;
+
+openAuth.addEventListener("click",()=>authOverlay.classList.add("active"));
+closeAuth.addEventListener("click",()=>authOverlay.classList.remove("active"));
+authOverlay.addEventListener("click",e=>{if(e.target===authOverlay)authOverlay.classList.remove("active");});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")authOverlay.classList.remove("active");});
+
+function setMessage(text,color="#aaa"){authMessage.style.color=color;authMessage.textContent=text;}
+function startResendTimer(){
+    clearInterval(resendTimer);
+    let left=60; resendOtpButton.disabled=true; resendOtpButton.textContent=`Resend in ${left}s`;
+    resendTimer=setInterval(()=>{
+        left--; resendOtpButton.textContent=left>0?`Resend in ${left}s`:"Resend OTP";
+        if(left<=0){clearInterval(resendTimer);resendOtpButton.disabled=false;}
+    },1000);
+}
+async function sendOtp(email){
+    const {error}=await supabaseClient.auth.signInWithOtp({email,options:{shouldCreateUser:true}});
+    if(error) throw error;
+    pendingEmail=email; otpEmail.textContent=email; emailStage.style.display="none"; otpStage.style.display="block";
+    otpInput.value=""; otpInput.focus(); startResendTimer();
 }
 
+authForm.addEventListener("submit",async e=>{
+    e.preventDefault();
+    const email=document.getElementById("email").value.trim();
+    if(!email)return;
+    authSubmit.disabled=true; authSubmit.textContent="Sending OTP..."; setMessage("Sending verification code...");
+    try{await sendOtp(email);setMessage("OTP sent. Check your email.","#70ff9c");}
+    catch(err){setMessage(err.message||"Could not send OTP.","#ff7070");}
+    finally{authSubmit.disabled=false;authSubmit.textContent="Send OTP";}
+});
 
-/* =========================
-   SIGNUP + LOGIN
-========================= */
-
-authForm.addEventListener(
-"submit",
-async(event)=>{
-
-    event.preventDefault();
-
-
-    authMessage.textContent =
-        "";
-
-
-    const email =
-    document.getElementById(
-        "email"
-    ).value.trim();
-
-
-    const password =
-    document.getElementById(
-        "password"
-    ).value;
-
-
-    const isSignup =
-    signupTab.classList.contains(
-        "active"
-    );
-
-
-    authSubmit.disabled =
-        true;
-
-
-    if(isSignup){
-
-        authSubmit.textContent =
-            "Creating Account...";
-
-    }
-
-    else{
-
-        authSubmit.textContent =
-            "Logging In...";
-
-    }
-
-
+verifyOtpButton.addEventListener("click",async()=>{
+    const token=otpInput.value.trim();
+    if(!pendingEmail||!token){setMessage("Enter the OTP from your email.","#ff7070");return;}
+    verifyOtpButton.disabled=true; verifyOtpButton.textContent="Verifying..."; setMessage("Verifying code...");
     try{
-
-
-        /* =====================
-           SIGN UP
-        ===================== */
-
-        if(isSignup){
-
-            const confirm =
-            confirmPassword.value;
-
-
-            if(password.length < 6){
-
-                authMessage.style.color =
-                    "#ff7070";
-
-                authMessage.textContent =
-                    "Password must be at least 6 characters.";
-
-                return;
-
-            }
-
-
-            if(password !== confirm){
-
-                authMessage.style.color =
-                    "#ff7070";
-
-                authMessage.textContent =
-                    "Passwords do not match.";
-
-                return;
-
-            }
-
-
-            const {
-                data,
-                error
-            } =
-            await supabaseClient.auth.signUp({
-
-                email:email,
-
-                password:password
-
-            });
-
-
-            if(error){
-
-                authMessage.style.color =
-                    "#ff7070";
-
-                authMessage.textContent =
-                    error.message;
-
-                return;
-
-            }
-
-
-            authMessage.style.color =
-                "#70ff9c";
-
-
-            if(
-                data.user &&
-                !data.session
-            ){
-
-                authMessage.textContent =
-                "Account created! Check your email to verify your account.";
-
-            }
-
-            else{
-
-                authMessage.textContent =
-                    "Account created successfully.";
-
-            }
-
-
-            document.getElementById(
-                "password"
-            ).value =
-                "";
-
-            confirmPassword.value =
-                "";
-
-        }
-
-
-        /* =====================
-           LOGIN
-        ===================== */
-
-        else{
-
-            const {
-                data,
-                error
-            } =
-            await supabaseClient.auth
-            .signInWithPassword({
-
-                email:email,
-
-                password:password
-
-            });
-
-
-            if(error){
-
-                authMessage.style.color =
-                    "#ff7070";
-
-                authMessage.textContent =
-                    error.message;
-
-                return;
-
-            }
-
-
-            authMessage.style.color =
-                "#70ff9c";
-
-            authMessage.textContent =
-                "Logged in successfully!";
-
-
-            updateAccountUI(
-                data.user
-            );
-
-
-            setTimeout(()=>{
-
-                authOverlay.classList.remove(
-                    "active"
-                );
-
-            },600);
-
-        }
-
-    }
-
-    catch(error){
-
-        console.error(
-            error
-        );
-
-        authMessage.style.color =
-            "#ff7070";
-
-        authMessage.textContent =
-            "Something went wrong.";
-
-    }
-
-    finally{
-
-        authSubmit.disabled =
-            false;
-
-
-        if(
-        signupTab.classList.contains(
-            "active"
-        )
-        ){
-
-            authSubmit.textContent =
-                "Create Account";
-
-        }
-
-        else{
-
-            authSubmit.textContent =
-                "Login";
-
-        }
-
-    }
-
+        const {data,error}=await supabaseClient.auth.verifyOtp({email:pendingEmail,token,type:"email"});
+        if(error)throw error;
+        setMessage("Verified successfully!","#70ff9c"); updateAccountUI(data.user);
+        setTimeout(()=>authOverlay.classList.remove("active"),600);
+    }catch(err){setMessage(err.message||"Invalid or expired OTP.","#ff7070");}
+    finally{verifyOtpButton.disabled=false;verifyOtpButton.textContent="Verify & Continue";}
 });
 
-
-/* =========================
-   FORGOT PASSWORD
-========================= */
-
-document.getElementById(
-    "forgotPassword"
-)
-.addEventListener(
-"click",
-async(event)=>{
-
-    event.preventDefault();
-
-
-    const email =
-    document.getElementById(
-        "email"
-    ).value.trim();
-
-
-    if(!email){
-
-        authMessage.style.color =
-            "#ff7070";
-
-        authMessage.textContent =
-            "Enter your email address first.";
-
-        return;
-
-    }
-
-
-    authMessage.style.color =
-        "#aaa";
-
-    authMessage.textContent =
-        "Sending password reset email...";
-
-
-    const {
-        error
-    } =
-    await supabaseClient.auth
-    .resetPasswordForEmail(
-
-        email,
-
-        {
-
-            redirectTo:
-            window.location.origin +
-            "/reset-password/"
-
-        }
-
-    );
-
-
-    if(error){
-
-        authMessage.style.color =
-            "#ff7070";
-
-        authMessage.textContent =
-            error.message;
-
-        return;
-
-    }
-
-
-    authMessage.style.color =
-        "#70ff9c";
-
-    authMessage.textContent =
-        "Password reset email sent!";
-
+otpInput.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();verifyOtpButton.click();}});
+resendOtpButton.addEventListener("click",async()=>{
+    if(!pendingEmail)return; resendOtpButton.disabled=true; setMessage("Sending a new OTP...");
+    try{await sendOtp(pendingEmail);setMessage("New OTP sent.","#70ff9c");}
+    catch(err){setMessage(err.message||"Could not resend OTP.","#ff7070");resendOtpButton.disabled=false;}
 });
-
-
-/* =========================
-   UPDATE ACCOUNT UI
-========================= */
+changeEmailButton.addEventListener("click",()=>{
+    clearInterval(resendTimer); pendingEmail=""; otpStage.style.display="none"; emailStage.style.display="block"; setMessage("");
+});
 
 function updateAccountUI(user){
-
-    if(user){
-
-        loginButtonText.textContent =
-            "My Account";
-
-        authArea.style.display =
-            "none";
-
-        accountArea.style.display =
-            "block";
-
-        accountEmail.textContent =
-            user.email;
-
-    }
-
-    else{
-
-        loginButtonText.textContent =
-            "Login / Sign Up";
-
-        authArea.style.display =
-            "block";
-
-        accountArea.style.display =
-            "none";
-
-        accountEmail.textContent =
-            "";
-
-    }
-
+    if(user){loginButtonText.textContent="My Account";authArea.style.display="none";accountArea.style.display="block";accountEmail.textContent=user.email;}
+    else{loginButtonText.textContent="Login / Sign Up";authArea.style.display="block";accountArea.style.display="none";accountEmail.textContent="";emailStage.style.display="block";otpStage.style.display="none";}
 }
-
-
-/* =========================
-   CHECK LOGIN ON PAGE LOAD
-========================= */
-
-async function checkLogin(){
-
-    const {
-        data:{
-            session
-        }
-    } =
-    await supabaseClient.auth
-    .getSession();
-
-
-    if(session){
-
-        updateAccountUI(
-            session.user
-        );
-
-    }
-
-    else{
-
-        updateAccountUI(
-            null
-        );
-
-    }
-
-}
-
-
+async function checkLogin(){const {data:{session}}=await supabaseClient.auth.getSession();updateAccountUI(session?session.user:null);}
 checkLogin();
-
-
-/* =========================
-   AUTH STATE CHANGE
-========================= */
-
-supabaseClient.auth
-.onAuthStateChange(
-(event,session)=>{
-
-    if(session){
-
-        updateAccountUI(
-            session.user
-        );
-
-    }
-
-    else{
-
-        updateAccountUI(
-            null
-        );
-
-    }
-
+supabaseClient.auth.onAuthStateChange((event,session)=>updateAccountUI(session?session.user:null));
+logoutButton.addEventListener("click",async()=>{
+    const {error}=await supabaseClient.auth.signOut(); if(error){alert(error.message);return;} updateAccountUI(null);authOverlay.classList.remove("active");
 });
-
-
-/* =========================
-   LOGOUT
-========================= */
-
-logoutButton.addEventListener(
-"click",
-async()=>{
-
-    const {
-        error
-    } =
-    await supabaseClient.auth
-    .signOut();
-
-
-    if(error){
-
-        alert(
-            error.message
-        );
-
-        return;
-
-    }
-
-
-    updateAccountUI(
-        null
-    );
-
-
-    authOverlay.classList.remove(
-        "active"
-    );
-
-});
-
-
-/* =========================
-   PARTICLES
-========================= */
 
 const particleContainer =
-document.getElementById(
-    "particles"
-);
-
+document.getElementById("particles");
 
 function createParticle(){
 
     const p =
-    document.createElement(
-        "span"
-    );
-
+    document.createElement("span");
 
     const size =
     Math.random()*6+2;
-
 
     p.style.position =
         "absolute";
@@ -1570,19 +800,15 @@ function createParticle(){
     p.style.boxShadow =
         "0 0 20px rgba(255,255,255,.6)";
 
-
     particleContainer.appendChild(
         p
     );
 
-
     const speed =
     Math.random()*5+6;
 
-
     let y =
         110;
-
 
     const move =
     setInterval(()=>{
@@ -1592,12 +818,9 @@ function createParticle(){
         p.style.top =
             y+"vh";
 
-
         if(y < -10){
 
-            clearInterval(
-                move
-            );
+            clearInterval(move);
 
             p.remove();
 
@@ -1606,7 +829,6 @@ function createParticle(){
     },speed);
 
 }
-
 
 setInterval(
     createParticle,
