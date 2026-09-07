@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2510718785366541"
-     crossorigin="anonymous"></script>
 <link rel="icon" type="image/png" href="favicon.png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -158,14 +156,6 @@ nav{
 }
 
 
-.top-ad-wrap{
-    width:min(960px,calc(100% - 80px));
-    margin:28px auto 0;
-}
-.top-ad-wrap .ad-slot{
-    min-height:120px;
-}
-
 /* Original-style hero: WSP left, XENARO.69 right */
 .hero-section{
     width:100%;
@@ -273,45 +263,6 @@ nav{
     text-transform:uppercase;
     color:rgba(255,255,255,.42);
     margin-bottom:14px;
-}
-
-/* AdSense placeholders */
-.ad-slot{
-    width:100%;
-    min-height:190px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:0;
-    border:0;
-    border-radius:0;
-    background:transparent;
-    box-shadow:none;
-    color:rgba(255,255,255,.38);
-    font-size:15px;
-    letter-spacing:1.6px;
-    text-transform:uppercase;
-}
-
-.ad-slot.large{ min-height:220px; }
-
-.ad-slot .adsbygoogle{
-    display:block !important;
-    width:100% !important;
-    max-width:100%;
-    min-height:inherit;
-    border:0 !important;
-    background:transparent !important;
-}
-
-.ad-slot .adsbygoogle[data-ad-status="unfilled"]{
-    display:none !important;
-}
-
-.ad-slot iframe{
-    max-width:100% !important;
-    border:0 !important;
 }
 
 /* Action buttons below first ad */
@@ -442,14 +393,7 @@ footer h2{
 }
 
 @media(max-width:900px){
-    .top-ad-wrap{
-        width:calc(100% - 40px);
-        margin-top:20px;
-    }
-    .top-ad-wrap .ad-slot{
-        min-height:100px;
-    }
-    header{ height:56px; }
+header{ height:56px; }
     nav{ padding:0 18px; }
     .logo{ font-size:19px; }
     .nav-buttons{ gap:8px; }
@@ -493,14 +437,7 @@ footer h2{
     }
 
     .content-block{ margin-bottom:34px; }
-
-    .ad-slot,
-    .ad-slot.large{
-        min-height:220px;
-        border-radius:20px;
-    }
-
-    .action-grid{
+.action-grid{
         grid-template-columns:repeat(2,minmax(0,1fr));
         gap:16px;
     }
@@ -572,27 +509,7 @@ footer h2{
 </header>
 
 <main class="page">
-
-    <!-- TOP ADVERTISEMENT -->
-    <section class="top-ad-wrap">
-        <div class="section-eyebrow">Advertisement</div>
-        <div class="ad-slot">
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2510718785366541"
-     crossorigin="anonymous"></script>
-<!-- Top Ads -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2510718785366541"
-     data-ad-slot="6714421422"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-        </div>
-    </section>
-
-    <!-- ORIGINAL-STYLE TOP HERO -->
+<!-- ORIGINAL-STYLE TOP HERO -->
     <section class="hero-section" id="home">
         <div class="hero-left">
             <h2>Wsp Homies!!!</h2>
@@ -629,26 +546,7 @@ footer h2{
 
     <!-- SCROLLING CONTENT -->
     <div class="content-flow">
-
-        
-
-        <section class="content-block">
-            <div class="section-eyebrow">Advertisement</div>
-            <div class="ad-slot">
-                <!-- Middle Ad -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2510718785366541"
-     data-ad-slot="2731883738"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-            </div>
-        </section>
-
-        <section class="content-block">
+<section class="content-block">
             <div class="action-grid">
                 <a class="action-btn" href="resources/">
                     <div class="action-copy">
@@ -667,24 +565,7 @@ footer h2{
                 </a>
             </div>
         </section>
-
-        <section class="content-block">
-            <div class="section-eyebrow">Advertisement</div>
-            <div class="ad-slot">
-                <!-- Bottom ads -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2510718785366541"
-     data-ad-slot="9779568462"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-            </div>
-        </section>
-
-        <section class="social-section" id="socials">
+<section class="social-section" id="socials">
             <div class="social-links">
                 <a href="https://www.youtube.com/@xenaro.69" target="_blank" rel="noopener" class="social-link" data-label="YOUTUBE CHANNEL">
                     <i class="fa-brands fa-youtube"></i><span>YouTube</span>
