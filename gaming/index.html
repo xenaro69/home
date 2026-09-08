@@ -54,7 +54,8 @@ body{
     z-index:0;
 }
 
-/* Loader */
+
+/* Simple white circle loading screen */
 #loadingScreen{
     position:fixed;
     inset:0;
@@ -64,27 +65,27 @@ body{
     align-items:center;
     justify-content:center;
     opacity:1;
-    transition:opacity 1s ease-out;
+    visibility:visible;
+    transition:opacity .45s ease, visibility .45s ease;
 }
 
 #loadingScreen.fade-out{
     opacity:0;
+    visibility:hidden;
     pointer-events:none;
 }
 
-.loader-logo{
-    font-size:clamp(32px,5vw,48px);
-    font-weight:800;
-    letter-spacing:10px;
-    color:#00cfff;
-    animation:pulse 1.2s infinite;
-    text-shadow:0 0 12px #00cfff;
+.simple-loader{
+    width:52px;
+    height:52px;
+    border:4px solid rgba(255,255,255,.18);
+    border-top-color:#fff;
+    border-radius:50%;
+    animation:simpleLoaderSpin .75s linear infinite;
 }
 
-@keyframes pulse{
-    0%{ transform:scale(1); }
-    50%{ transform:scale(1.1); text-shadow:0 0 20px #00cfff,0 0 50px #00cfff; }
-    100%{ transform:scale(1); }
+@keyframes simpleLoaderSpin{
+    to{ transform:rotate(360deg); }
 }
 
 /* Header */
@@ -497,9 +498,7 @@ header{ height:56px; }
 </head>
 
 <body>
-<div id="loadingScreen">
-    <div class="loader-logo">XENARO</div>
-</div>
+<div id="loadingScreen"><div class="simple-loader"></div></div>
 
 <div id="particles"></div>
 
@@ -604,7 +603,7 @@ window.addEventListener("load", () => {
             loadingScreen.classList.add("fade-out");
             setTimeout(() => loadingScreen.remove(), 1000);
         }
-    }, 1200);
+    }, 900);
 });
 
 const header = document.querySelector("header");
