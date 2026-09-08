@@ -40,7 +40,7 @@
 .back-btn{
     position:fixed;
     top:11px;
-    right:24px;
+    left:24px;
     z-index:600;
     background:#ffffff;
     border:1px solid rgba(255,255,255,.15);
@@ -60,7 +60,7 @@
 
 .back-btn:hover{
     background:#e6e6e6;
-    transform:translateX(3px);
+    transform:translateX(-3px);
 }
 
 .credits-btn{
@@ -120,12 +120,17 @@ nav{
     max-width:1680px;
     margin:auto;
     display:flex;
-    justify-content:space-between;
+    justify-content:center;
     align-items:center;
     padding:0 clamp(24px,4vw,64px);
+    position:relative;
 }
 
 .logo{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
     font-size:22px;
     font-weight:800;
     letter-spacing:2px;
@@ -868,21 +873,6 @@ footer h2{
     </div>
 </div>
 
-<div class="action-buttons">
-    <button class="action-btn" onclick="openPasswordModal()">
-        More of Me
-        <div class="btn-tooltip">KNOW MORE ABOUT ME</div>
-    </button>
-    <button class="action-btn github-btn">
-        Github Page
-        <div class="btn-tooltip">SOURCE CODE OF THIS WEBSITE</div>
-    </button>
-    <button class="action-btn" onclick="openDevicesModal()">
-        My Devices
-        <div class="btn-tooltip">DEVICES I USE</div>
-    </button>
-</div>
-
 <div id="passwordModal" class="modal-overlay">
     <div class="modal-box">
         <button class="modal-close-btn" onclick="closePasswordModal()">&times;</button>
@@ -1120,10 +1110,6 @@ document.addEventListener('keydown', (e)=>{
     }
 });
 
-// GitHub button - link to GitHub
-document.querySelector('.github-btn').addEventListener('click', ()=>{
-    window.open('https://github.com/xenaro69', '_blank');
-});
 
 const isTouchDevice = () => {
     return (('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0));
