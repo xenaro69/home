@@ -202,7 +202,7 @@ nav{
 .edit-description{
     min-height:44px;
     font-family:'Poppins',sans-serif;
-    font-size:13px;
+    font-size:19px;
     line-height:1.6;
     color:rgba(255,255,255,.58);
     margin-bottom:18px;
@@ -287,8 +287,8 @@ footer h2{ font-size:18px; margin-bottom:4px; color:#f5f5f5; }
     left:50%;
     top:50%;
     transform:translate(-50%,-50%) scale(.96);
-    width:min(400px,calc(100vw - 32px));
-    padding:22px 24px 20px;
+    width:min(600px,calc(100vw - 32px));
+    padding:33px 36px 30px;
     border-radius:14px;
     z-index:100000;
     opacity:0;
@@ -315,10 +315,10 @@ footer h2{ font-size:18px; margin-bottom:4px; color:#f5f5f5; }
 }
 
 .status-title{
-    font-size:19px;
+    font-size:28px;
     line-height:1.3;
     font-weight:800;
-    margin-bottom:7px;
+    margin-bottom:11px;
 }
 
 .status-box.success .status-title{
@@ -339,17 +339,17 @@ footer h2{ font-size:18px; margin-bottom:4px; color:#f5f5f5; }
     font-size:13px;
     line-height:1.6;
     color:rgba(255,255,255,.72);
-    margin-bottom:17px;
+    margin-bottom:25px;
 }
 
 .status-close{
     border:1px solid rgba(255,255,255,.78);
     border-radius:9px;
-    padding:8px 17px;
+    padding:12px 25px;
     background:#0d0d0d;
     color:#fff;
     font-family:'Poppins',sans-serif;
-    font-size:12px;
+    font-size:17px;
     font-weight:700;
     cursor:pointer;
     transition:.2s ease;
@@ -379,10 +379,16 @@ footer h2{ font-size:18px; margin-bottom:4px; color:#f5f5f5; }
 @media(max-width:620px){
     .status-box{
         width:calc(100vw - 30px);
-        padding:20px;
+        padding:28px 24px;
         border-radius:13px;
     }
 }
+
+/* Force the Xenaro website font onto every visible element */
+html, body, body *, button, input, textarea, select, option, a, p, span, div, h1, h2, h3, h4, h5, h6{
+    font-family:'Sunrise Brown','Poppins',sans-serif !important;
+}
+
 </style>
 </head>
 <body>
@@ -631,7 +637,7 @@ trialBuyBtn?.addEventListener("click", async () => {
     const session = await getSession();
 
     if(!session){
-        showStatusBox("error", "Login required", "Please log in to your account before purchasing this project.");
+        showStatusBox("error", "Login required", "Please log in to your Xenaro account before purchasing this project.");
         return;
     }
 
