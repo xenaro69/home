@@ -73,38 +73,12 @@ body{
     to{ transform:rotate(360deg); }
 }
 
-/* White cursor-follow glow */
-#cursorGlow{
-    position:fixed;
-    left:0;
-    top:0;
-    width:180px;
-    height:180px;
-    border-radius:50%;
-    pointer-events:none;
-    z-index:1;
-    opacity:0;
-    transform:translate(-50%,-50%);
-    background:radial-gradient(
-        circle,
-        rgba(255,255,255,.16) 0%,
-        rgba(255,255,255,.09) 28%,
-        rgba(255,255,255,.035) 50%,
-        transparent 72%
-    );
-    filter:blur(5px);
-    transition:opacity .2s ease;
-    will-change:left,top;
-}
 
-body:hover #cursorGlow{
-    opacity:1;
-}
 
-@media (hover:none), (pointer:coarse){
-    #cursorGlow{ display:none; }
+/* Custom white cursor with black outline */
+html, body, a, button, input, textarea, select, label, video {
+    cursor:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%2032%2032%22%3E%0A%3Cpath%20d%3D%22M5%203%20L7%2026%20L13%2018%20L18%2028%20L22%2026%20L17%2016%20L27%2015%20Z%22%0Afill%3D%22white%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linejoin%3D%22round%22%2F%3E%0A%3C%2Fsvg%3E") 5 3, auto;
 }
-
 
 header{
     position:fixed;
@@ -458,7 +432,6 @@ i.fa-brands,
 </div>
 <div id="loadingScreen"><div class="simple-loader"></div></div>
 <div id="particles"></div>
-<div id="cursorGlow"></div>
 
 <header>
     <nav>
@@ -554,33 +527,6 @@ i.fa-brands,
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-
-/* Smooth white glow that follows the cursor */
-const cursorGlow = document.getElementById("cursorGlow");
-
-if(cursorGlow && window.matchMedia("(pointer:fine)").matches){
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-    let glowX = mouseX;
-    let glowY = mouseY;
-
-    window.addEventListener("mousemove", (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-    });
-
-    function animateCursorGlow(){
-        glowX += (mouseX - glowX) * 0.16;
-        glowY += (mouseY - glowY) * 0.16;
-
-        cursorGlow.style.left = glowX + "px";
-        cursorGlow.style.top = glowY + "px";
-
-        requestAnimationFrame(animateCursorGlow);
-    }
-
-    animateCursorGlow();
-}
 
 
 function showStatusBox(type, title, message){
@@ -868,4 +814,4 @@ refreshTrialPurchaseState();
 
 </script>
 </body>
-</html>a
+</html>
