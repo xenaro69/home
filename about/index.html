@@ -65,7 +65,7 @@
 
 .credits-btn{
     position:fixed;
-    bottom:80px;
+    top:11px;
     right:24px;
     z-index:600;
     background:#ffffff;
@@ -86,7 +86,8 @@
 
 .credits-btn:hover{
     background:#e6e6e6;
-    transform:translateX(-3px);
+    transform:translateY(-2px);
+    box-shadow:0 0 20px rgba(255,255,255,.35);
 }
 
 html, body{
@@ -195,7 +196,6 @@ nav{
 
 .profile-card{
     position:relative;
-    order:-1;
     width:640px;
     min-width:640px;
     height:auto;
@@ -537,6 +537,33 @@ nav{
 
 .password-error.show{
     display:block;
+}
+
+
+.credits-box{
+    max-width:340px;
+    width:calc(100% - 40px);
+    padding:28px 26px;
+    background:#000;
+    border:1px solid rgba(255,255,255,.95);
+    border-radius:14px;
+    box-shadow:
+        0 0 10px rgba(255,255,255,.45),
+        0 0 26px rgba(255,255,255,.18),
+        0 18px 50px rgba(0,0,0,.7);
+    text-align:center;
+}
+
+.credits-box p{
+    font-size:16px;
+    line-height:1.65;
+    color:#f5f5f5;
+    margin:0;
+}
+
+.credits-box strong{
+    color:#fff;
+    text-shadow:0 0 10px rgba(255,255,255,.55);
 }
 
 .devices-box{
@@ -938,9 +965,9 @@ footer h2{
 </div>
 
 <div id="creditsModal" class="modal-overlay">
-    <div class="modal-box">
+    <div class="modal-box credits-box">
         <button class="modal-close-btn" onclick="closeCreditsModal()">&times;</button>
-        <p>Special thanks to Claude and ChatGPT for helping me build this website.</p>
+        <p>Website created with help from <strong>ChatGPT</strong> and <strong>Claude</strong>.</p>
     </div>
 </div>
 
