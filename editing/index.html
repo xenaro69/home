@@ -280,180 +280,153 @@ footer h2{ font-size:18px; margin-bottom:4px; color:#f5f5f5; }
 }
 
 /* =========================
-   XENARO TOAST NOTIFICATIONS
+   XENARO PAYMENT STATUS BOX
 ========================= */
-.toast-container{
+.status-box{
     position:fixed;
-    top:84px;
-    right:24px;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%) scale(.92);
+    width:min(420px,calc(100vw - 32px));
+    padding:24px 24px 22px;
+    border-radius:22px;
     z-index:100000;
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-    width:min(390px,calc(100vw - 32px));
-    pointer-events:none;
-}
-
-.toast{
-    pointer-events:auto;
-    display:grid;
-    grid-template-columns:44px 1fr auto;
-    align-items:center;
-    gap:13px;
-    padding:15px 16px;
-    border-radius:18px;
-    background:rgba(18,18,18,.96);
-    border:1px solid rgba(255,255,255,.12);
-    box-shadow:0 18px 55px rgba(0,0,0,.55);
-    backdrop-filter:blur(20px);
-    transform:translateX(120%);
     opacity:0;
-    transition:transform .35s ease, opacity .35s ease;
-    overflow:hidden;
+    visibility:hidden;
+    transition:.28s ease;
+    backdrop-filter:blur(22px);
+    box-shadow:0 28px 80px rgba(0,0,0,.62);
     font-family:'Poppins',sans-serif;
+    text-align:center;
 }
 
-.toast.show{
-    transform:translateX(0);
+.status-box.show{
     opacity:1;
+    visibility:visible;
+    transform:translate(-50%,-50%) scale(1);
 }
 
-.toast.hide{
-    transform:translateX(120%);
-    opacity:0;
+.status-box.success{
+    background:rgba(12,32,19,.97);
+    border:1px solid rgba(76,220,126,.42);
+    box-shadow:
+        0 28px 80px rgba(0,0,0,.62),
+        0 0 38px rgba(76,220,126,.12);
 }
 
-.toast-icon{
-    width:44px;
-    height:44px;
+.status-box.error{
+    background:rgba(38,14,14,.97);
+    border:1px solid rgba(255,91,91,.42);
+    box-shadow:
+        0 28px 80px rgba(0,0,0,.62),
+        0 0 38px rgba(255,91,91,.12);
+}
+
+.status-icon{
+    width:62px;
+    height:62px;
+    margin:0 auto 16px;
     border-radius:50%;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:19px;
-    flex-shrink:0;
+    font-size:28px;
 }
 
-.toast-copy{
-    min-width:0;
+.status-box.success .status-icon{
+    color:#4cdc7e;
+    background:rgba(76,220,126,.13);
+    border:1px solid rgba(76,220,126,.25);
 }
 
-.toast-title{
-    font-size:14px;
-    font-weight:700;
-    color:#fff;
-    margin-bottom:3px;
+.status-box.error .status-icon{
+    color:#ff5b5b;
+    background:rgba(255,91,91,.13);
+    border:1px solid rgba(255,91,91,.25);
 }
 
-.toast-message{
-    font-size:12px;
-    line-height:1.5;
-    color:rgba(255,255,255,.62);
-    word-break:break-word;
+.status-title{
+    font-size:21px;
+    font-weight:800;
+    margin-bottom:7px;
 }
 
-.toast-close{
-    width:30px;
-    height:30px;
+.status-box.success .status-title{
+    color:#79f09f;
+}
+
+.status-box.error .status-title{
+    color:#ff8383;
+}
+
+.status-message{
+    font-size:13px;
+    line-height:1.65;
+    color:rgba(255,255,255,.68);
+    margin-bottom:18px;
+}
+
+.status-close{
     border:none;
-    border-radius:50%;
-    background:rgba(255,255,255,.06);
-    color:rgba(255,255,255,.65);
+    border-radius:999px;
+    padding:10px 20px;
+    font-family:'Poppins',sans-serif;
+    font-size:13px;
+    font-weight:700;
     cursor:pointer;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    transition:.25s;
 }
 
-.toast-close:hover{
-    background:rgba(255,255,255,.12);
-    color:#fff;
+.status-box.success .status-close{
+    background:#4cdc7e;
+    color:#07170d;
 }
 
-.toast::after{
-    content:"";
-    position:absolute;
-    left:0;
-    bottom:0;
-    height:3px;
-    width:100%;
-    transform-origin:left;
-    animation:toastProgress 4.2s linear forwards;
+.status-box.error .status-close{
+    background:#ff5b5b;
+    color:#210707;
 }
 
-.toast.success{
-    border-color:rgba(68,214,121,.32);
-}
-.toast.success .toast-icon{
-    background:rgba(68,214,121,.14);
-    color:#44d679;
-    box-shadow:0 0 24px rgba(68,214,121,.15);
-}
-.toast.success::after{
-    background:#44d679;
+.status-close:hover{
+    transform:translateY(-2px);
+    filter:brightness(1.05);
 }
 
-.toast.error{
-    border-color:rgba(255,93,93,.34);
-}
-.toast.error .toast-icon{
-    background:rgba(255,93,93,.14);
-    color:#ff5d5d;
-    box-shadow:0 0 24px rgba(255,93,93,.15);
-}
-.toast.error::after{
-    background:#ff5d5d;
-}
-
-.toast.warning{
-    border-color:rgba(255,190,74,.34);
-}
-.toast.warning .toast-icon{
-    background:rgba(255,190,74,.14);
-    color:#ffbe4a;
-}
-.toast.warning::after{
-    background:#ffbe4a;
+.status-backdrop{
+    position:fixed;
+    inset:0;
+    z-index:99999;
+    background:rgba(0,0,0,.38);
+    backdrop-filter:blur(4px);
+    opacity:0;
+    visibility:hidden;
+    transition:.25s;
 }
 
-.toast.info{
-    border-color:rgba(0,207,255,.34);
-}
-.toast.info .toast-icon{
-    background:rgba(0,207,255,.14);
-    color:#00cfff;
-}
-.toast.info::after{
-    background:#00cfff;
-}
-
-@keyframes toastProgress{
-    from{ transform:scaleX(1); }
-    to{ transform:scaleX(0); }
+.status-backdrop.show{
+    opacity:1;
+    visibility:visible;
 }
 
 @media(max-width:620px){
-    .toast-container{
-        top:70px;
-        right:16px;
-        left:16px;
-        width:auto;
-    }
-    .toast{
-        grid-template-columns:40px 1fr auto;
-        padding:13px 14px;
-    }
-    .toast-icon{
-        width:40px;
-        height:40px;
-        font-size:17px;
+    .status-box{
+        width:calc(100vw - 28px);
+        padding:22px 18px 20px;
     }
 }
 
 </style>
 </head>
 <body>
-<div class="toast-container" id="toastContainer"></div>
+<div class="status-backdrop" id="statusBackdrop"></div>
+<div class="status-box success" id="statusBox">
+    <div class="status-icon" id="statusIcon">
+        <i class="fa-solid fa-check"></i>
+    </div>
+    <div class="status-title" id="statusTitle">Payment successful</div>
+    <div class="status-message" id="statusMessage">Your file is ready to download.</div>
+    <button class="status-close" id="statusClose" type="button">Done</button>
+</div>
 <div id="loadingScreen"><div class="loader-logo">XENARO</div></div>
 <div id="particles"></div>
 
@@ -552,57 +525,34 @@ footer h2{ font-size:18px; margin-bottom:4px; color:#f5f5f5; }
 
 <script>
 
-function showToast(type, title, message, duration = 4200){
-    const container = document.getElementById("toastContainer");
-    if(!container) return;
+function showStatusBox(type, title, message){
+    const box = document.getElementById("statusBox");
+    const backdrop = document.getElementById("statusBackdrop");
+    const icon = document.getElementById("statusIcon");
+    const titleEl = document.getElementById("statusTitle");
+    const messageEl = document.getElementById("statusMessage");
 
-    const icons = {
-        success: "fa-solid fa-check",
-        error: "fa-solid fa-xmark",
-        warning: "fa-solid fa-triangle-exclamation",
-        info: "fa-solid fa-circle-info"
-    };
+    box.classList.remove("success","error");
+    box.classList.add(type === "success" ? "success" : "error");
 
-    const toast = document.createElement("div");
-    toast.className = `toast ${type}`;
+    icon.innerHTML = type === "success"
+        ? '<i class="fa-solid fa-check"></i>'
+        : '<i class="fa-solid fa-xmark"></i>';
 
-    toast.innerHTML = `
-        <div class="toast-icon">
-            <i class="${icons[type] || icons.info}"></i>
-        </div>
+    titleEl.textContent = title;
+    messageEl.textContent = message;
 
-        <div class="toast-copy">
-            <div class="toast-title">${title}</div>
-            <div class="toast-message">${message}</div>
-        </div>
-
-        <button class="toast-close" type="button" aria-label="Close notification">
-            <i class="fa-solid fa-xmark"></i>
-        </button>
-    `;
-
-    container.appendChild(toast);
-
-    requestAnimationFrame(() => {
-        toast.classList.add("show");
-    });
-
-    const removeToast = () => {
-        toast.classList.remove("show");
-        toast.classList.add("hide");
-
-        setTimeout(() => {
-            toast.remove();
-        }, 350);
-    };
-
-    const timer = setTimeout(removeToast, duration);
-
-    toast.querySelector(".toast-close").addEventListener("click", () => {
-        clearTimeout(timer);
-        removeToast();
-    });
+    box.classList.add("show");
+    backdrop.classList.add("show");
 }
+
+function hideStatusBox(){
+    document.getElementById("statusBox")?.classList.remove("show");
+    document.getElementById("statusBackdrop")?.classList.remove("show");
+}
+
+document.getElementById("statusClose")?.addEventListener("click", hideStatusBox);
+document.getElementById("statusBackdrop")?.addEventListener("click", hideStatusBox);
 
 const SUPABASE_URL = "https://bvmcuoiprayzeksljnyo.supabase.co";
 const SUPABASE_KEY = "sb_publishable_RlXQ4_mUAhiKxuTsxGLU-Q_ILaQT_8C";
@@ -713,7 +663,7 @@ trialBuyBtn?.addEventListener("click", async () => {
     const session = await getSession();
 
     if(!session){
-        showToast("warning", "Login required", "Please log in to your Xenaro account before buying this project.");
+        showStatusBox("error", "Login required", "Please log in to your Xenaro account before buying this project.");
         return;
     }
 
@@ -771,26 +721,31 @@ trialBuyBtn?.addEventListener("click", async () => {
                 const result = await verifyResponse.json();
 
                 if(!verifyResponse.ok || !result.success){
-                    showToast("error", "Payment verification failed", result.error || "We could not verify your payment. Please try again.");
+                    showStatusBox("error", "Payment failed", result.error || "We could not verify your payment. Please try again.");
                     trialBuyBtn.disabled = false;
                     trialBuyBtn.innerHTML = oldText;
                     return;
                 }
 
                 await refreshTrialPurchaseState();
-                showToast("success", "Payment successful", "Love Me Not Edit has been unlocked and is ready to download.");
+                showStatusBox("success", "Payment successful", "Love Me Not Edit is unlocked. Your project file can be downloaded now.");
             },
 
             modal:{
                 ondismiss:function(){
                     trialBuyBtn.disabled = false;
                     trialBuyBtn.innerHTML = oldText;
+                    showStatusBox(
+                        "error",
+                        "Payment cancelled",
+                        "The payment was cancelled. No purchase was made and no file was unlocked."
+                    );
                 }
             }
         });
 
         razorpay.on("payment.failed", function(response){
-            showToast("error", "Payment failed", response.error?.description || "The payment could not be completed.");
+            showStatusBox("error", "Payment failed", response.error?.description || "The payment could not be completed.");
             trialBuyBtn.disabled = false;
             trialBuyBtn.innerHTML = oldText;
         });
@@ -801,7 +756,7 @@ trialBuyBtn?.addEventListener("click", async () => {
 
     }catch(error){
         console.error(error);
-        showToast("error", "Something went wrong", error.message || "Please try again in a moment.");
+        showStatusBox("error", "Payment failed", error.message || "Please try again in a moment.");
         trialBuyBtn.disabled = false;
         trialBuyBtn.innerHTML = oldText;
     }
@@ -813,7 +768,7 @@ trialDownloadBtn?.addEventListener("click", async (event) => {
     const session = await getSession();
 
     if(!session){
-        showToast("warning", "Login required", "Please log in to download your purchased project.");
+        showStatusBox("error", "Login required", "Please log in to download your purchased project.");
         return;
     }
 
@@ -833,12 +788,12 @@ trialDownloadBtn?.addEventListener("click", async (event) => {
             throw new Error(result.error || "Download is not available.");
         }
 
-        showToast("success", "Download ready", "Your project file is starting to download.");
+        showStatusBox("success", "Download ready", "Your project file is starting to download now.");
         setTimeout(() => { window.location.href = result.url; }, 450);
 
     }catch(error){
         console.error(error);
-        showToast("error", "Download failed", error.message || "Could not start your download.");
+        showStatusBox("error", "Download failed", error.message || "Could not start your download.");
     }
 });
 
