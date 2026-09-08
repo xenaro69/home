@@ -507,6 +507,28 @@ footer{
     }
 }
 
+
+/* White click/touch circle fade effect */
+.click-circle{
+    position:fixed;
+    width:18px;
+    height:18px;
+    left:0;
+    top:0;
+    border:2px solid #fff;
+    border-radius:50%;
+    pointer-events:none;
+    z-index:99998;
+    transform:translate(-50%,-50%) scale(.2);
+    opacity:.95;
+    box-shadow:0 0 8px rgba(255,255,255,.65);
+    animation:clickCircleFade .6s ease-out forwards;
+}
+@keyframes clickCircleFade{
+    0%{transform:translate(-50%,-50%) scale(.2);opacity:.95;}
+    100%{transform:translate(-50%,-50%) scale(3.2);opacity:0;}
+}
+
 </style>
 </head>
 
@@ -660,6 +682,20 @@ footer{
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
+
+/* Create a fading white circle wherever the user clicks or touches */
+function createClickCircle(x,y){
+    const circle=document.createElement("span");
+    circle.className="click-circle";
+    circle.style.left=x+"px";
+    circle.style.top=y+"px";
+    document.body.appendChild(circle);
+    circle.addEventListener("animationend",()=>circle.remove());
+}
+document.addEventListener("pointerdown",(e)=>{
+    createClickCircle(e.clientX,e.clientY);
+});
+
 
 const SUPABASE_URL =
 "https://bvmcuoiprayzeksljnyo.supabase.co";
