@@ -319,7 +319,7 @@ footer h2{ font-size:18px; margin-bottom:4px; color:#f5f5f5; }
                     <p class="edit-description">Buy this ₹1 trial pack to unlock the After Effects project file: <strong>love me not1.aep</strong>.</p>
                     <div class="price-row">
                         <span class="price">₹1</span>
-                        <button class="buy-btn" id="trialBuyBtn" type="button" data-product-id="trial-xyz">
+                        <button class="buy-btn" id="trialBuyBtn" type="button" data-product-id="love-me-not">
                             <i class="fa-solid fa-bag-shopping"></i> Buy for ₹1
                         </button>
                         <a class="buy-btn" id="trialDownloadBtn" href="#" style="display:none;">
@@ -455,7 +455,7 @@ async function refreshTrialPurchaseState(){
 
     try{
         const response = await fetch(
-            PAYMENT_API_BASE + "/api/check-purchase?productId=trial-xyz",
+            PAYMENT_API_BASE + "/api/check-purchase?productId=love-me-not",
             {
                 headers:{
                     "Authorization":"Bearer " + session.access_token
@@ -505,7 +505,7 @@ trialBuyBtn?.addEventListener("click", async () => {
                     "Authorization":"Bearer " + session.access_token
                 },
                 body:JSON.stringify({
-                    productId:"trial-xyz"
+                    productId:"love-me-not"
                 })
             }
         );
@@ -534,7 +534,7 @@ trialBuyBtn?.addEventListener("click", async () => {
                             "Authorization":"Bearer " + session.access_token
                         },
                         body:JSON.stringify({
-                            productId:"trial-xyz",
+                            productId:"love-me-not",
                             razorpay_order_id:response.razorpay_order_id,
                             razorpay_payment_id:response.razorpay_payment_id,
                             razorpay_signature:response.razorpay_signature
@@ -593,7 +593,7 @@ trialDownloadBtn?.addEventListener("click", async (event) => {
 
     try{
         const response = await fetch(
-            PAYMENT_API_BASE + "/api/download?productId=trial-xyz",
+            PAYMENT_API_BASE + "/api/download?productId=love-me-not",
             {
                 headers:{
                     "Authorization":"Bearer " + session.access_token
