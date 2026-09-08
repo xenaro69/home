@@ -149,8 +149,7 @@ nav{
 }
 .edits-grid{
     display:grid;
-    grid-template-columns:minmax(0,380px);
-    justify-content:center;
+    grid-template-columns:repeat(3,minmax(0,1fr));
     gap:24px;
 }
 .edit-card{
@@ -270,7 +269,7 @@ footer h2{ font-size:18px; margin-bottom:4px; color:#f5f5f5; }
     .back-btn,.join-btn{padding:8px 14px;font-size:13px}
     .page{padding-top:56px}
     .hero{padding:58px 0 36px}
-    .edits-grid{grid-template-columns:minmax(0,380px);justify-content:center;gap:18px}
+    .edits-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
 }
 @media(max-width:620px){
     .edits-grid{grid-template-columns:1fr}
@@ -317,7 +316,7 @@ footer h2{ font-size:18px; margin-bottom:4px; color:#f5f5f5; }
                 </div>
                 <div class="edit-info">
                     <h2 class="edit-title">Love Me Not Edit</h2>
-                    <p class="edit-description">Buy this edit to unlock the After Effects project file: <strong>love me not1.aep</strong>.</p>
+                    <p class="edit-description">Buy this ₹1 trial pack to unlock the After Effects project file: <strong>love me not1.aep</strong>.</p>
                     <div class="price-row">
                         <span class="price">₹1</span>
                         <button class="buy-btn" id="trialBuyBtn" type="button" data-product-id="trial-xyz">
@@ -326,6 +325,42 @@ footer h2{ font-size:18px; margin-bottom:4px; color:#f5f5f5; }
                         <a class="buy-btn" id="trialDownloadBtn" href="#" style="display:none;">
                             <i class="fa-solid fa-download"></i> Download Project
                         </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- COMING SOON PROJECT 1 -->
+            <article class="edit-card">
+                <div class="video-wrap">
+                    <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#050505;">
+                        <span style="font-family:'Poppins',sans-serif;font-size:20px;font-weight:700;opacity:.55;">COMING SOON</span>
+                    </div>
+                    <span class="video-badge">Coming Soon</span>
+                </div>
+                <div class="edit-info">
+                    <h2 class="edit-title">Coming Soon #1</h2>
+                    <p class="edit-description">A new After Effects project is coming soon.</p>
+                    <div class="price-row">
+                        <span class="price">₹149</span>
+                        <span class="buy-btn" style="opacity:.5;cursor:not-allowed;">Coming Soon</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- COMING SOON PROJECT 2 -->
+            <article class="edit-card">
+                <div class="video-wrap">
+                    <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#050505;">
+                        <span style="font-family:'Poppins',sans-serif;font-size:20px;font-weight:700;opacity:.55;">COMING SOON</span>
+                    </div>
+                    <span class="video-badge">Coming Soon</span>
+                </div>
+                <div class="edit-info">
+                    <h2 class="edit-title">Coming Soon #2</h2>
+                    <p class="edit-description">Another After Effects project is coming soon.</p>
+                    <div class="price-row">
+                        <span class="price">₹149</span>
+                        <span class="buy-btn" style="opacity:.5;cursor:not-allowed;">Coming Soon</span>
                     </div>
                 </div>
             </article>
@@ -380,6 +415,8 @@ footer h2{ font-size:18px; margin-bottom:4px; color:#f5f5f5; }
             </article>
 
         </div>
+
+        <div class="add-note">To add another edit, duplicate one <strong>&lt;article class="edit-card"&gt;</strong> block and change the video filename, title, description and price.</div>
     </section>
 </main>
 
