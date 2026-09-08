@@ -149,7 +149,8 @@ nav{
 }
 .edits-grid{
     display:grid;
-    grid-template-columns:repeat(3,minmax(0,1fr));
+    grid-template-columns:minmax(0,380px);
+    justify-content:center;
     gap:24px;
 }
 .edit-card{
@@ -269,7 +270,7 @@ footer h2{ font-size:18px; margin-bottom:4px; color:#f5f5f5; }
     .back-btn,.join-btn{padding:8px 14px;font-size:13px}
     .page{padding-top:56px}
     .hero{padding:58px 0 36px}
-    .edits-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+    .edits-grid{grid-template-columns:minmax(0,380px);justify-content:center;gap:18px}
 }
 @media(max-width:620px){
     .edits-grid{grid-template-columns:1fr}
@@ -315,8 +316,8 @@ footer h2{ font-size:18px; margin-bottom:4px; color:#f5f5f5; }
                     <span class="video-badge">Preview Only</span>
                 </div>
                 <div class="edit-info">
-                    <h2 class="edit-title">Trial XYZ</h2>
-                    <p class="edit-description">Buy this ₹1 trial pack to unlock the After Effects project file: <strong>love me not1.aep</strong>.</p>
+                    <h2 class="edit-title">Love Me Not Edit</h2>
+                    <p class="edit-description">Buy this edit to unlock the After Effects project file: <strong>love me not1.aep</strong>.</p>
                     <div class="price-row">
                         <span class="price">₹1</span>
                         <button class="buy-btn" id="trialBuyBtn" type="button" data-product-id="trial-xyz">
@@ -329,15 +330,7 @@ footer h2{ font-size:18px; margin-bottom:4px; color:#f5f5f5; }
                 </div>
             </article>
 
-            <!-- EDIT 1: Replace videos/softcore.mp4 with your actual video file -->
-            <article class="edit-card">
-                <div class="video-wrap">
-                    <video controls playsinline preload="metadata" poster="">
-                        <source src="videos/softcore.mp4" type="video/mp4">
-                        Your browser does not support video playback.
-                    </video>
-                    <span class="video-badge">After Effects</span>
-                </div>
+        </div>
                 <div class="edit-info">
                     <h2 class="edit-title">Softcore Typography</h2>
                     <p class="edit-description">Editable typography project with text animation, clouds, camera movement and effects.</p>
@@ -387,8 +380,6 @@ footer h2{ font-size:18px; margin-bottom:4px; color:#f5f5f5; }
             </article>
 
         </div>
-
-        <div class="add-note">To add another edit, duplicate one <strong>&lt;article class="edit-card"&gt;</strong> block and change the video filename, title, description and price.</div>
     </section>
 </main>
 
@@ -544,7 +535,7 @@ trialBuyBtn?.addEventListener("click", async () => {
             amount: order.amount,
             currency: order.currency || "INR",
             name: "Xenaro",
-            description: "Trial XYZ Project File",
+            description: "Love Me Not Edit Project File",
             order_id: order.orderId,
 
             handler: async function(response){
