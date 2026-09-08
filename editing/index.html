@@ -73,6 +73,39 @@ body{
     to{ transform:rotate(360deg); }
 }
 
+/* White cursor-follow glow */
+#cursorGlow{
+    position:fixed;
+    left:0;
+    top:0;
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    pointer-events:none;
+    z-index:1;
+    opacity:0;
+    transform:translate(-50%,-50%);
+    background:radial-gradient(
+        circle,
+        rgba(255,255,255,.16) 0%,
+        rgba(255,255,255,.09) 28%,
+        rgba(255,255,255,.035) 50%,
+        transparent 72%
+    );
+    filter:blur(5px);
+    transition:opacity .2s ease;
+    will-change:left,top;
+}
+
+body:hover #cursorGlow{
+    opacity:1;
+}
+
+@media (hover:none), (pointer:coarse){
+    #cursorGlow{ display:none; }
+}
+
+
 header{
     position:fixed;
     top:0; left:0;
@@ -425,6 +458,7 @@ i.fa-brands,
 </div>
 <div id="loadingScreen"><div class="simple-loader"></div></div>
 <div id="particles"></div>
+<div id="cursorGlow"></div>
 
 <header>
     <nav>
@@ -520,6 +554,34 @@ i.fa-brands,
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
+
+/* Smooth white glow that follows the cursor */
+const cursorGlow = document.getElementById("cursorGlow");
+
+if(cursorGlow && window.matchMedia("(pointer:fine)").matches){
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let glowX = mouseX;
+    let glowY = mouseY;
+
+    window.addEventListener("mousemove", (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    function animateCursorGlow(){
+        glowX += (mouseX - glowX) * 0.16;
+        glowY += (mouseY - glowY) * 0.16;
+
+        cursorGlow.style.left = glowX + "px";
+        cursorGlow.style.top = glowY + "px";
+
+        requestAnimationFrame(animateCursorGlow);
+    }
+
+    animateCursorGlow();
+}
+
 
 function showStatusBox(type, title, message){
     const box = document.getElementById("statusBox");
@@ -806,4 +868,4 @@ refreshTrialPurchaseState();
 
 </script>
 </body>
-</html>
+</html>a
