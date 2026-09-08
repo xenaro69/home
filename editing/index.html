@@ -222,6 +222,8 @@ nav{
     color:#fff;
 }
 .buy-btn{
+    border:none;
+    cursor:pointer;
     display:inline-flex;
     align-items:center;
     justify-content:center;
@@ -314,10 +316,15 @@ footer h2{ font-size:18px; margin-bottom:4px; color:#f5f5f5; }
                 </div>
                 <div class="edit-info">
                     <h2 class="edit-title">Trial XYZ</h2>
-                    <p class="edit-description">Preview the edit here. The video is for viewing only and is not offered as a downloadable file.</p>
+                    <p class="edit-description">Buy this ₹1 trial pack to unlock the After Effects project file: <strong>love me not1.aep</strong>.</p>
                     <div class="price-row">
                         <span class="price">₹1</span>
-                        <a class="buy-btn" href="#"><i class="fa-solid fa-bag-shopping"></i> Buy for ₹1</a>
+                        <button class="buy-btn" id="trialBuyBtn" type="button" data-product-id="trial-xyz">
+                            <i class="fa-solid fa-bag-shopping"></i> Buy for ₹1
+                        </button>
+                        <a class="buy-btn" id="trialDownloadBtn" href="#" style="display:none;">
+                            <i class="fa-solid fa-download"></i> Download Project
+                        </a>
                     </div>
                 </div>
             </article>
@@ -390,7 +397,17 @@ footer h2{ font-size:18px; margin-bottom:4px; color:#f5f5f5; }
     <p>© 2026 All Rights Reserved.</p>
 </footer>
 
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
+const SUPABASE_URL = "https://bvmcuoiprayzeksljnyo.supabase.co";
+const SUPABASE_KEY = "sb_publishable_RlXQ4_mUAhiKxuTsxGLU-Q_ILaQT_8C";
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+const RAZORPAY_KEY_ID = "rzp_test_TZHHGaIOBxQKRQ";
+const PAYMENT_API_BASE = "https://xenaro-payments.vercel.app";
+
 window.addEventListener("load", () => {
     setTimeout(() => {
         const loadingScreen = document.getElementById("loadingScreen");
@@ -441,6 +458,192 @@ function createParticle(){
     }, speed);
 }
 setInterval(createParticle,150);
+
+const trialBuyBtn = document.getElementById("trialBuyBtn");
+const trialDownloadBtn = document.getElementById("trialDownloadBtn");
+
+async function getSession(){
+    const { data } = await supabaseClient.auth.getSession();
+    return data?.session || null;
+}
+
+async function refreshTrialPurchaseState(){
+    const session = await getSession();
+
+    if(!session){
+        trialBuyBtn.style.display = "inline-flex";
+        trialDownloadBtn.style.display = "none";
+        return;
+    }
+
+    try{
+        const response = await fetch(
+            PAYMENT_API_BASE + "/api/check-purchase?productId=trial-xyz",
+            {
+                headers:{
+                    "Authorization":"Bearer " + session.access_token
+                }
+            }
+        );
+
+        if(!response.ok){
+            trialBuyBtn.style.display = "inline-flex";
+            trialDownloadBtn.style.display = "none";
+            return;
+        }
+
+        const result = await response.json();
+
+        if(result.purchased){
+            trialBuyBtn.style.display = "none";
+            trialDownloadBtn.style.display = "inline-flex";
+        }else{
+            trialBuyBtn.style.display = "inline-flex";
+            trialDownloadBtn.style.display = "none";
+        }
+    }catch(error){
+        console.error("Could not check purchase:", error);
+    }
+}
+
+trialBuyBtn?.addEventListener("click", async () => {
+    const session = await getSession();
+
+    if(!session){
+        alert("Please log in on Xenaro before buying this project.");
+        return;
+    }
+
+    const oldText = trialBuyBtn.innerHTML;
+    trialBuyBtn.disabled = true;
+    trialBuyBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Loading';
+
+    try{
+        const orderResponse = await fetch(
+            PAYMENT_API_BASE + "/api/create-order",
+            {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json",
+                    "Authorization":"Bearer " + session.access_token
+                },
+                body:JSON.stringify({
+                    productId:"trial-xyz"
+                })
+            }
+        );
+
+        const order = await orderResponse.json();
+
+        if(!orderResponse.ok){
+            throw new Error(order.error || "Could not create payment order.");
+        }
+
+        const razorpay = new Razorpay({
+            key: RAZORPAY_KEY_ID,
+            amount: order.amount,
+            currency: order.currency || "INR",
+            name: "Xenaro",
+            description: "Trial XYZ Project File",
+            order_id: order.orderId,
+
+            handler: async function(response){
+                const verifyResponse = await fetch(
+                    PAYMENT_API_BASE + "/api/verify-payment",
+                    {
+                        method:"POST",
+                        headers:{
+                            "Content-Type":"application/json",
+                            "Authorization":"Bearer " + session.access_token
+                        },
+                        body:JSON.stringify({
+                            productId:"trial-xyz",
+                            razorpay_order_id:response.razorpay_order_id,
+                            razorpay_payment_id:response.razorpay_payment_id,
+                            razorpay_signature:response.razorpay_signature
+                        })
+                    }
+                );
+
+                const result = await verifyResponse.json();
+
+                if(!verifyResponse.ok || !result.success){
+                    alert(result.error || "Payment verification failed.");
+                    trialBuyBtn.disabled = false;
+                    trialBuyBtn.innerHTML = oldText;
+                    return;
+                }
+
+                await refreshTrialPurchaseState();
+                alert("Payment successful! love me not1.aep is now unlocked.");
+            },
+
+            modal:{
+                ondismiss:function(){
+                    trialBuyBtn.disabled = false;
+                    trialBuyBtn.innerHTML = oldText;
+                }
+            }
+        });
+
+        razorpay.on("payment.failed", function(response){
+            alert(response.error?.description || "Payment failed.");
+            trialBuyBtn.disabled = false;
+            trialBuyBtn.innerHTML = oldText;
+        });
+
+        trialBuyBtn.disabled = false;
+        trialBuyBtn.innerHTML = oldText;
+        razorpay.open();
+
+    }catch(error){
+        console.error(error);
+        alert(error.message || "Something went wrong.");
+        trialBuyBtn.disabled = false;
+        trialBuyBtn.innerHTML = oldText;
+    }
+});
+
+trialDownloadBtn?.addEventListener("click", async (event) => {
+    event.preventDefault();
+
+    const session = await getSession();
+
+    if(!session){
+        alert("Please log in first.");
+        return;
+    }
+
+    try{
+        const response = await fetch(
+            PAYMENT_API_BASE + "/api/download?productId=trial-xyz",
+            {
+                headers:{
+                    "Authorization":"Bearer " + session.access_token
+                }
+            }
+        );
+
+        const result = await response.json();
+
+        if(!response.ok || !result.url){
+            throw new Error(result.error || "Download is not available.");
+        }
+
+        window.location.href = result.url;
+
+    }catch(error){
+        console.error(error);
+        alert(error.message || "Could not start download.");
+    }
+});
+
+supabaseClient.auth.onAuthStateChange(() => {
+    refreshTrialPurchaseState();
+});
+
+refreshTrialPurchaseState();
+
 </script>
 </body>
 </html>
