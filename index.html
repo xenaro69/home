@@ -529,6 +529,30 @@ footer{
     100%{transform:translate(-50%,-50%) scale(3.2);opacity:0;}
 }
 
+
+.footer-links{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:14px;
+    flex-wrap:wrap;
+    margin-top:8px;
+}
+.footer-link{
+    color:#bdbdbd;
+    text-decoration:none;
+    font-size:13px;
+    transition:.25s ease;
+}
+.footer-link:hover{
+    color:#00cfff;
+    text-shadow:0 0 10px rgba(0,207,255,.65);
+}
+@media(max-width:600px){
+    .footer-links{gap:10px;margin-top:6px}
+    .footer-link{font-size:11px}
+}
+
 </style>
 </head>
 
@@ -670,13 +694,13 @@ footer{
 </div>
 
 <footer>
-
     <div>XENARO</div>
-
-    <div>
-        © 2026 All Rights Reserved
+    <div>© 2026 All Rights Reserved</div>
+    <div class="footer-links">
+        <a class="footer-link" href="contact.html">Contact</a>
+        <a class="footer-link" href="terms.html">Terms &amp; Conditions</a>
+        <a class="footer-link" href="refund-policy.html">Refund &amp; Cancellation Policy</a>
     </div>
-
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
