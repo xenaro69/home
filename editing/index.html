@@ -487,8 +487,6 @@ i.fa-brands,
     <p>© 2026 All Rights Reserved.</p>
 </footer>
 
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 
@@ -535,27 +533,23 @@ function showNotification(type, message, duration = 3200){
     }, duration);
 }
 
-const SUPABASE_URL = "https://bvmcuoiprayzeksljnyo.supabase.co";
-const SUPABASE_KEY = "sb_publishable_RlXQ4_mUAhiKxuTsxGLU-Q_ILaQT_8C";
-const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-const RAZORPAY_KEY_ID = "rzp_test_TZHHGaIOBxQKRQ";
-const PAYMENT_API_BASE = "https://xenaro-payments.vercel.app";
-
-window.addEventListener("load", () => {
+function hideLoadingScreen(){
     const loadingScreen = document.getElementById("loadingScreen");
+    if(!loadingScreen) return;
 
-    setTimeout(() => {
-        if(loadingScreen){
-            loadingScreen.classList.add("fade-out");
-            document.body.classList.add("site-loaded");
+    loadingScreen.classList.add("fade-out");
+    document.body.classList.add("site-loaded");
 
-            setTimeout(() => {
-                loadingScreen.remove();
-            }, 850);
-        }
-    }, 900);
+    setTimeout(() => loadingScreen.remove(), 500);
+}
+
+/* Do not wait for videos/fonts/external resources to finish loading. */
+document.addEventListener("DOMContentLoaded", () => {
+    setTimeout(hideLoadingScreen, 450);
 });
+
+/* Safety fallback: loader can never stay permanently on screen. */
+setTimeout(hideLoadingScreen, 2500);
 
 const header = document.querySelector("header");
 window.addEventListener("scroll", () => {
@@ -599,10 +593,6 @@ function createParticle(){
 setInterval(createParticle,150);
 
 // Purchases are handled by Sellary.
-
-});
-
-refreshTrialPurchaseState();
 
 </script>
 </body>
