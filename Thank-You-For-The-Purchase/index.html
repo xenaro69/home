@@ -24,7 +24,8 @@ body{
   font-family:'Sunrise Brown','Poppins',sans-serif;
   background:#0a0a0a;
   color:#f5f5f5;
-  overflow:hidden;
+  overflow-x:hidden;
+  overflow-y:auto;
   display:flex;
   flex-direction:column;
 }
@@ -48,12 +49,16 @@ main{
   background:transparent;
 }
 .check{
-  width:82px;height:82px;margin:0 auto 24px;border-radius:50%;
+  width:82px;height:82px;margin:0;border-radius:50%;flex:0 0 auto;
   display:grid;place-items:center;border:2px solid rgba(255,255,255,.9);
   box-shadow:0 0 25px rgba(255,255,255,.18)
 }
 .check i{font-size:34px;color:#fff}
-h1{font-size:clamp(58px,9vw,92px);line-height:1.02;margin-bottom:24px}
+.thank-row{
+  display:flex;align-items:center;justify-content:center;gap:22px;
+  margin-bottom:28px;
+}
+h1{font-size:clamp(58px,9vw,92px);line-height:1.02;margin:0}
 h1 span{color:#00cfff;text-shadow:0 0 14px rgba(0,207,255,.75)}
 .sub{font-size:clamp(22px,2.3vw,29px);line-height:1.6;color:#aaa;max-width:680px;margin:0 auto 38px}
 .notice{
@@ -90,6 +95,8 @@ footer{
 @media(max-width:600px){
   .card{padding:28px 18px}
   .check{width:70px;height:70px}
+  .thank-row{gap:14px}
+  .thank-row h1{font-size:clamp(42px,12vw,62px)}
   .btn{width:100%}
   .logo{font-size:19px}
 }
@@ -102,8 +109,10 @@ footer{
 
 <main>
   <section class="card">
-    <div class="check"><i class="fa-solid fa-check"></i></div>
-    <h1>THANK <span>YOU!</span></h1>
+    <div class="thank-row">
+      <h1>THANK <span>YOU!</span></h1>
+      <div class="check"><i class="fa-solid fa-check"></i></div>
+    </div>
     <p class="sub">
       Your payment was completed successfully. Thanks for supporting XENARO and purchasing one of my project files.
     </p>
