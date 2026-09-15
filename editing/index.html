@@ -430,16 +430,14 @@ i.fa-brands,
                     <span class="video-badge">Preview Only</span>
                 </div>
                 <div class="edit-info">
-                    <h2 class="edit-title">Love Me Not Edit</h2>
-                    <p class="edit-description">Buy this ₹1 trial pack to unlock the After Effects project file: <strong>love me not1.aep</strong>.</p>
+                    <h2 class="edit-title">Love Me Not – After Effects Project File</h2>
+                    <p class="edit-description">Get the fully editable “Love Me Not” After Effects Project File, including all animations, compositions, and effects.</p>
                     <div class="price-row">
-                        <span class="price">₹1</span>
-                        <button class="buy-btn" id="trialBuyBtn" type="button" data-product-id="love-me-not">
+                        <span class="price">₹39</span>
+                        <a class="buy-btn" id="trialBuyBtn" href="https://www.sellary.in/product/love-me-not-after-effects-project-file">
                             <i class="fa-solid fa-bag-shopping"></i> Buy Now
-                        </button>
-                        <a class="buy-btn" id="trialDownloadBtn" href="#" style="display:none;">
-                            <i class="fa-solid fa-download"></i> Download Project
                         </a>
+
                     </div>
                 </div>
             </article>
@@ -600,94 +598,8 @@ function createParticle(){
 }
 setInterval(createParticle,150);
 
-const trialBuyBtn = document.getElementById("trialBuyBtn");
-const trialDownloadBtn = document.getElementById("trialDownloadBtn");
+// Purchases are handled by Sellary.
 
-async function getSession(){
-    const { data } = await supabaseClient.auth.getSession();
-    return data?.session || null;
-}
-
-async function refreshTrialPurchaseState(){
-    const session = await getSession();
-
-    if(!session){
-        trialBuyBtn.style.display = "inline-flex";
-        trialDownloadBtn.style.display = "none";
-        return;
-    }
-
-    try{
-        const response = await fetch(
-            PAYMENT_API_BASE + "/api/check-purchase?productId=love-me-not",
-            {
-                headers:{
-                    "Authorization":"Bearer " + session.access_token
-                }
-            }
-        );
-
-        if(!response.ok){
-            trialBuyBtn.style.display = "inline-flex";
-            trialDownloadBtn.style.display = "none";
-            return;
-        }
-
-        const result = await response.json();
-
-        if(result.purchased){
-            trialBuyBtn.style.display = "none";
-            trialDownloadBtn.style.display = "inline-flex";
-        }else{
-            trialBuyBtn.style.display = "inline-flex";
-            trialDownloadBtn.style.display = "none";
-        }
-    }catch(error){
-        console.error("Could not check purchase:", error);
-    }
-}
-
-trialBuyBtn?.addEventListener("click", () => {
-    showNotification("success", "Coming soon — Love Me Not Edit will be available to purchase soon.");
-});
-
-trialDownloadBtn?.addEventListener("click", async (event) => {
-    event.preventDefault();
-
-    const session = await getSession();
-
-    if(!session){
-        showNotification("error", "Login required — please log in to download this file.");
-        return;
-    }
-
-    try{
-        const response = await fetch(
-            PAYMENT_API_BASE + "/api/download?productId=love-me-not",
-            {
-                headers:{
-                    "Authorization":"Bearer " + session.access_token
-                }
-            }
-        );
-
-        const result = await response.json();
-
-        if(!response.ok || !result.url){
-            throw new Error(result.error || "Download is not available.");
-        }
-
-        showNotification("success", "Download started — your project file is ready.");
-        setTimeout(() => { window.location.href = result.url; }, 450);
-
-    }catch(error){
-        console.error(error);
-        showNotification("error", error.message || "Download failed — please try again.");
-    }
-});
-
-supabaseClient.auth.onAuthStateChange(() => {
-    refreshTrialPurchaseState();
 });
 
 refreshTrialPurchaseState();
