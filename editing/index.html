@@ -442,20 +442,23 @@ i.fa-brands,
                 </div>
             </article>
 
-            <!-- COMING SOON PROJECT 1 -->
+            <!-- SOFTCORE TYPOGRAPHY -->
             <article class="edit-card">
                 <div class="video-wrap">
-                    <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#050505;">
-                        <span style="font-family:'Poppins',sans-serif;font-size:20px;font-weight:700;opacity:.55;">COMING SOON</span>
-                    </div>
-                    <span class="video-badge">Coming Soon</span>
+                    <video id="softcoreVideo" controls playsinline preload="metadata" controlsList="nodownload" oncontextmenu="return false;">
+                        <source src="softcore typography.mp4" type="video/mp4">
+                        Your browser does not support video playback.
+                    </video>
+                    <span class="video-badge">Preview Only</span>
                 </div>
                 <div class="edit-info">
-                    <h2 class="edit-title">Coming Soon #1</h2>
-                    <p class="edit-description">A new After Effects project is coming soon.</p>
+                    <h2 class="edit-title">Softcore Typography – After Effects Project File</h2>
+                    <p class="edit-description">Get the fully editable “Softcore Typography” After Effects project file with the included project assets, animations, compositions, effects, and keyframes.</p>
                     <div class="price-row">
-                        <span class="price">₹149</span>
-                        <span class="buy-btn" style="opacity:.5;cursor:not-allowed;">Coming Soon</span>
+                        <span class="price">₹99</span>
+                        <a class="buy-btn" href="https://www.sellary.in/product/softcore-typography-after-effects-project-file" target="_blank" rel="noopener">
+                            <i class="fa-solid fa-bag-shopping"></i> Buy Now
+                        </a>
                     </div>
                 </div>
             </article>
@@ -564,6 +567,18 @@ if(trialVideo){
             trialVideo.dataset.fallbackTried = "1";
             trialVideo.src = "videos/trialxyz.mp4";
             trialVideo.load();
+        }
+    });
+}
+
+// Softcore typography video path fallback
+const softcoreVideo = document.getElementById("softcoreVideo");
+if(softcoreVideo){
+    softcoreVideo.addEventListener("error", () => {
+        if(!softcoreVideo.dataset.fallbackTried){
+            softcoreVideo.dataset.fallbackTried = "1";
+            softcoreVideo.src = "videos/softcore typography.mp4";
+            softcoreVideo.load();
         }
     });
 }
