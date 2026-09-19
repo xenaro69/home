@@ -1,3 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" type="image/png" href="favicon.png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Xenaro | Edits</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+<style>
+@font-face{
+    font-family:'Sunrise Brown';
+    src:url('Sunrise Brown.otf') format('opentype');
+    font-weight:normal;
+    font-style:normal;
+    font-display:swap;
+}
+
+*{ margin:0; padding:0; box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+    min-height:100vh;
+    font-family:'Sunrise Brown','Poppins',sans-serif;
+    background:#0a0a0a;
+    color:#f5f5f5;
+    overflow-x:hidden;
+}
+
+::-webkit-scrollbar{ width:10px; }
+::-webkit-scrollbar-track{ background:#0f0f0f; }
+::-webkit-scrollbar-thumb{ background:#fff; border-radius:100px; }
+
+#particles{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:0;
+}
+
+#loadingScreen{
+    position:fixed;
+    inset:0;
+    z-index:99999;
+    background:#000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    opacity:1;
+    visibility:visible;
+    transition:opacity .45s ease, visibility .45s ease;
+}
+
+#loadingScreen.fade-out{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+}
+
+.simple-loader{
+    width:52px;
+    height:52px;
+    border:4px solid rgba(255,255,255,.18);
+    border-top-color:#fff;
+    border-radius:50%;
+    animation:simpleLoaderSpin .75s linear infinite;
+}
+
+@keyframes simpleLoaderSpin{
+    to{ transform:rotate(360deg); }
+}
+
+
+
+header{
+    position:fixed;
+    top:0; left:0;
+    width:100%; height:64px;
+    z-index:500;
+    backdrop-filter:blur(8px);
+    background:rgba(10,10,10,.18);
+    border-bottom:1px solid rgba(255,255,255,.22);
+}
+nav{
+    max-width:1680px;
+    height:100%;
+    margin:auto;
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
+    padding:0 clamp(24px,4vw,64px);
+}
+
+nav .back-btn{ justify-self:start; }
+nav .logo{ justify-self:center; }
+nav .nav-buttons{ justify-self:end; }
+.logo{
+    font-size:24px;
+    font-weight:800;
+    letter-spacing:2px;
+    color:#00cfff;
+    text-shadow:0 0 12px #00cfff,0 0 30px rgba(0,207,255,.6);
+    animation:logoPulse 2s ease-in-out infinite;
+}
+@keyframes logoPulse{
+    0%,100%{text-shadow:0 0 12px #00cfff,0 0 30px rgba(0,207,255,.6)}
+    50%{text-shadow:0 0 20px #00cfff,0 0 50px rgba(0,207,255,.8)}
+}
+.nav-buttons{ display:flex; gap:12px; align-items:center; }
+.back-btn,.join-btn{
+    padding:10px 22px;
+    background:#fff;
+    border-radius:40px;
+    color:#000;
+    font-weight:700;
+    font-size:15px;
+    text-decoration:none;
+    transition:.35s;
+}
+.back-btn:hover,.join-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 0 30px rgba(255,255,255,.5);
+}
+
+.page{ position:relative; z-index:2; padding-top:64px; }
+.hero{
+    width:min(1180px,calc(100% - 40px));
+    margin:0 auto;
+    padding:78px 0 44px;
+    text-align:center;
+}
+.hero .eyebrow{
+    display:inline-block;
+    margin-bottom:14px;
+    font-size:13px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:#00cfff;
+}
+.hero h1{
+    font-size:clamp(38px,7vw,78px);
+    line-height:.98;
+    margin-bottom:18px;
+}
+.hero p{
+    max-width:680px;
+    margin:0 auto;
+    opacity:.66;
+    font-family:'Poppins',sans-serif;
+    font-size:clamp(14px,1.5vw,17px);
+    line-height:1.7;
+}
+
+.edits-section{
+    width:min(1180px,calc(100% - 40px));
+    margin:0 auto;
+    padding:12px 0 90px;
+}
+.edits-grid{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:24px;
+}
+.edit-card{
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    border-radius:24px;
+    background:rgba(255,255,255,.055);
+    border:1px solid rgba(255,255,255,.13);
+    backdrop-filter:blur(28px);
+    box-shadow:0 22px 50px rgba(0,0,0,.4);
+    transition:.35s ease;
+}
+.edit-card:hover{
+    transform:translateY(-8px);
+    border-color:rgba(255,255,255,.38);
+    box-shadow:0 0 38px rgba(255,255,255,.10),0 28px 60px rgba(0,0,0,.55);
+}
+.video-wrap{
+    position:relative;
+    aspect-ratio:1/1;
+    background:#050505;
+    overflow:hidden;
+}
+.video-wrap video{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    background:#000;
+}
+.video-badge{
+    position:absolute;
+    top:14px;
+    left:14px;
+    padding:7px 11px;
+    border-radius:999px;
+    background:rgba(0,0,0,.62);
+    border:1px solid rgba(255,255,255,.18);
+    backdrop-filter:blur(10px);
+    font-family:'Poppins',sans-serif;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:1px;
+    text-transform:uppercase;
+}
+.edit-info{
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+    flex:1;
+}
+.edit-title{
+    font-size:clamp(20px,2vw,27px);
+    margin-bottom:8px;
+}
+.edit-description{
+    min-height:calc(1.6em * 7);
+    font-family:'Poppins',sans-serif;
+    font-size:19px;
+    line-height:1.6;
+    color:rgba(255,255,255,.58);
+    margin-bottom:18px;
+}
+.price-row{
+    display:flex;
+    margin-top:auto;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+    padding-top:15px;
+    border-top:1px solid rgba(255,255,255,.10);
+}
+.price{
+    font-family:'Poppins',sans-serif;
+    font-size:25px;
+    font-weight:800;
+    color:#fff;
+}
+.buy-btn{
+    border:none;
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:14px 24px;
+    min-height:50px;
+    border-radius:999px;
+    background:#fff;
+    color:#000;
+    text-decoration:none;
+    font-family:'Poppins',sans-serif;
+    font-size:16px;
+    font-weight:700;
+    transition:.3s ease;
+}
+.buy-btn:hover{ transform:scale(1.05); box-shadow:0 0 25px rgba(255,255,255,.4); }
+
+.add-note{
+    margin-top:26px;
+    padding:18px 20px;
+    text-align:center;
+    border:1px dashed rgba(255,255,255,.16);
+    border-radius:18px;
+    color:rgba(255,255,255,.45);
+    font-family:'Poppins',sans-serif;
+    font-size:13px;
+}
+
+footer{
+    position:relative;
+    z-index:2;
+    padding:24px 20px;
+    text-align:center;
+    border-top:1px solid rgba(255,255,255,.12);
+    color:#999;
+    font-size:14px;
+}
+footer h2{ font-size:18px; margin-bottom:4px; color:#f5f5f5; }
+
+@media(max-width:900px){
+    header{height:56px}
+    nav{padding:0 18px}
+    .logo{font-size:19px}
+    .back-btn,.join-btn{padding:8px 14px;font-size:13px}
+    .page{padding-top:56px}
+    .hero{padding:58px 0 36px}
+    .edits-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+}
+@media(max-width:620px){
+    .edits-grid{grid-template-columns:1fr}
+    .edits-section,.hero{width:min(100% - 28px,520px)}
+    .edit-card{border-radius:20px}
+    .video-wrap{aspect-ratio:1/1}
+    .join-btn{display:none}
+}
+
+/* =========================
+   XENARO INLINE NOTIFICATION
+========================= */
+.notification-line{
+    position:fixed;
+    left:50%;
+    top:86px;
+    transform:translate(-50%,-12px);
+    z-index:100000;
+    min-width:min(520px,calc(100vw - 32px));
+    max-width:calc(100vw - 32px);
+    padding:13px 18px;
+    border-radius:10px;
+    background:#090909;
+    border:1px solid rgba(255,255,255,.9);
+    box-shadow:
+        0 0 10px rgba(255,255,255,.22),
+        0 10px 28px rgba(0,0,0,.45);
+    text-align:center;
+    font-size:15px;
+    font-weight:700;
+    line-height:1.45;
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transition:
+        opacity .3s ease,
+        transform .3s ease,
+        visibility .3s ease;
+}
+
+.notification-line.show{
+    opacity:1;
+    visibility:visible;
+    transform:translate(-50%,0);
+}
+
+.notification-line.success{
+    color:#55ef82;
+    text-shadow:
+        0 0 6px rgba(85,239,130,.65),
+        0 0 14px rgba(85,239,130,.28);
+}
+
+.notification-line.error{
+    color:#ff6666;
+    text-shadow:
+        0 0 6px rgba(255,102,102,.55),
+        0 0 14px rgba(255,102,102,.22);
+}
+
+@media(max-width:620px){
+    .notification-line{
+        top:68px;
+        min-width:calc(100vw - 28px);
+        max-width:calc(100vw - 28px);
+        padding:12px 14px;
+        font-size:13px;
+        border-radius:9px;
+    }
+}
+
+/* Force the Xenaro website font onto text elements without breaking Font Awesome icons */
+html, body, button, input, textarea, select, option, a, p, span, div, h1, h2, h3, h4, h5, h6{
+    font-family:'Sunrise Brown','Poppins',sans-serif !important;
+}
+
+/* Preserve Font Awesome's own icon font */
+i.fa-solid,
+i.fa-regular,
+i.fa-brands,
+.fa-solid,
+.fa-regular,
+.fa-brands{
+    font-family:"Font Awesome 6 Free","Font Awesome 6 Brands" !important;
+    font-style:normal;
+}
+
+
+/* White click/touch circle fade effect */
+.click-circle{
+    position:fixed;
+    width:18px;
+    height:18px;
+    left:0;
+    top:0;
+    border:2px solid #fff;
+    border-radius:50%;
+    pointer-events:none;
+    z-index:99998;
+    transform:translate(-50%,-50%) scale(.2);
+    opacity:.95;
+    box-shadow:0 0 8px rgba(255,255,255,.65);
+    animation:clickCircleFade .6s ease-out forwards;
+}
+@keyframes clickCircleFade{
+    0%{transform:translate(-50%,-50%) scale(.2);opacity:.95;}
+    100%{transform:translate(-50%,-50%) scale(3.2);opacity:0;}
+}
+
+</style>
+</head>
+<body>
+<div class="notification-line success" id="notificationLine" role="status" aria-live="polite"></div>
+<div id="loadingScreen"><div class="simple-loader"></div></div>
+<div id="particles"></div>
+
+<header>
+    <nav>
+        <a class="back-btn" href="javascript:history.back()"><i class="fa-solid fa-arrow-left"></i> Back</a>
+        <div class="logo">XENARO</div>
+        <div class="nav-buttons">
+            <a class="join-btn" href="https://discord.gg/C64h96EGR7" target="_blank" rel="noopener">Join Now</a>
+        </div>
+    </nav>
+</header>
+
+<main class="page">
+    <section class="hero">
+        <span class="eyebrow">Xenaro Edits</span>
+        <h1>After Effects Project Files &amp; Assets</h1>
+        <p>Watch my edits and get the editable After Effects project files to create your own edit or learn from it, for less than the price of a cold drink.</p>
+    </section>
+
+    <section class="edits-section">
+        <div class="edits-grid">
+
+
+            <!-- TRIAL VIDEO -->
+            <article class="edit-card">
+                <div class="video-wrap">
+                    <video id="trialVideo" controls playsinline preload="metadata" controlsList="nodownload" oncontextmenu="return false;">
+                        <source src="trialxyz.mp4" type="video/mp4">
+                        Your browser does not support video playback.
+                    </video>
+                    <span class="video-badge">Preview Only</span>
+                </div>
+                <div class="edit-info">
+                    <h2 class="edit-title">Love Me Not – After Effects Project File</h2>
+                    <p class="edit-description">Get the fully editable “Love Me Not” After Effects Project File, including all animations, compositions, and effects.</p>
+                    <div class="price-row">
+                        <span class="price">₹39</span>
+                        <a class="buy-btn" id="trialBuyBtn" href="https://www.sellary.in/product/love-me-not-after-effects-project-file" target="_blank" rel="noopener">
+                            <i class="fa-solid fa-bag-shopping"></i> Buy Now
+                        </a>
+
+                    </div>
+                </div>
+            </article>
+
+            <!-- SOFTCORE TYPOGRAPHY -->
+            <article class="edit-card">
+                <div class="video-wrap">
+                    <video id="softcoreVideo" controls playsinline preload="metadata" controlsList="nodownload" oncontextmenu="return false;">
+                        <source src="softcore typography.mp4" type="video/mp4">
+                        Your browser does not support video playback.
+                    </video>
+                    <span class="video-badge">Preview Only</span>
+                </div>
+                <div class="edit-info">
+                    <h2 class="edit-title">Softcore Typography – After Effects Project File</h2>
+                    <p class="edit-description">Get the fully editable “Softcore Typography” After Effects project file with the included project assets, animations, compositions, effects, and keyframes.</p>
+                    <div class="price-row">
+                        <span class="price">₹99</span>
+                        <a class="buy-btn" href="https://www.sellary.in/product/softcore-typography-edit-after-effects-project-file" target="_blank" rel="noopener">
+                            <i class="fa-solid fa-bag-shopping"></i> Buy Now
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- COMING SOON PROJECT 2 -->
+            <article class="edit-card">
+                <div class="video-wrap">
+                    <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#050505;">
+                        <span style="font-family:'Poppins',sans-serif;font-size:20px;font-weight:700;opacity:.55;">COMING SOON</span>
+                    </div>
+                    <span class="video-badge">Coming Soon</span>
+                </div>
+                <div class="edit-info">
+                    <h2 class="edit-title">Coming Soon #2</h2>
+                    <p class="edit-description">Another After Effects project is coming soon.</p>
+                    <div class="price-row">
+                        <span class="price">₹149</span>
+                        <span class="buy-btn" style="opacity:.5;cursor:not-allowed;">Coming Soon</span>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </section>
+</main>
+
+<footer>
+    <h2>XENARO</h2>
+    <p>© 2026 All Rights Reserved.</p>
+</footer>
+
+
+<script>
+
+/* Create a fading white circle wherever the user clicks or touches */
+function createClickCircle(x,y){
+    const circle=document.createElement("span");
+    circle.className="click-circle";
+    circle.style.left=x+"px";
+    circle.style.top=y+"px";
+    document.body.appendChild(circle);
+    circle.addEventListener("animationend",()=>circle.remove());
+}
+document.addEventListener("pointerdown",(e)=>{
     createClickCircle(e.clientX,e.clientY);
 });
 
