@@ -271,7 +271,7 @@ nav{
     border-radius:18px;
     border:1px solid #fff;
     padding:clamp(20px,2.4vw,30px);
-    transition:transform .22s ease-out, border-color .3s ease;
+    transition:transform .22s ease-out, border-color .3s ease, box-shadow .3s ease;
     transform-style:flat;
     will-change:transform;
 }
@@ -303,6 +303,10 @@ nav{
 .glass-card:hover,
 .social-link:hover{
     border-color:transparent;
+    box-shadow:
+        0 0 14px rgba(255,0,110,.55),
+        0 0 28px rgba(0,207,255,.45),
+        0 0 48px rgba(170,80,255,.35);
 }
 
 @keyframes rainbowFlow{
@@ -382,7 +386,7 @@ nav{
     color:#f5f5f5;
     font-size:22px;
     text-decoration:none;
-    transition:.35s;
+    transition:transform .35s, box-shadow .35s, border-color .35s;
 }
 
 .social-link span{
@@ -508,6 +512,22 @@ footer h2{
     .stats h3{font-size:18px;}
 }
 
+/* White loading spinner */
+.white-loader{
+    width:64px;
+    height:64px;
+    border-radius:50%;
+    border:3px solid rgba(255,255,255,.14);
+    border-top-color:#fff;
+    border-right-color:#fff;
+    box-shadow:0 0 18px rgba(255,255,255,.35);
+    animation:whiteSpin .9s linear infinite;
+}
+
+@keyframes whiteSpin{
+    to{ transform:rotate(360deg); }
+}
+
 /* White click/touch circle fade effect */
 .click-circle{
     position:fixed;
@@ -534,12 +554,7 @@ footer h2{
 
 <body>
 <div id="loadingScreen">
-    <div class="loader">
-        <div class="loader-logo" aria-label="XENARO">
-            <span style="--i:0">X</span><span style="--i:1">E</span><span style="--i:2">N</span><span style="--i:3">A</span><span style="--i:4">R</span><span style="--i:5">O</span>
-        </div>
-        <div class="loader-bar"><i></i></div>
-    </div>
+    <div class="white-loader" aria-label="Loading"></div>
 </div>
 
 <div id="particles"></div>
@@ -638,7 +653,7 @@ window.addEventListener("load", () => {
             loadingScreen.classList.add("fade-out");
             setTimeout(() => loadingScreen.remove(), 1000);
         }
-    }, 1900);
+    }, 1200);
 });
 
 /* White dots drifting upwards in the background */
