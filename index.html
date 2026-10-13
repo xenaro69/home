@@ -74,13 +74,83 @@ body{
     pointer-events:none;
 }
 
+.loader{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:34px;
+}
+
+/* Spinning cyan orbit behind the logo */
+.loader::before{
+    content:"";
+    position:absolute;
+    top:50%;
+    left:50%;
+    width:min(70vw,260px);
+    height:min(70vw,260px);
+    margin:calc(min(70vw,260px) / -2) 0 0 calc(min(70vw,260px) / -2);
+    border-radius:50%;
+    border:2px solid rgba(0,207,255,.12);
+    border-top-color:#00cfff;
+    box-shadow:0 0 18px rgba(0,207,255,.35);
+    animation:orbitSpin 1.2s linear infinite;
+}
+
 .loader-logo{
+    position:relative;
+    z-index:1;
     font-size:clamp(36px,8vw,64px);
     font-weight:800;
     letter-spacing:4px;
     color:#00cfff;
     text-shadow:0 0 12px #00cfff,0 0 30px rgba(0,207,255,.6);
     animation:logoPulse 1.4s ease-in-out infinite;
+}
+
+/* Each letter rises out of a blur, one after another */
+.loader-logo span{
+    display:inline-block;
+    opacity:0;
+    filter:blur(10px);
+    transform:translateY(24px) scale(.8);
+    animation:letterIn .6s cubic-bezier(.2,.8,.2,1) forwards;
+    animation-delay:calc(var(--i) * .11s);
+}
+
+/* Thin progress line under the logo */
+.loader-bar{
+    position:relative;
+    z-index:1;
+    width:min(60vw,200px);
+    height:2px;
+    background:rgba(0,207,255,.15);
+    overflow:hidden;
+    border-radius:2px;
+}
+
+.loader-bar i{
+    display:block;
+    height:100%;
+    width:100%;
+    background:#00cfff;
+    box-shadow:0 0 10px #00cfff;
+    transform:scaleX(0);
+    transform-origin:left center;
+    animation:barFill 1.7s ease-in-out forwards;
+}
+
+@keyframes orbitSpin{
+    to{ transform:rotate(360deg); }
+}
+
+@keyframes letterIn{
+    to{ opacity:1; filter:blur(0); transform:translateY(0) scale(1); }
+}
+
+@keyframes barFill{
+    to{ transform:scaleX(1); }
 }
 
 @keyframes logoPulse{
@@ -226,8 +296,8 @@ nav{
 
 .stats{
     display:grid;
-    grid-template-columns:repeat(4,minmax(0,1fr));
-    gap:22px;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:22px 18px;
     margin-top:24px;
     transform:translateZ(30px);
 }
@@ -243,6 +313,12 @@ nav{
     opacity:.6;
     font-size:18px;
     line-height:1.4;
+    overflow-wrap:anywhere;
+    hyphens:auto;
+}
+
+.stats > div{
+    min-width:0;
 }
 
 /* Scrolling content area */
@@ -429,7 +505,14 @@ footer h2{
 </head>
 
 <body>
-<div id="loadingScreen"><div class="loader-logo">XENARO</div></div>
+<div id="loadingScreen">
+    <div class="loader">
+        <div class="loader-logo" aria-label="XENARO">
+            <span style="--i:0">X</span><span style="--i:1">E</span><span style="--i:2">N</span><span style="--i:3">A</span><span style="--i:4">R</span><span style="--i:5">O</span>
+        </div>
+        <div class="loader-bar"><i></i></div>
+    </div>
+</div>
 
 <div id="particles"></div>
 
@@ -527,7 +610,7 @@ window.addEventListener("load", () => {
             loadingScreen.classList.add("fade-out");
             setTimeout(() => loadingScreen.remove(), 1000);
         }
-    }, 900);
+    }, 1900);
 });
 
 /* White dots drifting upwards in the background */
