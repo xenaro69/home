@@ -30,7 +30,6 @@ html{
 }
 
 body{
-    min-height:100%;
     font-family:'Sunrise Brown','Poppins',sans-serif;
     background:#0a0a0a;
     color:#f5f5f5;
@@ -45,7 +44,6 @@ body{
     border-radius:100px;
 }
 
-/* Background particles */
 #particles{
     position:fixed;
     inset:0;
@@ -54,8 +52,6 @@ body{
     z-index:0;
 }
 
-
-/* Simple white circle loading screen */
 #loadingScreen{
     position:fixed;
     inset:0;
@@ -88,7 +84,6 @@ body{
     to{ transform:rotate(360deg); }
 }
 
-/* Header */
 header{
     position:fixed;
     top:0;
@@ -136,7 +131,6 @@ nav{
     align-items:center;
 }
 
-.about-btn,
 .join-btn{
     padding:10px 22px;
     background:#fff;
@@ -148,25 +142,20 @@ nav{
     transition:.35s;
 }
 
-.about-btn:hover,
 .join-btn:hover{
     transform:translateY(-3px);
     box-shadow:0 0 30px rgba(255,255,255,.5);
 }
 
-/* Page */
 .page{
     position:relative;
     z-index:2;
     padding-top:64px;
 }
 
-
-/* Original-style hero: WSP left, XENARO.69 right */
 .hero-section{
     width:100%;
     max-width:1320px;
-    min-height:auto;
     margin:0 auto;
     padding:42px clamp(24px,4vw,64px) 52px;
     display:grid;
@@ -201,11 +190,10 @@ nav{
 
 .glass-card{
     width:100%;
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.12);
+    background:#fff;
+    color:#000;
     border-radius:22px;
     padding:clamp(24px,3.4vw,38px);
-    backdrop-filter:blur(30px);
     box-shadow:0 0 40px rgba(255,255,255,.1),0 25px 60px rgba(0,0,0,.55);
     transition:box-shadow .3s ease,transform .22s ease-out;
     transform-style:preserve-3d;
@@ -240,7 +228,6 @@ nav{
 
 .stats h3{
     font-size:clamp(18px,2vw,26px);
-    color:#fff;
 }
 
 .stats span{
@@ -251,78 +238,12 @@ nav{
     line-height:1.4;
 }
 
-/* Scrolling content area */
 .content-flow{
     width:min(960px,calc(100% - 80px));
     margin:0 auto;
     padding:20px 0 90px;
 }
 
-.content-block{
-    margin:0 0 54px;
-}
-
-.section-eyebrow{
-    text-align:center;
-    font-size:14px;
-    letter-spacing:2.2px;
-    text-transform:uppercase;
-    color:rgba(255,255,255,.42);
-    margin-bottom:14px;
-}
-
-/* Action buttons below first ad */
-.action-grid{
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:16px;
-}
-
-.action-btn{
-    min-height:145px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:24px;
-    padding:28px 30px;
-    border-radius:24px;
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.14);
-    color:#f5f5f5;
-    text-decoration:none;
-    backdrop-filter:blur(28px);
-    box-shadow:0 18px 45px rgba(0,0,0,.35);
-    transition:.35s ease;
-}
-
-.action-btn:hover{
-    transform:translateY(-6px);
-    border-color:rgba(255,255,255,.45);
-    box-shadow:0 0 35px rgba(255,255,255,.14),0 24px 55px rgba(0,0,0,.5);
-}
-
-.action-copy{
-    display:flex;
-    flex-direction:column;
-    gap:7px;
-}
-
-.action-copy strong{
-    font-size:clamp(22px,2vw,28px);
-}
-
-.action-copy span{
-    font-size:18px;
-    line-height:1.5;
-    opacity:.62;
-}
-
-.action-btn i{
-    font-size:29px;
-    opacity:.9;
-}
-
-/* Social links at bottom of content */
 .social-section{
     padding-top:12px;
 }
@@ -399,16 +320,15 @@ footer h2{
 }
 
 @media(max-width:900px){
-header{ height:56px; }
+    header{ height:56px; }
     nav{ padding:0 18px; }
     .logo{ font-size:19px; }
     .nav-buttons{ gap:8px; }
-    .about-btn,.join-btn{ padding:8px 14px; font-size:13px; }
+    .join-btn{ padding:8px 14px; font-size:13px; }
 
     .page{ padding-top:56px; }
 
     .hero-section{
-        min-height:auto;
         grid-template-columns:1fr;
         gap:26px;
         padding:52px 20px 56px;
@@ -419,6 +339,8 @@ header{ height:56px; }
         font-size:clamp(27px,8vw,38px);
         margin-bottom:14px;
     }
+
+    .hero-left p{ font-size:16px; }
 
     .hero-right{
         width:100%;
@@ -431,26 +353,19 @@ header{ height:56px; }
         transform:none !important;
     }
 
+    .glass-card h2{ font-size:21px; }
+
     .glass-card h2,
     .glass-card > .card-layer > p,
     .stats{
         transform:none;
     }
 
+    .stats h3{ font-size:18px; }
+
     .content-flow{
         width:min(100% - 32px,700px);
         padding:10px 0 64px;
-    }
-
-    .content-block{ margin-bottom:34px; }
-.action-grid{
-        grid-template-columns:repeat(2,minmax(0,1fr));
-        gap:16px;
-    }
-
-    .action-btn{
-        min-height:115px;
-        padding:18px;
     }
 
     .social-links{ gap:10px; }
@@ -465,37 +380,19 @@ header{ height:56px; }
 }
 
 @media(max-width:520px){
-    .action-grid{ gap:10px; }
-    .action-btn{
-        min-height:105px;
-        padding:14px;
-        gap:10px;
-    }
-    .action-copy strong{ font-size:18px; }
-    .action-copy span{ font-size:15px; }
-    .action-btn i{ font-size:22px; }
+    .glass-card{ padding:22px 18px; }
 
     .stats{
-        display:grid;
         grid-template-columns:repeat(2,1fr);
         gap:18px 10px;
         padding-top:20px;
-        border-top:1px solid rgba(255,255,255,.1);
+        border-top:1px solid rgba(0,0,0,.1);
     }
 
     .stats h3{ font-size:clamp(18px,2vw,26px); }
     .stats span{ font-size:13px; }
 }
 
-@media(max-width:900px){
-    .hero-left h2{font-size:clamp(27px,8vw,38px);}
-    .hero-left p{font-size:16px;}
-    .glass-card h2{font-size:21px;}
-    .stats h3{font-size:18px;}
-}
-
-
-/* White click/touch circle fade effect */
 .click-circle{
     position:fixed;
     width:18px;
@@ -511,11 +408,11 @@ header{ height:56px; }
     box-shadow:0 0 8px rgba(255,255,255,.65);
     animation:clickCircleFade .6s ease-out forwards;
 }
+
 @keyframes clickCircleFade{
     0%{transform:translate(-50%,-50%) scale(.2);opacity:.95;}
     100%{transform:translate(-50%,-50%) scale(3.2);opacity:0;}
 }
-
 </style>
 </head>
 
@@ -526,9 +423,6 @@ header{ height:56px; }
 
 <header>
     <nav>
-        <div class="nav-buttons">
-            <a class="about-btn" href="javascript:history.back()"><i class="fa-solid fa-arrow-left"></i> Back</a>
-        </div>
         <div class="logo">XENARO</div>
         <div class="nav-buttons">
             <a class="join-btn" href="https://discord.gg/C64h96EGR7" target="_blank" rel="noopener">Join Now</a>
@@ -537,7 +431,6 @@ header{ height:56px; }
 </header>
 
 <main class="page">
-<!-- ORIGINAL-STYLE TOP HERO -->
     <section class="hero-section" id="home">
         <div class="hero-left">
             <h2>Wsp Homies!!!</h2>
@@ -572,9 +465,8 @@ header{ height:56px; }
         </div>
     </section>
 
-    <!-- SCROLLING CONTENT -->
     <div class="content-flow">
-<section class="social-section" id="socials">
+        <section class="social-section" id="socials">
             <div class="social-links">
                 <a href="https://www.youtube.com/@xenaro.69" target="_blank" rel="noopener" class="social-link" data-label="YOUTUBE CHANNEL">
                     <i class="fa-brands fa-youtube"></i><span>YouTube</span>
@@ -599,8 +491,6 @@ header{ height:56px; }
 </footer>
 
 <script>
-
-/* Create a fading white circle wherever the user clicks or touches */
 function createClickCircle(x,y){
     const circle=document.createElement("span");
     circle.className="click-circle";
@@ -609,6 +499,7 @@ function createClickCircle(x,y){
     document.body.appendChild(circle);
     circle.addEventListener("animationend",()=>circle.remove());
 }
+
 document.addEventListener("pointerdown",(e)=>{
     createClickCircle(e.clientX,e.clientY);
 });
@@ -655,14 +546,6 @@ function createParticle(){
     }, speed);
 }
 setInterval(createParticle,120);
-
-const hero = document.querySelector(".hero-left h1");
-if(hero){
-    hero.animate([
-        { opacity:0, transform:"translateY(40px)" },
-        { opacity:1, transform:"translateY(0px)" }
-    ],{ duration:1200, fill:"forwards" });
-}
 
 document.querySelectorAll(".glass-card").forEach(card => {
     card.addEventListener("mousemove", e => {
