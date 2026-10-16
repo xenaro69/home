@@ -865,6 +865,39 @@ footer h2{
     }
 }
 
+/* Cursor glow: a translucent circle that follows the mouse (created by JS on fine pointers only) */
+#cursorGlow{
+    position:fixed;
+    left:0;
+    top:0;
+    width:60px;
+    height:60px;
+    margin:-30px 0 0 -30px;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(255,255,255,.28) 0%, rgba(255,255,255,.12) 55%, rgba(255,255,255,0) 72%);
+    border:1px solid rgba(255,255,255,.22);
+    pointer-events:none;
+    z-index:8990;
+    opacity:0;
+    transition:opacity .3s ease;
+    will-change:transform;
+}
+
+/* Drag trail canvas: rainbow glowing line drawn while dragging on empty space */
+#trailCanvas{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    z-index:8989;
+}
+
+body.drawing{
+    user-select:none;
+    -webkit-user-select:none;
+}
+
 /* White click/touch circle fade effect */
 .click-circle{
     position:fixed;
@@ -1207,6 +1240,133 @@ document.addEventListener('keydown', (e)=>{
     ring.innerHTML = '<span class="rainbow-spin"></span>';
     card.prepend(ring);
 })();
+
+/* Cursor glow: a translucent circle that trails the pointer smoothly (mouse/trackpad only) */
+if(window.matchMedia('(pointer:fine)').matches){
+    const cursorGlow = document.createElement('div');
+    cursorGlow.id = 'cursorGlow';
+    document.body.appendChild(cursorGlow);
+
+    let targetX = -999, targetY = -999, glowX = -999, glowY = -999;
+
+    window.addEventListener('pointermove', e => {
+        targetX = e.clientX;
+        targetY = e.clientY;
+        cursorGlow.style.opacity = '1';
+    });
+
+    window.addEventListener('mouseout', e => {
+        if(!e.relatedTarget) cursorGlow.style.opacity = '0';
+    });
+
+    (function followCursor(){
+        glowX += (targetX - glowX) * 0.18;
+        glowY += (targetY - glowY) * 0.18;
+        cursorGlow.style.transform = `translate3d(${glowX}px, ${glowY}px, 0)`;
+        requestAnimationFrame(followCursor);
+    })();
+}
+
+/* Drag trail: holding the mouse on empty space and dragging draws a temporary glowing rainbow line */
+const trailCanvas = document.createElement('canvas');
+trailCanvas.id = 'trailCanvas';
+document.body.appendChild(trailCanvas);
+const trailCtx = trailCanvas.getContext('2d');
+
+function resizeTrail(){
+    trailCanvas.width = innerWidth;
+    trailCanvas.height = innerHeight;
+}
+resizeTrail();
+window.addEventListener('resize', resizeTrail);
+
+const TRAIL_LIFE = 380; // ms a point stays visible before the line fades away
+let trailStrokes = [];   // each press-and-drag is its own separate line
+let currentStroke = null;
+let pressPoint = null;
+let isDragging = false;
+
+// Dragging that starts on links, buttons or the profile/social cards does not draw
+const isInteractive = el => el.closest('a, button, input, textarea, header, .glass-card, .social-link, .profile-card');
+
+document.addEventListener('pointerdown', e => {
+    if(e.button !== 0 || isInteractive(e.target)) return;
+    isDragging = true;
+    currentStroke = null; // a new line starts only once the pointer actually moves
+    pressPoint = { x: e.clientX, y: e.clientY };
+    document.body.classList.add('drawing');
+});
+
+window.addEventListener('pointermove', e => {
+    if(!isDragging) return;
+    const point = { x: e.clientX, y: e.clientY, t: performance.now() };
+    if(!currentStroke){
+        // The first movement starts the line from where the press began
+        currentStroke = [{ x: pressPoint.x, y: pressPoint.y, t: point.t }, point];
+        trailStrokes.push(currentStroke);
+        return;
+    }
+    const last = currentStroke[currentStroke.length - 1];
+    // Skip tiny movements so the curve stays clean
+    if(Math.hypot(point.x - last.x, point.y - last.y) < 2) return;
+    currentStroke.push(point);
+});
+
+function stopDragging(){
+    isDragging = false;
+    currentStroke = null;
+    document.body.classList.remove('drawing');
+}
+window.addEventListener('pointerup', stopDragging);
+window.addEventListener('pointercancel', stopDragging);
+window.addEventListener('blur', stopDragging);
+
+(function drawTrail(){
+    const now = performance.now();
+    trailCtx.clearRect(0, 0, trailCanvas.width, trailCanvas.height);
+
+    // Age out old points in place so the line being drawn stays linked to its pointer
+    trailStrokes.forEach(s => { while(s.length && now - s[0].t >= TRAIL_LIFE) s.shift(); });
+    trailStrokes = trailStrokes.filter(s => s.length > 0 || s === currentStroke);
+    trailStrokes.forEach(pts => drawStroke(pts, now));
+
+    requestAnimationFrame(drawTrail);
+})();
+
+function drawStroke(pts, now){
+    const n = pts.length;
+    if(n >= 2){
+        trailCtx.lineCap = 'round';
+        trailCtx.lineJoin = 'round';
+        trailCtx.globalAlpha = 1;
+
+        // Midpoint between two points: the curve passes through midpoints and uses each point as a control
+        const mid = (a, b) => ({ x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 });
+        const shift = (now * 0.12) % 360; // slow colour flow
+
+        for(let i = 1; i < n; i++){
+            const age = (now - pts[i].t) / TRAIL_LIFE;
+            const width = 4 * (1 - age); // the line thins out as it fades
+            if(width <= 0.3) continue;
+
+            const start = i === 1 ? pts[0] : mid(pts[i - 1], pts[i]);
+            const end = i === n - 1 ? pts[i] : mid(pts[i], pts[i + 1]);
+            const hue = ((i / n) * 240 + shift) % 360; // rainbow runs along the line
+
+            // Opaque colour, so overlapping pieces stay smooth; the glow comes from a soft shadow
+            const color = `hsl(${hue}, 100%, 60%)`;
+            trailCtx.strokeStyle = color;
+            trailCtx.shadowColor = color;
+            trailCtx.shadowBlur = 22;
+            trailCtx.lineWidth = width;
+            trailCtx.beginPath();
+            trailCtx.moveTo(start.x, start.y);
+            trailCtx.quadraticCurveTo(pts[i].x, pts[i].y, end.x, end.y);
+            trailCtx.stroke();
+        }
+        trailCtx.shadowBlur = 0;
+    }
+}
 
 const isTouchDevice = () => {
     return (('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0));
