@@ -19,13 +19,6 @@
     font-display:swap;
 }
 
-/* Animatable angle so the rainbow gradient can rotate smoothly */
-@property --rainbow-angle{
-    syntax:'<angle>';
-    inherits:false;
-    initial-value:0deg;
-}
-
 *{
     margin:0;
     padding:0;
@@ -59,6 +52,24 @@ body{
     pointer-events:none;
     overflow:hidden;
     z-index:0;
+}
+
+/* Each dot is moved by a CSS transform only, so the browser animates it without main-thread work */
+.particle{
+    position:absolute;
+    bottom:-20px;
+    border-radius:50%;
+    background:#ffffff;
+    box-shadow:0 0 10px rgba(255,255,255,.6);
+    will-change:transform;
+    animation-name:particleDrift;
+    animation-timing-function:linear;
+    animation-iteration-count:infinite;
+}
+
+@keyframes particleDrift{
+    from{ transform:translateY(0); }
+    to{ transform:translateY(-115vh); }
 }
 
 /* Loading screen: cyan XENARO */
@@ -283,27 +294,37 @@ nav{
     will-change:transform;
 }
 
-/* Rainbow outline: a conic gradient spinning clockwise, one full turn per second.
+/* Rainbow outline: a wrapper clips a large conic-gradient square that spins clockwise,
+   one full turn per second. The spin is a transform, so it stays on the compositor.
    Shown only on hover (profile card and social buttons) */
-.glass-card::before,
-.social-link::before{
-    content:"";
+.rainbow{
     position:absolute;
     inset:-1px;
     border-radius:inherit;
     padding:2px;
-    background:conic-gradient(from var(--rainbow-angle),#ff0040,#ff9900,#ffee00,#33ff66,#00cfff,#3366ff,#cc33ff,#ff0040);
-    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite:xor;
-    mask-composite:exclude;
+    overflow:hidden;
     opacity:0;
     transition:opacity .3s ease;
     pointer-events:none;
+    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;
+    mask-composite:exclude;
+}
+
+.rainbow-spin{
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:150%;
+    aspect-ratio:1;
+    translate:-50% -50%;
+    background:conic-gradient(#ff0040,#ff9900,#ffee00,#33ff66,#00cfff,#3366ff,#cc33ff,#ff0040);
+    will-change:transform;
     animation:rainbowSpin 1s linear infinite;
 }
 
-.glass-card:hover::before,
-.social-link:hover::before{
+.glass-card:hover .rainbow,
+.social-link:hover .rainbow{
     opacity:1;
 }
 
@@ -320,7 +341,8 @@ nav{
 }
 
 @keyframes rainbowSpin{
-    to{ --rainbow-angle:360deg; }
+    from{ transform:rotate(0deg); }
+    to{ transform:rotate(360deg); }
 }
 
 .card-layer{ transform-style:flat; }
@@ -672,34 +694,32 @@ window.addEventListener("load", () => {
     }, 1200);
 });
 
-/* White dots drifting upwards in the background */
+/* White dots drifting upwards in the background.
+   A fixed pool is created once; CSS keyframes move them, so there are no timers or per-frame DOM writes. */
+const PARTICLE_COUNT = 40;
 const particleContainer = document.getElementById("particles");
-function createParticle(){
+for(let i = 0; i < PARTICLE_COUNT; i++){
     const p = document.createElement("span");
     const size = Math.random() * 6 + 2;
-    p.style.position = "absolute";
+    const duration = Math.random() * 3 + 5; // seconds for one crossing
+    p.className = "particle";
     p.style.width = size + "px";
     p.style.height = size + "px";
-    p.style.borderRadius = "50%";
-    p.style.background = "#ffffff";
-    p.style.opacity = Math.random() * 0.6;
     p.style.left = Math.random() * 100 + "vw";
-    p.style.top = "110vh";
-    p.style.boxShadow = "0 0 20px rgba(255,255,255,.6)";
+    p.style.opacity = Math.random() * 0.6;
+    p.style.animationDuration = duration + "s";
+    p.style.animationDelay = -(Math.random() * duration) + "s"; // negative delay spreads dots across the screen at start
     particleContainer.appendChild(p);
-
-    const speed = Math.random() * 5 + 6;
-    let y = 110;
-    const move = setInterval(() => {
-        y -= 0.2;
-        p.style.top = y + "vh";
-        if(y < -10){
-            clearInterval(move);
-            p.remove();
-        }
-    }, speed);
 }
-setInterval(createParticle,120);
+
+/* Add the spinning rainbow ring to the profile card and each social button */
+document.querySelectorAll(".glass-card, .social-link").forEach(el => {
+    const ring = document.createElement("span");
+    ring.className = "rainbow";
+    ring.setAttribute("aria-hidden", "true");
+    ring.innerHTML = '<span class="rainbow-spin"></span>';
+    el.prepend(ring);
+});
 
 const header = document.querySelector("header");
 window.addEventListener("scroll", () => {
