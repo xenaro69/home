@@ -550,20 +550,20 @@ footer h2{
     .stats h3{font-size:18px;}
 }
 
-/* White loading spinner */
-.white-loader{
-    width:64px;
-    height:64px;
-    border-radius:50%;
-    border:3px solid rgba(255,255,255,.14);
-    border-top-color:#fff;
-    border-right-color:#fff;
-    box-shadow:0 0 18px rgba(255,255,255,.35);
-    animation:whiteSpin .9s linear infinite;
+/* Loading spinner */
+.simple-loader {
+    width: 52px;
+    height: 52px;
+    border: 4px solid rgba(255, 255, 255, .18);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: simpleLoaderSpin .75s linear infinite;
 }
 
-@keyframes whiteSpin{
-    to{ transform:rotate(360deg); }
+@keyframes simpleLoaderSpin {
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 /* White click/touch circle fade effect */
@@ -592,7 +592,7 @@ footer h2{
 
 <body>
 <div id="loadingScreen">
-    <div class="white-loader" aria-label="Loading"></div>
+    <div class="simple-loader" aria-label="Loading"></div>
 </div>
 
 <div id="particles"></div>
@@ -683,15 +683,15 @@ document.addEventListener("pointerdown",(e)=>{
     createClickCircle(e.clientX,e.clientY);
 });
 
-/* Fade out the cyan XENARO loading screen once the page has loaded */
-window.addEventListener("load", () => {
+window.addEventListener('load', () => {
     setTimeout(() => {
-        const loadingScreen = document.getElementById("loadingScreen");
-        if(loadingScreen){
-            loadingScreen.classList.add("fade-out");
-            setTimeout(() => loadingScreen.remove(), 1000);
+        const loadingScreen = document.getElementById('loadingScreen');
+
+        if (loadingScreen) {
+            loadingScreen.classList.add('fade-out');
+            setTimeout(() => loadingScreen.remove(), 600);
         }
-    }, 1200);
+    }, 900);
 });
 
 /* White dots drifting upwards in the background.
