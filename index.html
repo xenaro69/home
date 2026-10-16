@@ -571,9 +571,9 @@ footer h2{
     position:fixed;
     left:0;
     top:0;
-    width:240px;
-    height:240px;
-    margin:-120px 0 0 -120px;
+    width:60px;
+    height:60px;
+    margin:-30px 0 0 -30px;
     border-radius:50%;
     background:radial-gradient(circle, rgba(255,255,255,.10) 0%, rgba(255,255,255,.035) 55%, rgba(255,255,255,0) 70%);
     border:1px solid rgba(255,255,255,.07);
@@ -809,6 +809,9 @@ document.addEventListener('pointerdown', e => {
 
 window.addEventListener('pointermove', e => {
     if(!isDragging) return;
+    const last = trailPoints[trailPoints.length - 1];
+    // Skip tiny movements so the curve stays clean
+    if(last && Math.hypot(e.clientX - last.x, e.clientY - last.y) < 2) return;
     trailPoints.push({ x: e.clientX, y: e.clientY, t: performance.now() });
 });
 
@@ -823,25 +826,51 @@ window.addEventListener('blur', stopDragging);
 (function drawTrail(){
     const now = performance.now();
     trailPoints = trailPoints.filter(p => now - p.t < TRAIL_LIFE);
-
     trailCtx.clearRect(0, 0, trailCanvas.width, trailCanvas.height);
-    trailCtx.lineCap = 'round';
-    trailCtx.lineJoin = 'round';
 
-    for(let i = 1; i < trailPoints.length; i++){
-        const a = trailPoints[i - 1];
-        const b = trailPoints[i];
-        const alpha = 1 - (now - b.t) / TRAIL_LIFE;
-        const hue = (i * 6 + now * 0.25) % 360; // colour shifts along the line and over time
-        const color = `hsla(${hue}, 100%, 60%, ${alpha})`;
+    const pts = trailPoints;
+    if(pts.length >= 2){
+        const first = pts[0];
+        const last = pts[pts.length - 1];
+        const shift = (now * 0.08) % 360; // slow colour flow
 
-        trailCtx.strokeStyle = color;
-        trailCtx.shadowColor = color;
-        trailCtx.shadowBlur = 16;
-        trailCtx.lineWidth = 1 + 4 * alpha;
+        // One continuous stroke: a smooth curve through the points, coloured by a gradient
+        // that runs along the line and fades out the older points
+        const span = Math.hypot(last.x - first.x, last.y - first.y);
+        const grad = span > 1
+            ? trailCtx.createLinearGradient(first.x, first.y, last.x, last.y)
+            : null;
+
+        const ageAlpha = p => Math.max(0, 1 - (now - p.t) / TRAIL_LIFE);
+        const colorAt = (f, p) => `hsla(${(f * 180 + shift) % 360}, 100%, 62%, ${ageAlpha(p)})`;
+
+        if(grad){
+            for(let i = 0; i < pts.length; i++){
+                grad.addColorStop(i / (pts.length - 1), colorAt(i / (pts.length - 1), pts[i]));
+            }
+        }
+
         trailCtx.beginPath();
-        trailCtx.moveTo(a.x, a.y);
-        trailCtx.lineTo(b.x, b.y);
+        trailCtx.moveTo(first.x, first.y);
+        for(let i = 1; i < pts.length - 1; i++){
+            const mx = (pts[i].x + pts[i + 1].x) / 2;
+            const my = (pts[i].y + pts[i + 1].y) / 2;
+            trailCtx.quadraticCurveTo(pts[i].x, pts[i].y, mx, my);
+        }
+        trailCtx.lineTo(last.x, last.y);
+
+        trailCtx.lineCap = 'round';
+        trailCtx.lineJoin = 'round';
+        const strokeStyle = grad || colorAt(1, last);
+
+        // Soft outer glow, then a crisp core line on top
+        trailCtx.strokeStyle = strokeStyle;
+        trailCtx.lineWidth = 12;
+        trailCtx.globalAlpha = 0.25;
+        trailCtx.stroke();
+
+        trailCtx.lineWidth = 3;
+        trailCtx.globalAlpha = 1;
         trailCtx.stroke();
     }
 
