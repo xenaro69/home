@@ -208,34 +208,53 @@ nav{
     max-width:90vw;
     transform-style:flat;
     will-change:transform;
-    transition:border-color .3s, box-shadow .3s;
+    transition:transform .22s ease-out, translate .35s ease, scale .35s ease, border-color .3s, box-shadow .3s;
 }
 
-/* Rainbow flowing outline, shown only on hover (profile card and action buttons) */
-.profile-card::before,
-.action-btn::before{
-    content:"";
+/* Rainbow outline: a clipped wrapper with a large conic-gradient square spinning clockwise,
+   one full turn per second. Shown only on hover */
+.rainbow{
     position:absolute;
     inset:0;
     border-radius:inherit;
     padding:2px;
-    background:linear-gradient(90deg,#ff0040,#ff9900,#ffee00,#33ff66,#00cfff,#3366ff,#cc33ff,#ff0040,#ff9900,#ffee00,#33ff66,#00cfff,#3366ff,#cc33ff,#ff0040);
-    background-size:200% 100%;
-    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite:xor;
-    mask-composite:exclude;
+    overflow:hidden;
     opacity:0;
     transition:opacity .3s ease;
     pointer-events:none;
-    animation:rainbowFlow 3s linear infinite;
+    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;
+    mask-composite:exclude;
 }
 
-.profile-card:hover::before,
-.action-btn:hover::before{
+.rainbow-spin{
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:150%;
+    aspect-ratio:1;
+    translate:-50% -50%;
+    background:conic-gradient(#ff0040,#ff9900,#ffee00,#33ff66,#00cfff,#3366ff,#cc33ff,#ff0040);
+    will-change:transform;
+    animation:rainbowSpin 1s linear infinite;
+}
+
+.profile-card:hover .rainbow{
     opacity:1;
 }
 
-.profile-card:hover,
+/* Hovered profile card pops out toward the viewer */
+.profile-card:hover{
+    translate:0 -12px;
+    scale:1.04;
+    border-color:transparent;
+    box-shadow:
+        0 0 14px rgba(255,0,110,.55),
+        0 0 28px rgba(0,207,255,.45),
+        0 0 48px rgba(170,80,255,.35),
+        0 24px 50px rgba(0,0,0,.6);
+}
+
 .action-btn:hover{
     border-color:transparent;
     box-shadow:
@@ -244,9 +263,9 @@ nav{
         0 0 48px rgba(170,80,255,.35);
 }
 
-@keyframes rainbowFlow{
-    from{ background-position:0% 50%; }
-    to{ background-position:100% 50%; }
+@keyframes rainbowSpin{
+    from{ transform:rotate(0deg); }
+    to{ transform:rotate(360deg); }
 }
 
 .profile-top{
@@ -1179,6 +1198,16 @@ document.addEventListener('keydown', (e)=>{
 });
 
 
+/* Add the spinning rainbow ring to the profile card */
+(function addRainbowRing(){
+    const card = document.querySelector('.profile-card');
+    const ring = document.createElement('span');
+    ring.className = 'rainbow';
+    ring.setAttribute('aria-hidden', 'true');
+    ring.innerHTML = '<span class="rainbow-spin"></span>';
+    card.prepend(ring);
+})();
+
 const isTouchDevice = () => {
     return (('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0));
 };
@@ -1196,10 +1225,10 @@ if(!isTouchDevice()){
 
     document.querySelector('.profile-card').addEventListener('mouseleave', ()=>{
         const card = document.querySelector('.profile-card');
-        card.style.transition = 'transform .4s cubic-bezier(.4,0,.2,1), border-color .3s, box-shadow .3s';
+        card.style.transition = 'transform .4s cubic-bezier(.4,0,.2,1), translate .4s ease, scale .4s ease, border-color .3s, box-shadow .3s';
         card.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)';
         setTimeout(()=>{
-            card.style.transition = 'border-color .3s, box-shadow .3s';
+            card.style.transition = 'translate .35s ease, scale .35s ease, border-color .3s, box-shadow .3s';
         }, 400);
     });
 }
