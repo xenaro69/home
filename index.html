@@ -575,8 +575,8 @@ footer h2{
     height:60px;
     margin:-30px 0 0 -30px;
     border-radius:50%;
-    background:radial-gradient(circle, rgba(255,255,255,.10) 0%, rgba(255,255,255,.035) 55%, rgba(255,255,255,0) 70%);
-    border:1px solid rgba(255,255,255,.07);
+    background:radial-gradient(circle, rgba(255,255,255,.28) 0%, rgba(255,255,255,.12) 55%, rgba(255,255,255,0) 72%);
+    border:1px solid rgba(255,255,255,.22);
     pointer-events:none;
     z-index:8990;
     opacity:0;
@@ -793,7 +793,7 @@ function resizeTrail(){
 resizeTrail();
 window.addEventListener('resize', resizeTrail);
 
-const TRAIL_LIFE = 650; // ms a point stays visible before the line fades away
+const TRAIL_LIFE = 380; // ms a point stays visible before the line fades away
 let trailPoints = [];
 let isDragging = false;
 
@@ -829,49 +829,37 @@ window.addEventListener('blur', stopDragging);
     trailCtx.clearRect(0, 0, trailCanvas.width, trailCanvas.height);
 
     const pts = trailPoints;
-    if(pts.length >= 2){
-        const first = pts[0];
-        const last = pts[pts.length - 1];
-        const shift = (now * 0.08) % 360; // slow colour flow
-
-        // One continuous stroke: a smooth curve through the points, coloured by a gradient
-        // that runs along the line and fades out the older points
-        const span = Math.hypot(last.x - first.x, last.y - first.y);
-        const grad = span > 1
-            ? trailCtx.createLinearGradient(first.x, first.y, last.x, last.y)
-            : null;
-
-        const ageAlpha = p => Math.max(0, 1 - (now - p.t) / TRAIL_LIFE);
-        const colorAt = (f, p) => `hsla(${(f * 180 + shift) % 360}, 100%, 62%, ${ageAlpha(p)})`;
-
-        if(grad){
-            for(let i = 0; i < pts.length; i++){
-                grad.addColorStop(i / (pts.length - 1), colorAt(i / (pts.length - 1), pts[i]));
-            }
-        }
-
-        trailCtx.beginPath();
-        trailCtx.moveTo(first.x, first.y);
-        for(let i = 1; i < pts.length - 1; i++){
-            const mx = (pts[i].x + pts[i + 1].x) / 2;
-            const my = (pts[i].y + pts[i + 1].y) / 2;
-            trailCtx.quadraticCurveTo(pts[i].x, pts[i].y, mx, my);
-        }
-        trailCtx.lineTo(last.x, last.y);
-
+    const n = pts.length;
+    if(n >= 2){
         trailCtx.lineCap = 'round';
         trailCtx.lineJoin = 'round';
-        const strokeStyle = grad || colorAt(1, last);
-
-        // Soft outer glow, then a crisp core line on top
-        trailCtx.strokeStyle = strokeStyle;
-        trailCtx.lineWidth = 12;
-        trailCtx.globalAlpha = 0.25;
-        trailCtx.stroke();
-
-        trailCtx.lineWidth = 3;
         trailCtx.globalAlpha = 1;
-        trailCtx.stroke();
+
+        // Midpoint between two points: the curve passes through midpoints and uses each point as a control
+        const mid = (a, b) => ({ x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 });
+        const shift = (now * 0.12) % 360; // slow colour flow
+
+        for(let i = 1; i < n; i++){
+            const age = (now - pts[i].t) / TRAIL_LIFE;
+            const width = 4 * (1 - age); // the line thins out as it fades
+            if(width <= 0.3) continue;
+
+            const start = i === 1 ? pts[0] : mid(pts[i - 1], pts[i]);
+            const end = i === n - 1 ? pts[i] : mid(pts[i], pts[i + 1]);
+            const hue = ((i / n) * 240 + shift) % 360; // rainbow runs along the line
+
+            // Opaque colour, so overlapping pieces stay smooth; the glow comes from a soft shadow
+            const color = `hsl(${hue}, 100%, 60%)`;
+            trailCtx.strokeStyle = color;
+            trailCtx.shadowColor = color;
+            trailCtx.shadowBlur = 12;
+            trailCtx.lineWidth = width;
+            trailCtx.beginPath();
+            trailCtx.moveTo(start.x, start.y);
+            trailCtx.quadraticCurveTo(pts[i].x, pts[i].y, end.x, end.y);
+            trailCtx.stroke();
+        }
+        trailCtx.shadowBlur = 0;
     }
 
     requestAnimationFrame(drawTrail);
