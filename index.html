@@ -194,7 +194,7 @@ nav{
     height:100%;
     margin:auto;
     display:flex;
-    justify-content:space-between;
+    justify-content:flex-end;
     align-items:center;
     padding:0 clamp(24px,4vw,64px);
     position:relative;
@@ -632,11 +632,9 @@ body.drawing{
 
 <header>
     <nav>
-        <div class="nav-buttons">
-            <a class="about-btn" href="about/"><i class="fa-solid fa-user"></i> About Me</a>
-        </div>
         <div class="logo">XENARO</div>
         <div class="nav-buttons">
+            <a class="about-btn" href="about/"><i class="fa-solid fa-user"></i> About Me</a>
             <a class="join-btn" href="https://discord.gg/C64h96EGR7" target="_blank" rel="noopener">Join Now</a>
         </div>
     </nav>
@@ -794,7 +792,9 @@ resizeTrail();
 window.addEventListener('resize', resizeTrail);
 
 const TRAIL_LIFE = 380; // ms a point stays visible before the line fades away
-let trailPoints = [];
+let trailStrokes = [];   // each press-and-drag is its own separate line
+let currentStroke = null;
+let pressPoint = null;
 let isDragging = false;
 
 // Dragging that starts on links, buttons or the profile/social cards does not draw
@@ -803,20 +803,29 @@ const isInteractive = el => el.closest('a, button, input, textarea, header, .gla
 document.addEventListener('pointerdown', e => {
     if(e.button !== 0 || isInteractive(e.target)) return;
     isDragging = true;
+    currentStroke = null; // a new line starts only once the pointer actually moves
+    pressPoint = { x: e.clientX, y: e.clientY };
     document.body.classList.add('drawing');
-    trailPoints.push({ x: e.clientX, y: e.clientY, t: performance.now() });
 });
 
 window.addEventListener('pointermove', e => {
     if(!isDragging) return;
-    const last = trailPoints[trailPoints.length - 1];
+    const point = { x: e.clientX, y: e.clientY, t: performance.now() };
+    if(!currentStroke){
+        // The first movement starts the line from where the press began
+        currentStroke = [{ x: pressPoint.x, y: pressPoint.y, t: point.t }, point];
+        trailStrokes.push(currentStroke);
+        return;
+    }
+    const last = currentStroke[currentStroke.length - 1];
     // Skip tiny movements so the curve stays clean
-    if(last && Math.hypot(e.clientX - last.x, e.clientY - last.y) < 2) return;
-    trailPoints.push({ x: e.clientX, y: e.clientY, t: performance.now() });
+    if(Math.hypot(point.x - last.x, point.y - last.y) < 2) return;
+    currentStroke.push(point);
 });
 
 function stopDragging(){
     isDragging = false;
+    currentStroke = null;
     document.body.classList.remove('drawing');
 }
 window.addEventListener('pointerup', stopDragging);
@@ -825,10 +834,17 @@ window.addEventListener('blur', stopDragging);
 
 (function drawTrail(){
     const now = performance.now();
-    trailPoints = trailPoints.filter(p => now - p.t < TRAIL_LIFE);
     trailCtx.clearRect(0, 0, trailCanvas.width, trailCanvas.height);
 
-    const pts = trailPoints;
+    // Age out old points in place so the line being drawn stays linked to its pointer
+    trailStrokes.forEach(s => { while(s.length && now - s[0].t >= TRAIL_LIFE) s.shift(); });
+    trailStrokes = trailStrokes.filter(s => s.length > 0 || s === currentStroke);
+    trailStrokes.forEach(pts => drawStroke(pts, now));
+
+    requestAnimationFrame(drawTrail);
+})();
+
+function drawStroke(pts, now){
     const n = pts.length;
     if(n >= 2){
         trailCtx.lineCap = 'round';
@@ -852,7 +868,7 @@ window.addEventListener('blur', stopDragging);
             const color = `hsl(${hue}, 100%, 60%)`;
             trailCtx.strokeStyle = color;
             trailCtx.shadowColor = color;
-            trailCtx.shadowBlur = 12;
+            trailCtx.shadowBlur = 22;
             trailCtx.lineWidth = width;
             trailCtx.beginPath();
             trailCtx.moveTo(start.x, start.y);
@@ -861,9 +877,7 @@ window.addEventListener('blur', stopDragging);
         }
         trailCtx.shadowBlur = 0;
     }
-
-    requestAnimationFrame(drawTrail);
-})();
+}
 
 const header = document.querySelector("header");
 window.addEventListener("scroll", () => {
