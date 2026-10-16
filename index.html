@@ -566,6 +566,39 @@ footer h2{
     }
 }
 
+/* Cursor glow: a faint translucent circle that follows the mouse (created by JS on fine pointers only) */
+#cursorGlow{
+    position:fixed;
+    left:0;
+    top:0;
+    width:240px;
+    height:240px;
+    margin:-120px 0 0 -120px;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(255,255,255,.10) 0%, rgba(255,255,255,.035) 55%, rgba(255,255,255,0) 70%);
+    border:1px solid rgba(255,255,255,.07);
+    pointer-events:none;
+    z-index:8990;
+    opacity:0;
+    transition:opacity .3s ease;
+    will-change:transform;
+}
+
+/* Drag trail canvas: rainbow glowing line drawn while dragging on empty space */
+#trailCanvas{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    z-index:8989;
+}
+
+body.drawing{
+    user-select:none;
+    -webkit-user-select:none;
+}
+
 /* White click/touch circle fade effect */
 .click-circle{
     position:fixed;
@@ -720,6 +753,100 @@ document.querySelectorAll(".glass-card, .social-link").forEach(el => {
     ring.innerHTML = '<span class="rainbow-spin"></span>';
     el.prepend(ring);
 });
+
+/* Cursor glow: a translucent circle that trails the pointer smoothly (mouse/trackpad only) */
+if(window.matchMedia('(pointer:fine)').matches){
+    const cursorGlow = document.createElement('div');
+    cursorGlow.id = 'cursorGlow';
+    document.body.appendChild(cursorGlow);
+
+    let targetX = -999, targetY = -999, glowX = -999, glowY = -999;
+
+    window.addEventListener('pointermove', e => {
+        targetX = e.clientX;
+        targetY = e.clientY;
+        cursorGlow.style.opacity = '1';
+    });
+
+    window.addEventListener('mouseout', e => {
+        if(!e.relatedTarget) cursorGlow.style.opacity = '0';
+    });
+
+    (function followCursor(){
+        glowX += (targetX - glowX) * 0.18;
+        glowY += (targetY - glowY) * 0.18;
+        cursorGlow.style.transform = `translate3d(${glowX}px, ${glowY}px, 0)`;
+        requestAnimationFrame(followCursor);
+    })();
+}
+
+/* Drag trail: holding the mouse on empty space and dragging draws a temporary glowing rainbow line */
+const trailCanvas = document.createElement('canvas');
+trailCanvas.id = 'trailCanvas';
+document.body.appendChild(trailCanvas);
+const trailCtx = trailCanvas.getContext('2d');
+
+function resizeTrail(){
+    trailCanvas.width = innerWidth;
+    trailCanvas.height = innerHeight;
+}
+resizeTrail();
+window.addEventListener('resize', resizeTrail);
+
+const TRAIL_LIFE = 650; // ms a point stays visible before the line fades away
+let trailPoints = [];
+let isDragging = false;
+
+// Dragging that starts on links, buttons or the profile/social cards does not draw
+const isInteractive = el => el.closest('a, button, input, textarea, header, .glass-card, .social-link');
+
+document.addEventListener('pointerdown', e => {
+    if(e.button !== 0 || isInteractive(e.target)) return;
+    isDragging = true;
+    document.body.classList.add('drawing');
+    trailPoints.push({ x: e.clientX, y: e.clientY, t: performance.now() });
+});
+
+window.addEventListener('pointermove', e => {
+    if(!isDragging) return;
+    trailPoints.push({ x: e.clientX, y: e.clientY, t: performance.now() });
+});
+
+function stopDragging(){
+    isDragging = false;
+    document.body.classList.remove('drawing');
+}
+window.addEventListener('pointerup', stopDragging);
+window.addEventListener('pointercancel', stopDragging);
+window.addEventListener('blur', stopDragging);
+
+(function drawTrail(){
+    const now = performance.now();
+    trailPoints = trailPoints.filter(p => now - p.t < TRAIL_LIFE);
+
+    trailCtx.clearRect(0, 0, trailCanvas.width, trailCanvas.height);
+    trailCtx.lineCap = 'round';
+    trailCtx.lineJoin = 'round';
+
+    for(let i = 1; i < trailPoints.length; i++){
+        const a = trailPoints[i - 1];
+        const b = trailPoints[i];
+        const alpha = 1 - (now - b.t) / TRAIL_LIFE;
+        const hue = (i * 6 + now * 0.25) % 360; // colour shifts along the line and over time
+        const color = `hsla(${hue}, 100%, 60%, ${alpha})`;
+
+        trailCtx.strokeStyle = color;
+        trailCtx.shadowColor = color;
+        trailCtx.shadowBlur = 16;
+        trailCtx.lineWidth = 1 + 4 * alpha;
+        trailCtx.beginPath();
+        trailCtx.moveTo(a.x, a.y);
+        trailCtx.lineTo(b.x, b.y);
+        trailCtx.stroke();
+    }
+
+    requestAnimationFrame(drawTrail);
+})();
 
 const header = document.querySelector("header");
 window.addEventListener("scroll", () => {
