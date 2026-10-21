@@ -1,253 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="icon" type="image/png" href="favicon.png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Xenaro - About Me</title>
+<link rel="icon" type="image/png" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 <style>
-@font-face{
-    font-family:'Sunrise Brown';
-    src:url('Sunrise Brown.otf') format('opentype');
-    font-weight:normal;
-    font-style:normal;
-    font-display:swap;
+@font-face {
+    font-family: 'Sunrise Brown';
+    src: url('Sunrise%20Brown.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }
 
-:root{
-    --site-font:'Sunrise Brown','Poppins',sans-serif;
+:root {
+    --site-font: 'Sunrise Brown', 'Poppins', sans-serif;
 }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body { height: 100%; overflow: hidden; }
+
+body {
+    font-family: var(--site-font);
+    background: #000;
+    color: #f5f5f5;
+    position: relative;
 }
 
-#particles{
-    position:fixed;
-    inset:0;
-    width:100%;
-    height:100%;
-    z-index:0;
-    pointer-events:none;
+#particles {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
 }
 
-.back-btn{
-    position:fixed;
-    top:11px;
-    left:24px;
-    z-index:600;
-    background:#ffffff;
-    border:1px solid rgba(255,255,255,.15);
-    color:#000000;
-    height:42px;
-    padding:0 18px;
-    border-radius:40px;
-    cursor:pointer;
-    transition:.3s;
-    display:flex;
-    align-items:center;
-    gap:8px;
-    font-family:var(--site-font);
-    font-size:16px;
-    font-weight:600;
+/* ---------- Buttons ---------- */
+.back-btn,
+.credits-btn {
+    position: fixed;
+    top: 11px;
+    z-index: 600;
+    background: #fff;
+    border: 1px solid rgba(255,255,255,.15);
+    color: #000;
+    height: 42px;
+    padding: 0 18px;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: .3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--site-font);
+    font-size: 16px;
+    font-weight: 600;
+}
+.back-btn   { left: 24px; }
+.credits-btn { right: 24px; }
+
+.back-btn:hover { background: #e6e6e6; transform: translateX(-3px); }
+.credits-btn:hover {
+    background: #e6e6e6;
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(255,255,255,.35);
 }
 
-.back-btn:hover{
-    background:#e6e6e6;
-    transform:translateX(-3px);
+/* ---------- Header ---------- */
+header {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 64px;
+    z-index: 500;
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(255,255,255,.12);
+    display: flex;
+    align-items: center;
 }
 
-.credits-btn{
-    position:fixed;
-    top:11px;
-    right:24px;
-    z-index:600;
-    background:#ffffff;
-    border:1px solid rgba(255,255,255,.15);
-    color:#000000;
-    height:42px;
-    padding:0 18px;
-    border-radius:40px;
-    cursor:pointer;
-    transition:.3s;
-    display:flex;
-    align-items:center;
-    gap:8px;
-    font-family:var(--site-font);
-    font-size:16px;
-    font-weight:600;
+nav {
+    width: 100%;
+    max-width: 1680px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 clamp(24px,4vw,64px);
+    position: relative;
 }
 
-.credits-btn:hover{
-    background:#e6e6e6;
-    transform:translateY(-2px);
-    box-shadow:0 0 20px rgba(255,255,255,.35);
+.logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #00cfff;
+    animation: cyanGlow 2.5s ease-in-out infinite;
 }
 
-html, body{
-    height:100%;
-    overflow:hidden;
-}
-
-body{
-    font-family:var(--site-font);
-    background:#000;
-    color:#f5f5f5;
-    position:relative;
-}
-
-header{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:64px;
-    z-index:500;
-    backdrop-filter:blur(18px);
-    background:transparent;
-    border-bottom:1px solid rgba(255,255,255,.12);
-    display:flex;
-    align-items:center;
-}
-
-nav{
-    width:100%;
-    max-width:1680px;
-    margin:auto;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:0 clamp(24px,4vw,64px);
-    position:relative;
-}
-
-.logo{
-    position:absolute;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-    font-size:22px;
-    font-weight:800;
-    letter-spacing:2px;
-    color:#00cfff;
-    text-shadow:0 0 8px rgba(0,207,255,.8), 0 0 16px rgba(0,207,255,.6), 0 0 30px rgba(0,207,255,.3);
-    animation:cyanGlow 2.5s ease-in-out infinite;
-}
-
-@keyframes cyanGlow{
-    0%,100%{
-        text-shadow:0 0 8px rgba(0,207,255,.8), 0 0 16px rgba(0,207,255,.6), 0 0 30px rgba(0,207,255,.3);
+@keyframes cyanGlow {
+    0%,100% {
+        text-shadow: 0 0 8px rgba(0,207,255,.8), 0 0 16px rgba(0,207,255,.6), 0 0 30px rgba(0,207,255,.3);
     }
-    50%{
-        text-shadow:0 0 12px rgba(0,207,255,1), 0 0 25px rgba(0,207,255,.8), 0 0 45px rgba(0,207,255,.5);
+    50% {
+        text-shadow: 0 0 12px rgba(0,207,255,1), 0 0 25px rgba(0,207,255,.8), 0 0 45px rgba(0,207,255,.5);
     }
 }
 
-#profilePage{
-    position:fixed;
-    inset:0;
-    z-index:1;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:clamp(90px,10vw,120px) clamp(24px,6vw,64px) clamp(200px,15vw,240px);
+/* ---------- Profile layout ---------- */
+#profilePage {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(90px,10vw,120px) clamp(24px,6vw,64px) clamp(200px,15vw,240px);
 }
 
-.profile-wrap{
-    width:100%;
-    max-width:1200px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:clamp(30px,5vw,60px);
-    flex-wrap:wrap;
+.profile-wrap {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(30px,5vw,60px);
+    flex-wrap: wrap;
 }
 
-.profile-intro{
-    flex:1;
-    min-width:280px;
+.profile-intro { flex: 1; min-width: 280px; }
+
+.profile-intro h2 {
+    font-size: clamp(48px,7vw,74px);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -.5px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+}
+.profile-intro h2 span { color: #fff; }
+
+.profile-intro p {
+    font-size: clamp(19px,1.8vw,24px);
+    line-height: 1.7;
+    color: #bbb;
+    max-width: 520px;
 }
 
-.profile-intro h2{
-    font-size:clamp(48px,7vw,74px);
-    font-weight:800;
-    line-height:1.1;
-    letter-spacing:-.5px;
-    text-transform:uppercase;
-    margin-bottom:24px;
+/* ---------- Profile card ---------- */
+.profile-card {
+    position: relative;
+    width: min(560px,88vw);
+    background: #0d0d0d;
+    border: 1px solid #fff;
+    border-radius: 18px;
+    padding: 22px 28px;
+    overflow: hidden;
+    transition: transform .22s ease-out, translate .35s ease, scale .35s ease, border-color .3s, box-shadow .3s;
 }
 
-.profile-intro h2 span{
-    color:#ffffff;
+.rainbow {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 2px;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity .3s ease;
+    pointer-events: none;
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
 }
 
-.profile-intro p{
-    font-size:clamp(19px,1.8vw,24px);
-    line-height:1.7;
-    color:#bbb;
-    max-width:520px;
+.rainbow-spin {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 150%;
+    aspect-ratio: 1;
+    translate: -50% -50%;
+    background: conic-gradient(#ff0040,#ff9900,#ffee00,#33ff66,#00cfff,#3366ff,#cc33ff,#ff0040);
+    animation: rainbowSpin 1s linear infinite;
 }
 
-/* Profile card: near-black, white outline at rest, rainbow on hover */
-.profile-card{
-    position:relative;
-    width:min(560px,88vw);
-    min-width:0;
-    height:auto;
-    background:#0d0d0d;
-    border:1px solid #fff;
-    border-radius:18px;
-    padding:22px 28px;
-    overflow:hidden;
-    max-width:90vw;
-    transform-style:flat;
-    will-change:transform;
-    transition:transform .22s ease-out, translate .35s ease, scale .35s ease, border-color .3s, box-shadow .3s;
+@keyframes rainbowSpin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
 }
 
-/* Rainbow outline: a clipped wrapper with a large conic-gradient square spinning clockwise,
-   one full turn per second. Shown only on hover */
-.rainbow{
-    position:absolute;
-    inset:0;
-    border-radius:inherit;
-    padding:2px;
-    overflow:hidden;
-    opacity:0;
-    transition:opacity .3s ease;
-    pointer-events:none;
-    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite:xor;
-    mask-composite:exclude;
-}
+.profile-card:hover .rainbow { opacity: 1; }
 
-.rainbow-spin{
-    position:absolute;
-    left:50%;
-    top:50%;
-    width:150%;
-    aspect-ratio:1;
-    translate:-50% -50%;
-    background:conic-gradient(#ff0040,#ff9900,#ffee00,#33ff66,#00cfff,#3366ff,#cc33ff,#ff0040);
-    will-change:transform;
-    animation:rainbowSpin 1s linear infinite;
-}
-
-.profile-card:hover .rainbow{
-    opacity:1;
-}
-
-/* Hovered profile card pops out toward the viewer */
-.profile-card:hover{
-    translate:0 -12px;
-    scale:1.04;
-    border-color:transparent;
+.profile-card:hover {
+    translate: 0 -12px;
+    scale: 1.04;
+    border-color: transparent;
     box-shadow:
         0 0 14px rgba(255,0,110,.55),
         0 0 28px rgba(0,207,255,.45),
@@ -255,677 +213,488 @@ nav{
         0 24px 50px rgba(0,0,0,.6);
 }
 
-.action-btn:hover{
-    border-color:transparent;
-    box-shadow:
-        0 0 14px rgba(255,0,110,.55),
-        0 0 28px rgba(0,207,255,.45),
-        0 0 48px rgba(170,80,255,.35);
+.profile-top {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 20px;
 }
 
-@keyframes rainbowSpin{
-    from{ transform:rotate(0deg); }
-    to{ transform:rotate(360deg); }
+.profile-photo-wrap {
+    position: relative;
+    flex: none;
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    touch-action: manipulation;
 }
 
-.profile-top{
-    position:relative;
-    display:flex;
-    align-items:center;
-    gap:18px;
-    margin-bottom:20px;
+.profile-photo-ring {
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,.2);
+    pointer-events: none;
 }
 
-.profile-photo-wrap{
-    position:relative;
-    flex:none;
-    width:100px;
-    height:100px;
-    cursor:pointer;
-    touch-action:manipulation;
+.profile-photo,
+.profile-photo-fallback {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    border: 3px solid rgba(255,255,255,.5);
+    transition: border-color .3s;
 }
 
-.profile-photo-ring{
-    position:absolute;
-    inset:-4px;
-    border-radius:50%;
-    border:2px solid rgba(255,255,255,.2);
+.profile-photo:hover { border-color: #00cfff; }
+
+.profile-photo-fallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(145deg,#1a1a1a,#050505);
+    color: #fff;
+    font-size: 32px;
+    font-weight: 800;
 }
 
-.profile-photo, .profile-photo-fallback{
-    width:100%;
-    height:100%;
-    border-radius:50%;
-    object-fit:cover;
-    display:block;
-    border:3px solid rgba(255,255,255,.5);
-    transition:.3s;
+.profile-names { min-width: 0; }
+
+.profile-names h2 {
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: .5px;
+    margin-bottom: 6px;
+    overflow-wrap: anywhere;
 }
 
-.profile-photo:hover{
-    border-color:#00cfff;
+.profile-tag {
+    font-size: 16px;
+    color: #888;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
-.profile-photo-fallback{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:linear-gradient(145deg,#1a1a1a,#050505);
-    color:#ffffff;
-    font-size:32px;
-    font-weight:800;
+.profile-list {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    gap: 12px 22px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-.profile-names{
-    min-width:0;
+.profile-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #d5d5d5;
+    transition: .3s;
+    white-space: nowrap;
+}
+.profile-list li:hover { color: #fff; transform: translateY(-3px); }
+.profile-list li i {
+    font-size: 22px;
+    color: rgba(255,255,255,.6);
+    width: 22px;
+    text-align: center;
+    transition: .3s;
+}
+.profile-list li:hover i { color: #fff; }
+
+/* ---------- Modals ---------- */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 8000;
+    background: rgba(0,0,0,.85);
+    backdrop-filter: blur(8px);
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn .3s ease-out;
+}
+.modal-overlay.active { display: flex; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.modal-box {
+    position: relative;
+    background: #000;
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 0 40px rgba(0,207,255,.15), 0 8px 32px rgba(0,0,0,.6);
+    animation: slideUp .3s cubic-bezier(.4,0,.2,1);
 }
 
-.profile-names h2{
-    font-size:30px;
-    font-weight:800;
-    letter-spacing:.5px;
-    margin-bottom:6px;
-    overflow-wrap:anywhere;
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
-.profile-tag{
-    font-size:16px;
-    color:#888;
-    letter-spacing:1px;
-    text-transform:uppercase;
+.modal-close-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .3s;
+}
+.modal-close-btn:hover { color: #00cfff; transform: rotate(90deg); }
+
+.modal-box h3 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    letter-spacing: .5px;
 }
 
-.profile-list{
-    list-style:none;
-    display:flex;
-    flex-direction:row;
-    gap:12px 22px;
-    flex-wrap:wrap;
-    justify-content:center;
+.modal-box p {
+    font-size: 20px;
+    line-height: 1.6;
+    text-align: center;
+    color: #d5d5d5;
 }
 
-.profile-list li{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    font-size:18px;
-    font-weight:500;
-    color:#d5d5d5;
-    transition:.3s;
-    flex-shrink:0;
-    white-space:nowrap;
+.password-input {
+    width: 100%;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.2);
+    color: #f5f5f5;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-family: var(--site-font);
+    font-size: 18px;
+    margin-bottom: 16px;
+    transition: .3s;
+}
+.password-input:focus {
+    outline: none;
+    border-color: rgba(0,207,255,.6);
+    background: rgba(255,255,255,.12);
+    box-shadow: 0 0 12px rgba(0,207,255,.2);
 }
 
-.profile-list li:hover{
-    color:#ffffff;
-    transform:translateY(-3px);
+.password-submit {
+    width: 100%;
+    background: #00cfff;
+    border: none;
+    color: #000;
+    padding: 12px;
+    border-radius: 12px;
+    font-family: var(--site-font);
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: .5px;
+    cursor: pointer;
+    transition: .3s;
+    text-transform: uppercase;
+}
+.password-submit:hover {
+    background: #00e6ff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,207,255,.3);
 }
 
-.profile-list li i{
-    font-size:22px;
-    color:rgba(255,255,255,.6);
-    width:22px;
-    text-align:center;
-    transition:.3s;
+.password-error {
+    color: #ff6b6b;
+    font-size: 15px;
+    margin-top: 8px;
+    display: none;
 }
+.password-error.show { display: block; }
 
-.profile-list li:hover i{
-    color:#ffffff;
+.credits-box {
+    max-width: 595px;
+    width: calc(100% - 40px);
+    padding: 49px 46px;
+    background: #000;
+    border: 1px solid rgba(255,255,255,.95);
+    border-radius: 14px;
+    box-shadow: 0 0 10px rgba(255,255,255,.45), 0 0 26px rgba(255,255,255,.18), 0 18px 50px rgba(0,0,0,.7);
+    text-align: center;
 }
-
-.action-buttons{
-    position:fixed;
-    bottom:150px;
-    left:50%;
-    transform:translateX(-50%);
-    z-index:400;
-    display:flex;
-    gap:12px;
-    justify-content:center;
-    flex-wrap:nowrap;
-    max-width:90vw;
+.credits-box p {
+    font-size: 28px;
+    line-height: 1.65;
+    color: #f5f5f5;
+    margin: 0;
 }
+.credits-box strong { color: #fff; text-shadow: 0 0 10px rgba(255,255,255,.55); }
 
-/* Action buttons: smaller, black with white outline, rainbow on hover */
-.action-btn{
-    position:relative;
-    background:#0d0d0d;
-    border:1px solid #fff;
-    color:#f5f5f5;
-    padding:7px 14px;
-    border-radius:14px;
-    cursor:pointer;
-    font-family:var(--site-font);
-    font-size:13px;
-    font-weight:600;
-    letter-spacing:.5px;
-    text-transform:uppercase;
-    transition:transform .3s, border-color .3s, box-shadow .3s;
-    flex-shrink:0;
-}
-
-.action-btn:hover{
-    transform:translateY(-2px);
-}
-
-.action-btn:active{
-    transform:translateY(0);
-}
-
-.btn-tooltip{
-    position:absolute;
-    bottom:100%;
-    left:50%;
-    transform:translateX(-50%);
-    background:#000;
-    border:1px solid #fff;
-    color:#ddd;
-    padding:8px 14px;
-    border-radius:8px;
-    font-size:14px;
-    white-space:nowrap;
-    opacity:0;
-    pointer-events:none;
-    transition:.3s;
-    margin-bottom:8px;
-    text-transform:none;
-    letter-spacing:normal;
-    font-weight:500;
-}
-
-.action-btn:hover .btn-tooltip{
-    opacity:1;
-}
-
-.modal-overlay{
-    display:none;
-    position:fixed;
-    inset:0;
-    z-index:8000;
-    background:rgba(0,0,0,.85);
-    backdrop-filter:blur(8px);
-    align-items:center;
-    justify-content:center;
-    animation:fadeIn .3s ease-out;
-}
-
-.modal-overlay.active{
-    display:flex;
-}
-
-@keyframes fadeIn{
-    from{ opacity:0; }
-    to{ opacity:1; }
-}
-
-.modal-box{
-    position:relative;
-    background:#000;
-    border:1px solid rgba(255,255,255,.2);
-    border-radius:20px;
-    padding:40px;
-    max-width:400px;
-    width:90%;
-    backdrop-filter:blur(30px);
-    box-shadow:0 0 40px rgba(0,207,255,.15), 0 8px 32px rgba(0,0,0,.6);
-    animation:slideUp .3s cubic-bezier(.4,0,.2,1);
-}
-
-@keyframes slideUp{
-    from{
-        opacity:0;
-        transform:translateY(20px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-.modal-close-btn{
-    position:absolute;
-    top:12px;
-    right:12px;
-    background:none;
-    border:none;
-    color:#ffffff;
-    font-size:24px;
-    cursor:pointer;
-    width:32px;
-    height:32px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    transition:.3s;
-}
-
-.modal-close-btn:hover{
-    color:#00cfff;
-    transform:rotate(90deg);
-}
-
-.modal-box h3{
-    font-size:24px;
-    font-weight:700;
-    margin-bottom:20px;
-    letter-spacing:.5px;
-    color:#f5f5f5;
-}
-
-.modal-box p{
-    font-size:20px;
-    line-height:1.6;
-    text-align:center;
-    color:#d5d5d5;
-}
-
-.password-input{
-    width:100%;
-    background:rgba(255,255,255,.08);
-    border:1px solid rgba(255,255,255,.2);
-    color:#f5f5f5;
-    padding:12px 16px;
-    border-radius:12px;
-    font-family:var(--site-font);
-    font-size:18px;
-    margin-bottom:16px;
-    transition:.3s;
-}
-
-.password-input:focus{
-    outline:none;
-    border-color:rgba(0,207,255,.6);
-    background:rgba(255,255,255,.12);
-    box-shadow:0 0 12px rgba(0,207,255,.2);
-}
-
-.password-submit{
-    width:100%;
-    background:#00cfff;
-    border:none;
-    color:#000000;
-    padding:12px;
-    border-radius:12px;
-    font-family:var(--site-font);
-    font-size:16px;
-    font-weight:700;
-    letter-spacing:.5px;
-    cursor:pointer;
-    transition:.3s;
-    text-transform:uppercase;
-}
-
-.password-submit:hover{
-    background:#00e6ff;
-    transform:translateY(-2px);
-    box-shadow:0 8px 20px rgba(0,207,255,.3);
-}
-
-.password-error{
-    color:#ff6b6b;
-    font-size:15px;
-    margin-top:8px;
-    display:none;
-}
-
-.password-error.show{
-    display:block;
-}
-
-
-.credits-box{
-    max-width:595px;
-    width:calc(100% - 40px);
-    padding:49px 46px;
-    background:#000;
-    border:1px solid rgba(255,255,255,.95);
-    border-radius:14px;
-    box-shadow:
-        0 0 10px rgba(255,255,255,.45),
-        0 0 26px rgba(255,255,255,.18),
-        0 18px 50px rgba(0,0,0,.7);
-    text-align:center;
-}
-
-.credits-box p{
-    font-size:28px;
-    line-height:1.65;
-    color:#f5f5f5;
-    margin:0;
-}
-
-.credits-box strong{
-    color:#fff;
-    text-shadow:0 0 10px rgba(255,255,255,.55);
-}
-
-.devices-box{
-    max-width:620px;
-    padding:34px;
-    overflow:hidden;
+.devices-box {
+    max-width: 620px;
+    padding: 34px;
+    overflow: hidden;
     background:
-        radial-gradient(circle at 85% 0%,rgba(0,207,255,.13),transparent 35%),
+        radial-gradient(circle at 85% 0%, rgba(0,207,255,.13), transparent 35%),
         #000;
 }
 
-.devices-box::before{
-    content:"";
-    position:absolute;
-    width:170px;
-    height:170px;
-    top:-90px;
-    right:-65px;
-    border-radius:50%;
-    border:1px solid rgba(0,207,255,.18);
-    box-shadow:0 0 70px rgba(0,207,255,.08);
-    pointer-events:none;
+.device-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 4px 42px 22px 0;
+    margin-bottom: 18px;
+    border-bottom: 1px solid rgba(255,255,255,.1);
 }
 
-.device-header{
-    display:flex;
-    align-items:center;
-    gap:16px;
-    padding:4px 42px 22px 0;
-    margin-bottom:18px;
-    border-bottom:1px solid rgba(255,255,255,.1);
+.device-icon {
+    width: 52px;
+    height: 52px;
+    flex: none;
+    display: grid;
+    place-items: center;
+    border-radius: 15px;
+    color: #00cfff;
+    font-size: 22px;
+    background: rgba(0,207,255,.1);
+    border: 1px solid rgba(0,207,255,.3);
 }
 
-.device-icon{
-    width:52px;
-    height:52px;
-    flex:none;
-    display:grid;
-    place-items:center;
-    border-radius:15px;
-    color:#00cfff;
-    font-size:22px;
-    background:rgba(0,207,255,.1);
-    border:1px solid rgba(0,207,255,.3);
-    box-shadow:inset 0 0 18px rgba(0,207,255,.06);
+.device-eyebrow {
+    color: #00cfff;
+    font-size: 15px;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
 }
 
-.device-eyebrow{
-    color:#00cfff;
-    font-size:15px;
-    letter-spacing:1.8px;
-    text-transform:uppercase;
-    margin-bottom:4px;
+.device-name {
+    color: #f5f5f5;
+    font-size: 27px;
+    font-weight: 700;
+    line-height: 1.25;
 }
 
-.device-name{
-    color:#f5f5f5;
-    font-size:27px;
-    font-weight:700;
-    line-height:1.25;
+.specs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
 }
 
-.specs-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
+.spec-box {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    align-items: center;
+    gap: 12px;
+    min-height: 82px;
+    background: rgba(255,255,255,.035);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 15px;
+    padding: 14px 15px;
+    transition: .3s;
+}
+.spec-box:hover {
+    background: rgba(0,207,255,.07);
+    border-color: rgba(0,207,255,.32);
+    transform: translateY(-3px);
 }
 
-.spec-box{
-    position:relative;
-    display:grid;
-    grid-template-columns:40px 1fr;
-    align-items:center;
-    gap:12px;
-    min-height:82px;
-    background:rgba(255,255,255,.035);
-    border:1px solid rgba(255,255,255,.1);
-    border-radius:15px;
-    padding:14px 15px;
-    text-align:left;
-    transition:.3s;
+.spec-icon {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border-radius: 11px;
+    background: rgba(255,255,255,.06);
+    color: #00cfff;
+    font-size: 16px;
+    transition: .3s;
+}
+.spec-box:hover .spec-icon { background: #00cfff; color: #071014; }
+
+.spec-info { min-width: 0; }
+
+.spec-label {
+    color: #888;
+    font-size: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+    display: block;
 }
 
-.spec-box:hover{
-    background:rgba(0,207,255,.07);
-    border-color:rgba(0,207,255,.32);
-    transform:translateY(-3px);
-    box-shadow:0 10px 24px rgba(0,0,0,.22);
+.spec-value {
+    color: #f2f2f2;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.25;
 }
 
-.spec-icon{
-    width:40px;
-    height:40px;
-    display:grid;
-    place-items:center;
-    border-radius:11px;
-    background:rgba(255,255,255,.06);
-    color:#00cfff;
-    font-size:16px;
-    transition:.3s;
+/* ---------- Loading screen ---------- */
+#loadingScreen {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity .45s ease, visibility .45s ease;
+}
+#loadingScreen.fade-out {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
 }
 
-.spec-box:hover .spec-icon{
-    background:#00cfff;
-    color:#071014;
+.simple-loader {
+    width: 52px;
+    height: 52px;
+    border: 4px solid rgba(255,255,255,.18);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: simpleLoaderSpin .75s linear infinite;
+}
+@keyframes simpleLoaderSpin { to { transform: rotate(360deg); } }
+
+/* ---------- Image viewer ---------- */
+#imageModal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 7000;
+    background: rgba(0,0,0,.95);
+    backdrop-filter: blur(5px);
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn .3s ease-out;
+}
+#imageModal.active { display: flex; }
+
+.modal-content {
+    position: relative;
+    max-width: 85vw;
+    max-height: 85vh;
 }
 
-.spec-info{
-    min-width:0;
+.modal-img {
+    display: block;
+    max-width: 85vw;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 12px;
 }
 
-.spec-label{
-    color:#888;
-    font-size:15px;
-    letter-spacing:1px;
-    text-transform:uppercase;
-    margin-bottom:3px;
-    display:block;
+.modal-close {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 32px;
+    cursor: pointer;
+    transition: .3s;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.modal-close:hover { color: #00cfff; transform: rotate(90deg); }
+
+/* ---------- Footer ---------- */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+    padding: 16px;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,.12);
+    color: #999;
+    font-size: 15px;
+    backdrop-filter: blur(10px);
+}
+footer h2 {
+    font-size: 18px;
+    margin-bottom: 2px;
+    color: #fff;
+    font-weight: 700;
 }
 
-.spec-value{
-    color:#f2f2f2;
-    font-size:20px;
-    font-weight:700;
-    line-height:1.25;
+/* ---------- Cursor, trail, click effects ---------- */
+#cursorGlow {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 60px;
+    height: 60px;
+    margin: -30px 0 0 -30px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,.28) 0%, rgba(255,255,255,.12) 55%, rgba(255,255,255,0) 72%);
+    border: 1px solid rgba(255,255,255,.22);
+    pointer-events: none;
+    z-index: 8990;
+    opacity: 0;
+    transition: opacity .3s ease;
+    will-change: transform;
 }
 
-
-/* Simple white circle loading screen */
-#loadingScreen{
-    position:fixed;
-    inset:0;
-    z-index:99999;
-    background:#000;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    opacity:1;
-    visibility:visible;
-    transition:opacity .45s ease, visibility .45s ease;
+#trailCanvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 8989;
 }
 
-#loadingScreen.fade-out{
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
+body.drawing { user-select: none; -webkit-user-select: none; }
+
+.click-circle {
+    position: fixed;
+    width: 18px;
+    height: 18px;
+    left: 0;
+    top: 0;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99998;
+    transform: translate(-50%,-50%) scale(.2);
+    opacity: .95;
+    box-shadow: 0 0 8px rgba(255,255,255,.65);
+    animation: clickCircleFade .6s ease-out forwards;
+}
+@keyframes clickCircleFade {
+    0%   { transform: translate(-50%,-50%) scale(.2); opacity: .95; }
+    100% { transform: translate(-50%,-50%) scale(3.2); opacity: 0; }
 }
 
-.simple-loader{
-    width:52px;
-    height:52px;
-    border:4px solid rgba(255,255,255,.18);
-    border-top-color:#fff;
-    border-radius:50%;
-    animation:simpleLoaderSpin .75s linear infinite;
-}
-
-@keyframes simpleLoaderSpin{
-    to{ transform:rotate(360deg); }
-}
-
-#imageModal{
-    display:none;
-    position:fixed;
-    inset:0;
-    z-index:7000;
-    background:rgba(0,0,0,.95);
-    backdrop-filter:blur(5px);
-    align-items:center;
-    justify-content:center;
-    animation:fadeIn .3s ease-out;
-}
-
-#imageModal.active{
-    display:flex;
-}
-
-.modal-content{
-    position:relative;
-    max-width:85vw;
-    max-height:85vh;
-}
-
-.modal-img{
-    width:100%;
-    height:100%;
-    max-width:85vw;
-    max-height:85vh;
-    object-fit:contain;
-    border-radius:12px;
-    display:block;
-}
-
-.modal-close{
-    position:absolute;
-    top:-40px;
-    right:0;
-    background:none;
-    border:none;
-    color:#ffffff;
-    font-size:32px;
-    cursor:pointer;
-    transition:.3s;
-    padding:0;
-    width:40px;
-    height:40px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.modal-close:hover{
-    color:#00cfff;
-    transform:rotate(90deg);
-}
-
-footer{
-    position:fixed;
-    bottom:0;
-    left:0;
-    width:100%;
-    z-index:2;
-    padding:16px;
-    text-align:center;
-    border-top:1px solid rgba(255,255,255,.12);
-    color:#999;
-    font-size:15px;
-    background:transparent;
-    backdrop-filter:blur(10px);
-}
-
-footer h2{
-    font-size:18px;
-    margin-bottom:2px;
-    color:#ffffff;
-    font-weight:700;
-}
-
-@media(max-width:768px){
-    .profile-card{
-        width:100%;
-        min-width:0;
-        max-width:calc(100vw - 48px);
-        padding:18px 20px;
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+    .profile-card {
+        width: 100%;
+        max-width: calc(100vw - 48px);
+        padding: 18px 20px;
     }
-
-    .profile-intro h2{
-        font-size:clamp(40px,11vw,56px);
-    }
-
-    .devices-box{
-        padding:28px 20px 22px;
-    }
-
-    .specs-grid{
-        grid-template-columns:1fr;
-    }
-
-    .device-header{
-        gap:12px;
-        padding-right:36px;
-    }
-
-    .device-name{
-        font-size:22px;
-    }
+    .profile-intro h2 { font-size: clamp(40px,11vw,56px); }
+    .devices-box { padding: 28px 20px 22px; }
+    .specs-grid { grid-template-columns: 1fr; }
+    .device-header { gap: 12px; padding-right: 36px; }
+    .device-name { font-size: 22px; }
 }
-
-/* Cursor glow: a translucent circle that follows the mouse (created by JS on fine pointers only) */
-#cursorGlow{
-    position:fixed;
-    left:0;
-    top:0;
-    width:60px;
-    height:60px;
-    margin:-30px 0 0 -30px;
-    border-radius:50%;
-    background:radial-gradient(circle, rgba(255,255,255,.28) 0%, rgba(255,255,255,.12) 55%, rgba(255,255,255,0) 72%);
-    border:1px solid rgba(255,255,255,.22);
-    pointer-events:none;
-    z-index:8990;
-    opacity:0;
-    transition:opacity .3s ease;
-    will-change:transform;
-}
-
-/* Drag trail canvas: rainbow glowing line drawn while dragging on empty space */
-#trailCanvas{
-    position:fixed;
-    inset:0;
-    width:100%;
-    height:100%;
-    pointer-events:none;
-    z-index:8989;
-}
-
-body.drawing{
-    user-select:none;
-    -webkit-user-select:none;
-}
-
-/* White click/touch circle fade effect */
-.click-circle{
-    position:fixed;
-    width:18px;
-    height:18px;
-    left:0;
-    top:0;
-    border:2px solid #fff;
-    border-radius:50%;
-    pointer-events:none;
-    z-index:99998;
-    transform:translate(-50%,-50%) scale(.2);
-    opacity:.95;
-    box-shadow:0 0 8px rgba(255,255,255,.65);
-    animation:clickCircleFade .6s ease-out forwards;
-}
-
-@keyframes clickCircleFade{
-    0%{
-        transform:translate(-50%,-50%) scale(.2);
-        opacity:.95;
-    }
-    100%{
-        transform:translate(-50%,-50%) scale(3.2);
-        opacity:0;
-    }
-}
-
 </style>
 </head>
 <body>
@@ -939,7 +708,7 @@ body.drawing{
     <span>Back</span>
 </button>
 
-<button class="credits-btn" onclick="openCreditsModal()">
+<button class="credits-btn" onclick="openModal('creditsModal')">
     <i class="fa-solid fa-code"></i>
     <span>Credits</span>
 </button>
@@ -958,10 +727,11 @@ body.drawing{
         </div>
 
         <div class="profile-card">
+            <span class="rainbow" aria-hidden="true"><span class="rainbow-spin"></span></span>
             <div class="profile-top">
                 <div class="profile-photo-wrap" id="photoWrap">
                     <div class="profile-photo-ring"></div>
-                    <img src="profile.png" alt="Xenaro" class="profile-photo" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'profile-photo-fallback',textContent:'X'}))">
+                    <img id="profilePhoto" src="profile.png" alt="Xenaro" class="profile-photo">
                 </div>
                 <div class="profile-names">
                     <h2>Xenaro</h2>
@@ -977,26 +747,28 @@ body.drawing{
     </div>
 </div>
 
+<!-- Password modal (no trigger on the page yet; call openModal('passwordModal')) -->
 <div id="passwordModal" class="modal-overlay">
     <div class="modal-box">
-        <button class="modal-close-btn" onclick="closePasswordModal()">&times;</button>
+        <button class="modal-close-btn" onclick="closeModal('passwordModal')">&times;</button>
         <h3>Enter Password</h3>
-        <input type="password" id="passwordInput" class="password-input" placeholder="Enter password..." onkeypress="if(event.key==='Enter') submitPassword()">
-        <button class="password-submit" onclick="submitPassword()">Submit</button>
+        <input type="password" id="passwordInput" class="password-input" placeholder="Enter password...">
+        <button class="password-submit" id="passwordSubmit">Submit</button>
         <div class="password-error" id="passwordError">Incorrect password</div>
     </div>
 </div>
 
 <div id="aboutMeModal" class="modal-overlay">
     <div class="modal-box">
-        <button class="modal-close-btn" onclick="closeAboutMeModal()">&times;</button>
+        <button class="modal-close-btn" onclick="closeModal('aboutMeModal')">&times;</button>
         <p>I'm femboy.</p>
     </div>
 </div>
 
+<!-- Devices modal (no trigger on the page yet; call openModal('devicesModal')) -->
 <div id="devicesModal" class="modal-overlay">
     <div class="modal-box devices-box">
-        <button class="modal-close-btn" onclick="closeDevicesModal()">&times;</button>
+        <button class="modal-close-btn" onclick="closeModal('devicesModal')">&times;</button>
         <div class="device-header">
             <div class="device-icon"><i class="fa-solid fa-laptop"></i></div>
             <div>
@@ -1004,38 +776,22 @@ body.drawing{
                 <div class="device-name">Lenovo LOQ 15IAX9</div>
             </div>
         </div>
-
         <div class="specs-grid">
             <div class="spec-box">
                 <div class="spec-icon"><i class="fa-solid fa-microchip"></i></div>
-                <div class="spec-info">
-                    <span class="spec-label">Processor</span>
-                    <span class="spec-value">Intel Core i5</span>
-                </div>
+                <div class="spec-info"><span class="spec-label">Processor</span><span class="spec-value">Intel Core i5</span></div>
             </div>
-
             <div class="spec-box">
                 <div class="spec-icon"><i class="fa-solid fa-display"></i></div>
-                <div class="spec-info">
-                    <span class="spec-label">Graphics</span>
-                    <span class="spec-value">NVIDIA RTX 3050</span>
-                </div>
+                <div class="spec-info"><span class="spec-label">Graphics</span><span class="spec-value">NVIDIA RTX 3050</span></div>
             </div>
-
             <div class="spec-box">
                 <div class="spec-icon"><i class="fa-solid fa-memory"></i></div>
-                <div class="spec-info">
-                    <span class="spec-label">Memory</span>
-                    <span class="spec-value">16 GB RAM</span>
-                </div>
+                <div class="spec-info"><span class="spec-label">Memory</span><span class="spec-value">16 GB RAM</span></div>
             </div>
-
             <div class="spec-box">
                 <div class="spec-icon"><i class="fa-solid fa-hard-drive"></i></div>
-                <div class="spec-info">
-                    <span class="spec-label">Storage</span>
-                    <span class="spec-value">512 GB SSD</span>
-                </div>
+                <div class="spec-info"><span class="spec-label">Storage</span><span class="spec-value">512 GB SSD</span></div>
             </div>
         </div>
     </div>
@@ -1043,14 +799,14 @@ body.drawing{
 
 <div id="creditsModal" class="modal-overlay">
     <div class="modal-box credits-box">
-        <button class="modal-close-btn" onclick="closeCreditsModal()">&times;</button>
+        <button class="modal-close-btn" onclick="closeModal('creditsModal')">&times;</button>
         <p>Website created with help from <strong>ChatGPT</strong> and <strong>Claude</strong>.</p>
     </div>
 </div>
 
 <div id="imageModal">
     <div class="modal-content">
-        <button class="modal-close" onclick="closeModal()">&times;</button>
+        <button class="modal-close" id="imageModalClose">&times;</button>
         <img src="profile.png" alt="Xenaro" class="modal-img">
     </div>
 </div>
@@ -1061,258 +817,207 @@ body.drawing{
 </footer>
 
 <script>
+/* ---------- Modal helpers ---------- */
+const OVERLAY_IDS = ['passwordModal', 'aboutMeModal', 'devicesModal', 'creditsModal'];
 
-/* Create a fading white circle wherever the user clicks or touches */
-function createClickCircle(x, y){
-    const circle = document.createElement("span");
-    circle.className = "click-circle";
-    circle.style.left = x + "px";
-    circle.style.top = y + "px";
-    document.body.appendChild(circle);
-
-    circle.addEventListener("animationend", () => circle.remove());
+function openModal(id) {
+    document.getElementById(id)?.classList.add('active');
 }
 
-document.addEventListener("pointerdown", (e) => {
-    createClickCircle(e.clientX, e.clientY);
+function closeModal(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.remove('active');
+    if (id === 'passwordModal') {
+        document.getElementById('passwordInput').value = '';
+        document.getElementById('passwordError').classList.remove('show');
+    }
+}
+
+// Close overlay when clicking the dark background
+OVERLAY_IDS.forEach(id => {
+    document.getElementById(id).addEventListener('click', e => {
+        if (e.target.id === id) closeModal(id);
+    });
 });
 
-const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
+const imageModal = document.getElementById('imageModal');
+function closeImageModal() { imageModal.classList.remove('active'); }
 
-function resize(){
-    canvas.width = innerWidth;
-    canvas.height = innerHeight;
+// Single Escape handler for every modal
+document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    OVERLAY_IDS.forEach(closeModal);
+    closeImageModal();
+});
+
+/* ---------- Password (optional, not wired to a button) ---------- */
+function submitPassword() {
+    const input = document.getElementById('passwordInput');
+    const errorEl = document.getElementById('passwordError');
+    if (input.value === '2401') {
+        closeModal('passwordModal');
+        openModal('aboutMeModal');
+    } else {
+        errorEl.classList.add('show');
+        input.value = '';
+    }
 }
-resize();
-addEventListener("resize", resize);
+document.getElementById('passwordSubmit').addEventListener('click', submitPassword);
+document.getElementById('passwordInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') submitPassword();
+});
 
-const particles = Array.from({length:70},()=>({
-    x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height,
-    r:Math.random()*2+1,
-    s:Math.random()*1.2+0.3,
-    a:Math.random()*0.7+0.2
-}));
+/* ---------- Profile photo: show a fallback and log the reason if it fails ---------- */
+const profilePhoto = document.getElementById('profilePhoto');
 
-function animate(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    particles.forEach(p=>{
-        ctx.beginPath();
-        ctx.fillStyle=`rgba(255,255,255,${p.a})`;
-        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx.fill();
-        p.y-=p.s;
-        if(p.y<-5){
-            p.y=canvas.height+5;
-            p.x=Math.random()*canvas.width;
-        }
-    });
-    requestAnimationFrame(animate);
+function showFallback(img) {
+    const fallback = document.createElement('div');
+    fallback.className = 'profile-photo-fallback';
+    fallback.textContent = 'X';
+    img.replaceWith(fallback);
 }
-animate();
 
-window.addEventListener('load', ()=>{
-    setTimeout(()=>{
-        const loadingScreen = document.getElementById('loadingScreen');
-        if(loadingScreen){
-            loadingScreen.classList.add('fade-out');
-            setTimeout(()=>loadingScreen.remove(), 600);
-        }
+profilePhoto.addEventListener('error', () => {
+    console.warn('profile.png failed to load. Check that it sits next to index.html and the name matches exactly (case-sensitive).');
+    showFallback(profilePhoto);
+});
+
+// Image may finish loading before this script runs (cached); handle that case
+if (profilePhoto.complete && profilePhoto.naturalWidth === 0) {
+    showFallback(profilePhoto);
+}
+
+// Click the photo to open it full size
+document.getElementById('photoWrap').addEventListener('click', () => openModal('imageModalWrap'));
+// The image viewer uses its own element, not an overlay in OVERLAY_IDS
+document.getElementById('photoWrap').addEventListener('click', () => imageModal.classList.add('active'));
+document.getElementById('imageModalClose').addEventListener('click', closeImageModal);
+imageModal.addEventListener('click', e => {
+    if (e.target === imageModal) closeImageModal();
+});
+
+/* ---------- Loading screen ---------- */
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        const screen = document.getElementById('loadingScreen');
+        if (!screen) return;
+        screen.classList.add('fade-out');
+        setTimeout(() => screen.remove(), 600);
     }, 900);
 });
 
-const photoWrap = document.getElementById('photoWrap');
-const imageModal = document.getElementById('imageModal');
+/* ---------- Particles ---------- */
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
 
-photoWrap.addEventListener('click', ()=>{
-    imageModal.classList.add('active');
-});
-
-function closeModal(){
-    imageModal.classList.remove('active');
+function resizeCanvas() {
+    canvas.width = innerWidth;
+    canvas.height = innerHeight;
 }
+resizeCanvas();
+addEventListener('resize', resizeCanvas);
 
-imageModal.addEventListener('click', (e)=>{
-    if(e.target === imageModal){
-        closeModal();
+const particles = Array.from({ length: 70 }, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 2 + 1,
+    s: Math.random() * 1.2 + 0.3,
+    a: Math.random() * 0.7 + 0.2
+}));
+
+(function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (const p of particles) {
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(255,255,255,${p.a})`;
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+        p.y -= p.s;
+        if (p.y < -5) {
+            p.y = canvas.height + 5;
+            p.x = Math.random() * canvas.width;
+        }
     }
-});
-
-document.addEventListener('keydown', (e)=>{
-    if(e.key === 'Escape' && imageModal.classList.contains('active')){
-        closeModal();
-    }
-});
-
-// Modal Functions
-function openPasswordModal(){
-    const modal = document.getElementById('passwordModal');
-    modal.classList.add('active');
-    document.getElementById('passwordInput').focus();
-    document.getElementById('passwordError').classList.remove('show');
-}
-
-function closePasswordModal(){
-    const modal = document.getElementById('passwordModal');
-    modal.classList.remove('active');
-    document.getElementById('passwordInput').value = '';
-    document.getElementById('passwordError').classList.remove('show');
-}
-
-function submitPassword(){
-    const password = document.getElementById('passwordInput').value;
-    const errorEl = document.getElementById('passwordError');
-
-    if(password === '2401'){
-        closePasswordModal();
-        openAboutMeModal();
-    } else {
-        errorEl.classList.add('show');
-        document.getElementById('passwordInput').value = '';
-    }
-}
-
-function openAboutMeModal(){
-    const modal = document.getElementById('aboutMeModal');
-    modal.classList.add('active');
-}
-
-function closeAboutMeModal(){
-    const modal = document.getElementById('aboutMeModal');
-    modal.classList.remove('active');
-}
-
-function openDevicesModal(){
-    const modal = document.getElementById('devicesModal');
-    modal.classList.add('active');
-}
-
-function closeDevicesModal(){
-    const modal = document.getElementById('devicesModal');
-    modal.classList.remove('active');
-}
-
-function openCreditsModal(){
-    const modal = document.getElementById('creditsModal');
-    modal.classList.add('active');
-}
-
-function closeCreditsModal(){
-    const modal = document.getElementById('creditsModal');
-    modal.classList.remove('active');
-}
-
-// Close modals on overlay click
-document.getElementById('passwordModal').addEventListener('click', (e)=>{
-    if(e.target.id === 'passwordModal') closePasswordModal();
-});
-
-document.getElementById('aboutMeModal').addEventListener('click', (e)=>{
-    if(e.target.id === 'aboutMeModal') closeAboutMeModal();
-});
-
-document.getElementById('devicesModal').addEventListener('click', (e)=>{
-    if(e.target.id === 'devicesModal') closeDevicesModal();
-});
-
-document.getElementById('creditsModal').addEventListener('click', (e)=>{
-    if(e.target.id === 'creditsModal') closeCreditsModal();
-});
-
-// Close modals on Escape key
-document.addEventListener('keydown', (e)=>{
-    if(e.key === 'Escape'){
-        closePasswordModal();
-        closeAboutMeModal();
-        closeDevicesModal();
-        closeCreditsModal();
-    }
-});
-
-
-/* Add the spinning rainbow ring to the profile card */
-(function addRainbowRing(){
-    const card = document.querySelector('.profile-card');
-    const ring = document.createElement('span');
-    ring.className = 'rainbow';
-    ring.setAttribute('aria-hidden', 'true');
-    ring.innerHTML = '<span class="rainbow-spin"></span>';
-    card.prepend(ring);
+    requestAnimationFrame(animateParticles);
 })();
 
-/* Cursor glow: a translucent circle that trails the pointer smoothly (mouse/trackpad only) */
-if(window.matchMedia('(pointer:fine)').matches){
-    const cursorGlow = document.createElement('div');
-    cursorGlow.id = 'cursorGlow';
-    document.body.appendChild(cursorGlow);
+/* ---------- Click circles ---------- */
+document.addEventListener('pointerdown', e => {
+    const circle = document.createElement('span');
+    circle.className = 'click-circle';
+    circle.style.left = e.clientX + 'px';
+    circle.style.top = e.clientY + 'px';
+    document.body.appendChild(circle);
+    circle.addEventListener('animationend', () => circle.remove());
+});
 
-    let targetX = -999, targetY = -999, glowX = -999, glowY = -999;
+/* ---------- Cursor glow (mouse/trackpad only) ---------- */
+if (window.matchMedia('(pointer: fine)').matches) {
+    const glow = document.createElement('div');
+    glow.id = 'cursorGlow';
+    document.body.appendChild(glow);
+
+    let tx = -999, ty = -999, gx = -999, gy = -999;
 
     window.addEventListener('pointermove', e => {
-        targetX = e.clientX;
-        targetY = e.clientY;
-        cursorGlow.style.opacity = '1';
+        tx = e.clientX;
+        ty = e.clientY;
+        glow.style.opacity = '1';
     });
+    document.addEventListener('mouseleave', () => { glow.style.opacity = '0'; });
 
-    window.addEventListener('mouseout', e => {
-        if(!e.relatedTarget) cursorGlow.style.opacity = '0';
-    });
-
-    (function followCursor(){
-        glowX += (targetX - glowX) * 0.18;
-        glowY += (targetY - glowY) * 0.18;
-        cursorGlow.style.transform = `translate3d(${glowX}px, ${glowY}px, 0)`;
+    (function followCursor() {
+        gx += (tx - gx) * 0.18;
+        gy += (ty - gy) * 0.18;
+        glow.style.transform = `translate3d(${gx}px, ${gy}px, 0)`;
         requestAnimationFrame(followCursor);
     })();
 }
 
-/* Drag trail: holding the mouse on empty space and dragging draws a temporary glowing rainbow line */
+/* ---------- Drag trail ---------- */
 const trailCanvas = document.createElement('canvas');
 trailCanvas.id = 'trailCanvas';
 document.body.appendChild(trailCanvas);
 const trailCtx = trailCanvas.getContext('2d');
 
-function resizeTrail(){
+function resizeTrail() {
     trailCanvas.width = innerWidth;
     trailCanvas.height = innerHeight;
 }
 resizeTrail();
-window.addEventListener('resize', resizeTrail);
+addEventListener('resize', resizeTrail);
 
-const TRAIL_LIFE = 380; // ms a point stays visible before the line fades away
-let trailStrokes = [];   // each press-and-drag is its own separate line
+const TRAIL_LIFE = 380;
+let trailStrokes = [];
 let currentStroke = null;
 let pressPoint = null;
 let isDragging = false;
 
-// Dragging that starts on links, buttons or the profile/social cards does not draw
-const isInteractive = el => el.closest('a, button, input, textarea, header, .glass-card, .social-link, .profile-card');
+const isInteractive = el => el.closest('a, button, input, textarea, header, .profile-card, .modal-box');
 
 document.addEventListener('pointerdown', e => {
-    if(e.button !== 0 || isInteractive(e.target)) return;
+    if (e.button !== 0 || isInteractive(e.target)) return;
     isDragging = true;
-    currentStroke = null; // a new line starts only once the pointer actually moves
+    currentStroke = null;
     pressPoint = { x: e.clientX, y: e.clientY };
     document.body.classList.add('drawing');
 });
 
 window.addEventListener('pointermove', e => {
-    if(!isDragging) return;
+    if (!isDragging) return;
     const point = { x: e.clientX, y: e.clientY, t: performance.now() };
-    if(!currentStroke){
-        // The first movement starts the line from where the press began
+    if (!currentStroke) {
         currentStroke = [{ x: pressPoint.x, y: pressPoint.y, t: point.t }, point];
         trailStrokes.push(currentStroke);
         return;
     }
     const last = currentStroke[currentStroke.length - 1];
-    // Skip tiny movements so the curve stays clean
-    if(Math.hypot(point.x - last.x, point.y - last.y) < 2) return;
+    if (Math.hypot(point.x - last.x, point.y - last.y) < 2) return;
     currentStroke.push(point);
 });
 
-function stopDragging(){
+function stopDragging() {
     isDragging = false;
     currentStroke = null;
     document.body.classList.remove('drawing');
@@ -1321,60 +1026,51 @@ window.addEventListener('pointerup', stopDragging);
 window.addEventListener('pointercancel', stopDragging);
 window.addEventListener('blur', stopDragging);
 
-(function drawTrail(){
+function drawStroke(pts, now) {
+    const n = pts.length;
+    if (n < 2) return;
+    trailCtx.lineCap = 'round';
+    trailCtx.lineJoin = 'round';
+    const mid = (a, b) => ({ x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 });
+    const shift = (now * 0.12) % 360;
+
+    for (let i = 1; i < n; i++) {
+        const age = (now - pts[i].t) / TRAIL_LIFE;
+        const width = 4 * (1 - age);
+        if (width <= 0.3) continue;
+
+        const start = i === 1 ? pts[0] : mid(pts[i - 1], pts[i]);
+        const end = i === n - 1 ? pts[i] : mid(pts[i], pts[i + 1]);
+        const hue = ((i / n) * 240 + shift) % 360;
+        const color = `hsl(${hue}, 100%, 60%)`;
+
+        trailCtx.strokeStyle = color;
+        trailCtx.shadowColor = color;
+        trailCtx.shadowBlur = 22;
+        trailCtx.lineWidth = width;
+        trailCtx.beginPath();
+        trailCtx.moveTo(start.x, start.y);
+        trailCtx.quadraticCurveTo(pts[i].x, pts[i].y, end.x, end.y);
+        trailCtx.stroke();
+    }
+    trailCtx.shadowBlur = 0;
+}
+
+(function drawTrail() {
     const now = performance.now();
     trailCtx.clearRect(0, 0, trailCanvas.width, trailCanvas.height);
-
-    // Age out old points in place so the line being drawn stays linked to its pointer
-    trailStrokes.forEach(s => { while(s.length && now - s[0].t >= TRAIL_LIFE) s.shift(); });
+    trailStrokes.forEach(s => { while (s.length && now - s[0].t >= TRAIL_LIFE) s.shift(); });
     trailStrokes = trailStrokes.filter(s => s.length > 0 || s === currentStroke);
     trailStrokes.forEach(pts => drawStroke(pts, now));
-
     requestAnimationFrame(drawTrail);
 })();
 
-function drawStroke(pts, now){
-    const n = pts.length;
-    if(n >= 2){
-        trailCtx.lineCap = 'round';
-        trailCtx.lineJoin = 'round';
-        trailCtx.globalAlpha = 1;
+/* ---------- 3D tilt on the profile card (non-touch only) ---------- */
+const isTouchDevice = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+const card = document.querySelector('.profile-card');
 
-        // Midpoint between two points: the curve passes through midpoints and uses each point as a control
-        const mid = (a, b) => ({ x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 });
-        const shift = (now * 0.12) % 360; // slow colour flow
-
-        for(let i = 1; i < n; i++){
-            const age = (now - pts[i].t) / TRAIL_LIFE;
-            const width = 4 * (1 - age); // the line thins out as it fades
-            if(width <= 0.3) continue;
-
-            const start = i === 1 ? pts[0] : mid(pts[i - 1], pts[i]);
-            const end = i === n - 1 ? pts[i] : mid(pts[i], pts[i + 1]);
-            const hue = ((i / n) * 240 + shift) % 360; // rainbow runs along the line
-
-            // Opaque colour, so overlapping pieces stay smooth; the glow comes from a soft shadow
-            const color = `hsl(${hue}, 100%, 60%)`;
-            trailCtx.strokeStyle = color;
-            trailCtx.shadowColor = color;
-            trailCtx.shadowBlur = 22;
-            trailCtx.lineWidth = width;
-            trailCtx.beginPath();
-            trailCtx.moveTo(start.x, start.y);
-            trailCtx.quadraticCurveTo(pts[i].x, pts[i].y, end.x, end.y);
-            trailCtx.stroke();
-        }
-        trailCtx.shadowBlur = 0;
-    }
-}
-
-const isTouchDevice = () => {
-    return (('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0));
-};
-
-if(!isTouchDevice()){
-    document.querySelector('.profile-card').addEventListener('mousemove', (e)=>{
-        const card = document.querySelector('.profile-card');
+if (!isTouchDevice) {
+    card.addEventListener('mousemove', e => {
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
@@ -1383,12 +1079,11 @@ if(!isTouchDevice()){
         card.style.transform = `perspective(1200px) rotateX(${rx}deg) rotateY(${ry}deg) scale3d(1.02,1.02,1.02)`;
     });
 
-    document.querySelector('.profile-card').addEventListener('mouseleave', ()=>{
-        const card = document.querySelector('.profile-card');
+    card.addEventListener('mouseleave', () => {
         card.style.transition = 'transform .4s cubic-bezier(.4,0,.2,1), translate .4s ease, scale .4s ease, border-color .3s, box-shadow .3s';
         card.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)';
-        setTimeout(()=>{
-            card.style.transition = 'translate .35s ease, scale .35s ease, border-color .3s, box-shadow .3s';
+        setTimeout(() => {
+            card.style.transition = 'transform .22s ease-out, translate .35s ease, scale .35s ease, border-color .3s, box-shadow .3s';
         }, 400);
     });
 }
